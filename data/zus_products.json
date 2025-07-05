@@ -1,0 +1,112 @@
+[
+  {
+    "id": "product_01",
+    "name": "ZUS OG CUP 2.0 With Screw-On Lid 500ml (17oz)",
+    "category": "tumbler",
+    "price": "RM 55.00",
+    "description": "",
+    "promotion": "On sale",
+    "in_stock": true,
+    "scraped_at": "2025-07-04 15:42:27"
+  },
+  {
+    "id": "product_02",
+    "name": "ZUS All-Can Tumbler 600ml (20oz)",
+    "category": "tumbler",
+    "price": "RM 105.00",
+    "description": "",
+    "promotion": "Buy 1 Free 1",
+    "in_stock": true,
+    "scraped_at": "2025-07-04 15:42:27"
+  },
+  {
+    "id": "product_03",
+    "name": "ZUS All Day Cup 500ml (17oz) - Sundaze Collection",
+    "category": "tumbler",
+    "price": "RM 55.00",
+    "description": "",
+    "promotion": "On sale",
+    "in_stock": true,
+    "scraped_at": "2025-07-04 15:42:27"
+  },
+  {
+    "id": "product_04",
+    "name": "ZUS All Day Cup 500ml (17oz)",
+    "category": "tumbler",
+    "price": "RM 55.00",
+    "description": "",
+    "promotion": "On sale",
+    "in_stock": true,
+    "scraped_at": "2025-07-04 15:42:27"
+  },
+  {
+    "id": "product_05",
+    "name": "ZUS Frozee Cold Cup 650ml (22oz)",
+    "category": "tumbler",
+    "price": "RM 55.00",
+    "description": "",
+    "promotion": "Buy 1 Free 1",
+    "in_stock": true,
+    "scraped_at": "2025-07-04 15:42:27"
+  },
+  {
+    "id": "product_06",
+    "name": "ZUS OG Ceramic Mug (16oz)",
+    "category": "mug",
+    "price": "RM 39.00",
+    "description": "",
+    "promotion": "Buy 1 Free 1",
+    "in_stock": true,
+    "scraped_at": "2025-07-04 15:42:27"
+  },
+  {
+    "id": "product_07",
+    "name": "[Kopi Patah Hati] ZUS Frozee Cold Cup 650ml (22oz)",
+    "category": "tumbler",
+    "price": "RM 44.00",
+    "description": "",
+    "promotion": "On sale",
+    "in_stock": true,
+    "scraped_at": "2025-07-04 15:42:27"
+  },
+  {
+    "id": "product_08",
+    "name": "ZUS All Day Cup 500ml (17oz) - Mountain Collection",
+    "category": "tumbler",
+    "price": "RM 79.00",
+    "description": "",
+    "promotion": "",
+    "in_stock": true,
+    "scraped_at": "2025-07-04 15:42:27"
+  },
+  {
+    "id": "product_09",
+    "name": "ZUS All Day Cup 500ml (17oz) - Aqua Collection",
+    "category": "tumbler",
+    "price": "RM 79.00",
+    "description": "",
+    "promotion": "",
+    "in_stock": true,
+    "scraped_at": "2025-07-04 15:42:27"
+  },
+  {
+    "id": "product_10",
+    "name": "ZUS Stainless Steel Mug (14oz)",
+    "category": "mug",
+    "price": "RM 41.30",
+    "description": "",
+    "promotion": "Save 30%",
+    "in_stock": true,
+    "scraped_at": "2025-07-04 15:42:27"
+  },
+  {
+    "id": "product_11",
+    "name": "[Corak Malaysia] Tiga Sekawan Bundle",
+    "category": "bundle",
+    "price": "RM 133.90",
+    "description": "",
+    "promotion": "",
+    "in_stock": true,
+    "scraped_at": "2025-07-04 15:42:27"
+  }
+]
