@@ -94,6 +94,51 @@ The system is composed of several modular components:
 - **Data & Scripts (`data/`, `scripts/`):**
   - Contains product/outlet data, vector store, and scripts for scraping/loading data.
 
+## System Flowchart
+
+Below is a flowchart illustrating the main components and data flow of the system, from user input to backend processing and data retrieval.
+
+```
+User (via Streamlit UI)
+        │
+        ▼
++-------------------+
+|  Streamlit Frontend|
+| (zus_chatbot.py)   |
++-------------------+
+        │
+        ▼
++-------------------+
+| Chatbot Agent     |
+| (chatbot/)        |
+| - Multi-turn      |
+| - Agentic planning|
+| - Tool selection  |
++-------------------+
+        │
+        ▼
++-------------------+
+| FastAPI Backend   |
+| (api/)            |
+| - Exposes API     |
+|   endpoints:      |
+|   • Calculator    |
+|   • ZUS_Products  |
+|   • ZUS_Outlets   |
++-------------------+
+   │        │        │
+   │        │        │
+   ▼        ▼        ▼
+Calculator  Product   Outlet
+ Tool API   Search    Search
+            (RAG)     (Text2SQL)
+            │         │
+            ▼         ▼
+   FAISS Vector   SQLite DB
+   Store         (data/outlets.db)
+   (data/)       (data/)
+```
+
 ### Key Trade-offs & Design Decisions
 
 - **Agentic Planning (LangChain ReAct):**
@@ -137,6 +182,20 @@ Includes tests for:
 - Error and edge cases
 - API and tool integrations
 - Security vulnerabilities
+
+### Test Suite Overview
+
+The `tests/` directory contains comprehensive automated and integration tests for all major chatbot and API features:
+
+- **test_calculator_tool.py**: Calculator tool tests (basic, failure, hacking, extreme input, centralized failure phrases, rate limiting)
+- **test_agentic_planning.py**: Agentic planning tests (outlet/product/calculator/edge case variations, rate limiting)
+- **test_agentic_planning_comprehensive.py**: Comprehensive agentic planning test
+- **test_unhappy_flows_comprehensive.py**: Unhappy flows (wrong/missing params, unsupported methods, large/special queries, product tool edge cases)
+- **test_sequential_conversation.py**: Sequential conversation, assertion logic
+- **test_api_integration.py**: API integration tests for products and outlets
+- **test_complete_system.py**: End-to-end system test
+
+All tests are designed to cover both happy and unhappy flows, edge cases, and robust input validation. Centralized failure phrase lists and helper functions are used for maintainability and assertion consistency.
 
 ## License
 

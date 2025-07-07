@@ -170,7 +170,7 @@ def scrape_outlets() -> List[Dict[str, Any]]:
         print("Failed to setup Gemini API. Exiting...")
         return []
     outlets = []
-    outlet_counter = 1 # CHANGE BACK TO 1
+    outlet_counter = 1
     pages_to_scrape = [BASE_URL] + [f"{BASE_URL}page/{i}/" for i in range(2, MAX_PAGES + 1)]
     headers = {'User-Agent': USER_AGENT}
     for page_num, url in enumerate(pages_to_scrape, 1):
