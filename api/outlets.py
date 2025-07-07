@@ -15,29 +15,23 @@ load_dotenv()
 
 router = APIRouter(prefix="/outlets", tags=["outlets"])
 
-# Database configuration
+# --- Database Configuration ---
 DATABASE_PATH = "data/outlets.db"
 DATABASE_URL = f"sqlite:///{DATABASE_PATH}"
 
-# Converts natural language queries to SQL for outlets database
+# --- Text2SQL Converter ---
 class Text2SQLConverter:
-
     # Setup Gemini API configuration
     def __init__(self):
-        
         api_key = os.getenv('GEMINI_API_KEY')
         genai.configure(api_key=api_key)
         self.model = genai.GenerativeModel('gemini-2.5-flash-lite-preview-06-17')
-    
-    # Convert natural language query to SQL using Gemini 2.0 Flash-Lite
+    # Convert natural language query to SQL using Gemini
     def convert_to_sql(self, natural_query: str) -> str:
-        
         if not self.model:
             raise HTTPException(status_code=503, detail="Gemini API not available")
-        
         # Preprocess the query for time conversion
         processed_query = self.preprocess_query(natural_query)
-        
         system_prompt = f"""
         Convert user queries into SQLite SQL for ZUS Coffee outlets.
 
@@ -61,41 +55,31 @@ class Text2SQLConverter:
         Query: {processed_query}
         SQL:
         """
-        
         try:
             response = self.model.generate_content(system_prompt)
-            
             if not response.text:
                 raise HTTPException(status_code=500, detail="Failed to generate SQL query")
-            
             sql_query = response.text.strip()
-            
             # Clean up the SQL query
             sql_query = sql_query.replace('```sql', '').replace('```', '').strip()
             if not sql_query.endswith(';'):
                 sql_query += ';'
-            
             return sql_query
-            
         except Exception as e:
             print(f"Gemini API error: {e}")
             raise HTTPException(status_code=500, detail=f"Error generating SQL query: {str(e)}")
-    
     # Preprocess the query to handle time conversions and context.
     def preprocess_query(self, query: str) -> str:
-    
         # Convert AM/PM times to 24-hour format
         def convert_time(match):
             time_str = match.group(0)
             # Extract hour, minute, and AM/PM
             time_pattern = r'(\d{1,2})(?::(\d{2}))?\s*(AM|PM)'
             time_match = re.search(time_pattern, time_str, re.IGNORECASE)
-            
             if time_match:
                 hour = int(time_match.group(1))
                 minute = int(time_match.group(2)) if time_match.group(2) else 0
                 period = time_match.group(3).upper()
-                
                 # Convert to 24-hour format
                 if period == 'AM':
                     if hour == 12:
@@ -103,29 +87,21 @@ class Text2SQLConverter:
                 elif period == 'PM':
                     if hour != 12:
                         hour += 12
-                
                 return f"{hour:02d}:{minute:02d}"
-            
             return time_str
-        
         # Find and replace time patterns
         time_pattern = r'\b\d{1,2}(?::\d{2})?\s*[AP]M\b'
         processed_query = re.sub(time_pattern, convert_time, query, flags=re.IGNORECASE)
-        
         return processed_query
 
-# Execute SQL query and return results
+# --- SQL Execution ---
 def execute_sql_query(sql_query: str) -> List[Dict[str, Any]]:    
-    
     if not os.path.exists(DATABASE_PATH):
         raise HTTPException(status_code=500, detail="Database not found. Please load database first.")
-    
     try:
         engine = create_engine(DATABASE_URL)
-        
         with engine.connect() as connection:
             result = connection.execute(text(sql_query))
-            
             # Convert result to list of dictionaries
             columns = list(result.keys())
             rows = []
@@ -134,15 +110,12 @@ def execute_sql_query(sql_query: str) -> List[Dict[str, Any]]:
                 for i, value in enumerate(row):
                     row_dict[columns[i]] = value
                 rows.append(row_dict)
-            
             return rows
-    
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Database query error: {str(e)}")
 
-# Validate the natural language query for outlets.
+# --- Query Validation ---
 def validate_outlet_query(query: str) -> str | None:
-    
     if not query or not query.strip():
         return "Please specify a location, area, or outlet name to search for."
     if not re.search(r"[a-zA-Z0-9]", query):
@@ -154,10 +127,9 @@ def validate_outlet_query(query: str) -> str | None:
         return "Invalid or potentially unsafe query. Please rephrase your request."
     return None
 
-# API endpoint to handle natural language queries for outlets
+# --- API Endpoints ---
 @router.get("/")
 async def query_outlets(
-   
     query: str = Query(..., description="Natural language query about outlets")):
     try:
         error_msg = validate_outlet_query(query)
@@ -169,48 +141,39 @@ async def query_outlets(
                 "count": 0,
                 "message": error_msg
             }
-        
         # Convert natural language to SQL
         converter = Text2SQLConverter()
         sql_query = converter.convert_to_sql(query)
-        
         # Execute SQL query
         results = execute_sql_query(sql_query)
-        
         return {
             "query": query,
             "sql": sql_query,
             "results": results,
             "count": len(results),
         }
-    
     except HTTPException:
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing query: {str(e)}")
 
-# Test endpoint to verify database connectivity
 @router.get("/test")
 async def health_check():    
-   
     try:
         if not os.path.exists(DATABASE_PATH):
             return {
                 "status": "error",
                 "message": "Database not found. Please run: python scripts/load_database.py"
             }
-        
         # Test query
         results = execute_sql_query("SELECT COUNT(*) as count FROM outlets;")
         outlet_count = results[0]['count'] if results else 0
-        
         return {
             "status": "healthy",
             "database_path": DATABASE_PATH,
             "outlet_count": outlet_count,
             "message": "Database connection successful"
         }
-    
     except Exception as e:
         return {
             "status": "error",

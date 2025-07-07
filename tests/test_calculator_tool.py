@@ -127,5 +127,4 @@ def test_calculator_extreme_inputs():
     assert any(phrase in output for phrase in FAILURE_PHRASES)
     time.sleep(4)
 
-    clear_session_history
-    (session_id)
+    clear_session_history(session_id)

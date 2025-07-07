@@ -27,6 +27,7 @@ from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.chat_history import BaseChatMessageHistory
 from langchain.prompts import PromptTemplate
 
+# --- Session and Memory Management ---
 # Load API keys
 load_dotenv()
 
@@ -35,30 +36,28 @@ session_store = {}
 
 # Get or create a chat message history for a session
 def get_session_history(session_id: str) -> BaseChatMessageHistory:
-   
     if session_id not in session_store:
         session_store[session_id] = ChatMessageHistory()
     return session_store[session_id]
 
 # Clear the chat history for a session
 def clear_session_history(session_id: str):
-   
     if session_id in session_store:
         del session_store[session_id]
 
-# Setup Google Gemini LLM for the agent.
+# --- LLM and Tool Setup ---
+# Setup Gemini for the agent.
 def setup_llm():
-
- api_key = os.getenv('GEMINI_API_KEY')
+    api_key = os.getenv('GEMINI_API_KEY')
     if not api_key:
         raise ValueError("GEMINI_API_KEY not found.")
-    
     return ChatGoogleGenerativeAI(
         model="gemini-2.5-flash-lite-preview-06-17", #gemini-2.0-flash
         google_api_key=api_key,
         temperature=0.3  # 0.1 Low temperature for consistent, factual responses
     )
 
+# Calculator tool for arithmetic operations.
 def calculator_tool(expression: str) -> str:
     """
     Calculator tool for arithmetic operations.    
@@ -80,19 +79,18 @@ def calculator_tool(expression: str) -> str:
             f"http://127.0.0.1:8000/calculator?expression={encoded_expression}",
             timeout=10
         )
-        
         if response.status_code == 200:
             data = response.json()
             result = data.get('result', 'Error in calculation')
             return f"The result of {expression} is {result}"
         else:
             return f"Calculator API error: {response.status_code}"
-            
     except requests.RequestException as e:
         return f"Failed to connect to calculator API: {str(e)}"
     except Exception as e:
         return f"Error calculating: {expression}"
 
+# Outlets tool for outlet search
 def outlets_tool(query: str) -> dict:
     """    
     This tool uses Text2SQL conversion with Gemini to translate
@@ -113,7 +111,6 @@ def outlets_tool(query: str) -> dict:
             params={"query": query},
             timeout=30
         )
-        
         if response.status_code == 200:
             data = response.json()
             outlets = data.get('results', [])
@@ -127,6 +124,7 @@ def outlets_tool(query: str) -> dict:
     except Exception as e:
         return {"query": query, "outlets": [], "message": f"Error processing outlets request: {str(e)}"}
 
+# Products tool for product search and summary
 def products_tool(query: str) -> str:
     """
     This tool uses a FAISS vector database to find relevant products
@@ -147,23 +145,18 @@ def products_tool(query: str) -> str:
             f"http://127.0.0.1:8000/products?query={query}&top_k=3",
             timeout=20
         )
-        
         if response.status_code == 200:
             data = response.json()
-            
             # Get AI summary
             summary = data.get('summary', 'No summary available')
             products = data.get('products', [])
             total_results = data.get('total_results', 0)
-            
             if total_results == 0:
                 return f"No drinkware products found for: {query}"
-            
             # Format response with AI summary and product details
             result = f"Product Search Results for '{query}':\n\n"
             result += f"Summary: {summary}\n\n"
             result += f"Products ({total_results} found):\n"
-            
             for i, product in enumerate(products[:3], 1):
                 result += f"{i}. {product['name']}\n"
                 result += f"   Price: {product['price']}\n"
@@ -171,19 +164,16 @@ def products_tool(query: str) -> str:
                 result += f"   Category: {product['category']}\n"
                 result += f"   Colours: {product['colours']}\n"
                 result += f"   Similarity Score: {product['similarity_score']:.3f}\n\n"
-            
             return result
         else:
             return f"Products API error: {response.status_code}"
-            
     except requests.RequestException as e:
         return f"Failed to connect to products API: {str(e)}"
     except Exception as e:
         return f"Error processing products request: {str(e)}"
 
-# Create the list of tools for the agent.
+# --- Tool List Creation ---
 def create_tools() -> List[Tool]:    
-    
     tools = [
         Tool(
             name="Calculator",
@@ -201,21 +191,16 @@ def create_tools() -> List[Tool]:
             description="Search for ZUS Coffee drinkware products like tumblers, mugs, cups, etc. Returns AI-generated product recommendations with details and pricing."
         )
     ]
-    
     return tools
 
-# Agent Setup
+# --- Agent Setup ---
 def create_agent():    
-  
     # Setup LLM
     llm = setup_llm()
-    
     # Create tools
     tools = create_tools()
-    
     # Use the official ReAct prompt from LangChain hub
     react_prompt = hub.pull("hwchase17/react")
-    
     custom_instructions = """
     
     You are a helpful, friendly assistant for ZUS Coffee with access to tools that return structured data (e.g., outlets, products, calculations).
@@ -230,18 +215,16 @@ def create_agent():
     - Never answer before 'Final Answer:'.
     - Use bullet points ("- Item") for lists, each on a new line.
     - For outlet searches, list only outlet names unless the user asks for more (e.g., address, hours, directions).
-    - Politely refuse complex or intentionally long arithmetic inputs, and suggest simplifying them.
+    - If the user makes a very long, complex, or multi-part request (e.g., asking for products, outlets, and calculations at once, or inputting complex arithmetic), politely refuse and ask them to simplify or split it into smaller parts.
 
     """
-
-# Combine custom instructions with the official ReAct template
+    # Combine custom instructions with the official ReAct template
     combined_prompt = PromptTemplate(
-    input_variables=react_prompt.input_variables,
-    template=custom_instructions + react_prompt.template
-)
+        input_variables=react_prompt.input_variables,
+        template=custom_instructions + react_prompt.template
+    )
     # Create the agent
     agent = create_react_agent(llm, tools, combined_prompt)
-    
     # Create agent executor
     agent_executor = AgentExecutor(
         agent=agent,
@@ -251,7 +234,6 @@ def create_agent():
         max_execution_time=60,
         handle_parsing_errors=True
     )
-    
     # Setup for message history
     agent_with_history = RunnableWithMessageHistory(
         agent_executor,
@@ -260,40 +242,32 @@ def create_agent():
     )
     return agent_with_history
 
-# CLI Chat Interface
+# --- CLI Chat Interface ---
 def chat_interface():    
-    
     print("ZUS Coffee Chatbot")
     print("=" * 50)
     print("\nType 'quit' to exit, 'clear' to clear memory")
     print("=" * 50)
-    
     try:
         agent = create_agent()
         session_id = "user_session"  # Using a fixed session ID for command-line interface
-        
         while True:
             user_input = input("\n🙋 You: ").strip()
-            
             if user_input.lower() in ['quit', 'exit', 'bye']:
                 print("\nThank you for using ZUS Coffee chatbot!")
                 break
-            
             if user_input.lower() == 'clear':
                 # Clear session history instead of recreating agent
                 clear_session_history(session_id)
                 print("\nMemory cleared!")
                 continue
-            
             if not user_input:
                 continue
-
             # Block direct SQL input
             sql_keywords = ['select', 'insert', 'update', 'delete', 'drop', 'alter', 'create', 'truncate']
             if any(user_input.strip().lower().startswith(kw) for kw in sql_keywords):
                 print("\nSQL queries are not allowed. Please use natural language.")
                 continue
-
             try:
                 print(f"\n🤖 Assistant: ", end="", flush=True)
                 response = agent.invoke(
@@ -301,11 +275,9 @@ def chat_interface():
                     config={"configurable": {"session_id": session_id}}
                 )
                 print(response['output'])
-
             except Exception as e:
                 print(f"\nError: {str(e)}")
                 print("Please try again with a different question.")
-    
     except KeyboardInterrupt:
         print("\n\nGoodbye!")
     except Exception as e:

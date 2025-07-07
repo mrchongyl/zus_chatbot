@@ -14,16 +14,13 @@ import csv
 import os
 from pathlib import Path
 
-# Create the database and outlets table
+# --- Create the database and outlets table ---
 def create_database():    
-   
     # Ensure data directory exists
     os.makedirs('data', exist_ok=True)
-    
     # Connect to database
     conn = sqlite3.connect('data/outlets.db')
     cursor = conn.cursor()
-    
     # Drop the table if exists
     cursor.execute('DROP TABLE IF EXISTS outlets')
     cursor.execute('''
@@ -40,35 +37,27 @@ def create_database():
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )
     ''')
-    
     conn.commit()
     return conn
 
-# Load outlet data from CSV file into database
+# --- Load outlet data from CSV file into database ---
 def load_outlets_from_csv():
-    
     csv_file = Path('data/zus_outlets.csv')
-    
     if not csv_file.exists():
         print("CSV file not found: data/zus_outlets.csv")
         print("Run: python scripts/scrape_outlets.py first")
         return False
-    
     # Create database
     conn = create_database()
     cursor = conn.cursor()
-    
     # Clear existing data
     cursor.execute('DELETE FROM outlets')
     print("Cleared existing outlet data")
-    
     # Load data from CSV
     outlets_loaded = 0
-    
     try:
         with open(csv_file, 'r', encoding='utf-8') as file:
             reader = csv.DictReader(file)
-            
             for row in reader:
                 cursor.execute('''
                     INSERT OR REPLACE INTO outlets 
@@ -86,25 +75,21 @@ def load_outlets_from_csv():
                     row.get('scraped_at', '')
                 ))
                 outlets_loaded += 1
-        
         conn.commit()
         print(f"Loaded {outlets_loaded} outlets into database")
-        
         # Show sample data
         cursor.execute('SELECT name, area, state, opening_time, closing_time, direction_url FROM outlets LIMIT 3')
         sample = cursor.fetchall()
         print("\nSample outlets:")
         for outlet in sample:
             print(outlet)
-        
     except Exception as e:
         print(f"Error loading data: {e}")
         return False
-    
     finally:
         conn.close()
 
-# Main function to load outlets
+# --- Main function to load outlets ---
 def main():
     print("Loading Outlets to Database")    
     success = load_outlets_from_csv()
