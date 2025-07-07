@@ -1,6 +1,7 @@
-# API endpoints for outlets Text2SQL queries.
-# Text to SQL conversion for ZUS outlet data.
-
+"""
+Text2SQL API
+Text to SQL conversion for ZUS outlet data
+"""
 
 from fastapi import APIRouter, HTTPException, Query
 from typing import List, Dict, Any
@@ -18,16 +19,18 @@ router = APIRouter(prefix="/outlets", tags=["outlets"])
 DATABASE_PATH = "data/outlets.db"
 DATABASE_URL = f"sqlite:///{DATABASE_PATH}"
 
+# Converts natural language queries to SQL for outlets database
 class Text2SQLConverter:
-    """Converts natural language queries to SQL for outlets database."""
-    
+
+    # Setup Gemini API configuration
     def __init__(self):
+        
         api_key = os.getenv('GEMINI_API_KEY')
         genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-2.0-flash')
+        self.model = genai.GenerativeModel('gemini-2.5-flash-lite-preview-06-17')
     
+    # Convert natural language query to SQL using Gemini 2.0 Flash-Lite
     def convert_to_sql(self, natural_query: str) -> str:
-        """Convert natural language query to SQL using Gemini 2.0 Flash."""
         
         if not self.model:
             raise HTTPException(status_code=503, detail="Gemini API not available")
@@ -78,8 +81,8 @@ class Text2SQLConverter:
             print(f"Gemini API error: {e}")
             raise HTTPException(status_code=500, detail=f"Error generating SQL query: {str(e)}")
     
+    # Preprocess the query to handle time conversions and context.
     def preprocess_query(self, query: str) -> str:
-        """Preprocess the query to handle time conversions and context."""
     
         # Convert AM/PM times to 24-hour format
         def convert_time(match):
@@ -111,8 +114,8 @@ class Text2SQLConverter:
         
         return processed_query
 
-def execute_sql_query(sql_query: str) -> List[Dict[str, Any]]:
-    """Execute SQL query and return results."""
+# Execute SQL query and return results
+def execute_sql_query(sql_query: str) -> List[Dict[str, Any]]:    
     
     if not os.path.exists(DATABASE_PATH):
         raise HTTPException(status_code=500, detail="Database not found. Please load database first.")
@@ -137,15 +140,36 @@ def execute_sql_query(sql_query: str) -> List[Dict[str, Any]]:
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Database query error: {str(e)}")
 
+# Validate the natural language query for outlets.
+def validate_outlet_query(query: str) -> str | None:
+    
+    if not query or not query.strip():
+        return "Please specify a location, area, or outlet name to search for."
+    if not re.search(r"[a-zA-Z0-9]", query):
+        return "Please enter a valid location, area, or outlet name."
+    if len(query) > 100 or len(query.split()) > 20:
+        return "Query too long. Please shorten your query."
+    lowered = query.lower()
+    if any(keyword in lowered for keyword in [";", "--", "drop ", "delete ", "insert ", "update ", "alter ", "truncate "]):
+        return "Invalid or potentially unsafe query. Please rephrase your request."
+    return None
+
+# API endpoint to handle natural language queries for outlets
 @router.get("/")
 async def query_outlets(
-    query: str = Query(..., description="Natural language query about outlets")
-):
-    """
-    Convert natural language query to SQL and return outlet information.
-    """
-
+   
+    query: str = Query(..., description="Natural language query about outlets")):
     try:
+        error_msg = validate_outlet_query(query)
+        if error_msg:
+            return {
+                "query": query,
+                "sql": None,
+                "results": [],
+                "count": 0,
+                "message": error_msg
+            }
+        
         # Convert natural language to SQL
         converter = Text2SQLConverter()
         sql_query = converter.convert_to_sql(query)
@@ -165,10 +189,10 @@ async def query_outlets(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing query: {str(e)}")
 
+# Test endpoint to verify database connectivity
 @router.get("/test")
-async def health_check():
-    """Test endpoint to verify database connectivity."""
-    
+async def health_check():    
+   
     try:
         if not os.path.exists(DATABASE_PATH):
             return {

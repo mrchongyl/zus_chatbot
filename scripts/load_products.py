@@ -12,16 +12,18 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 from pathlib import Path
 
+
 class ProductVectorStore:
+    
+    # Initialize the vector store with a sentence transformer model
     def __init__(self, model_name: str = "all-MiniLM-L6-v2"):
-        """Initialize the vector store with a sentence transformer model."""
         self.model = SentenceTransformer(model_name)
         self.index = None
         self.products = []
         self.dimension = 384  # Dimension for all-MiniLM-L6-v2
-        
+
+    # Create searchable documents from product data, including colours and promotion details   
     def create_product_documents(self, products: List[Dict[str, Any]]) -> List[str]:
-        """Create searchable documents from product data, including colours and promotion details."""
         documents = []
         
         for product in products:
@@ -44,8 +46,9 @@ class ProductVectorStore:
         
         return documents
     
+    # Build the FAISS index from product data
     def build_index(self, products: List[Dict[str, Any]]):
-        """Build FAISS index from product data."""
+        
         print(f"Building vector store for {len(products)} products...")
         
         # Store products for later retrieval
@@ -68,10 +71,10 @@ class ProductVectorStore:
         self.index.add(embeddings_f32)
         
         print(f"Vector store built with {self.index.ntotal} products")
-        
-    def search(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:
-        """Search for products similar to the query."""
-        
+    
+    # Search for products similar to the query
+    def search(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:        
+       
         # Generate query embedding
         query_embedding = self.model.encode([query])
         faiss.normalize_L2(query_embedding)
@@ -91,8 +94,9 @@ class ProductVectorStore:
         
         return results
     
+    # Save the vector store to disk, including the FAISS index and product metadata
     def save(self, directory: str = "data/vector_store"):
-        """Save the vector store to disk."""
+       
         os.makedirs(directory, exist_ok=True)
         
         # Save FAISS index
@@ -114,8 +118,9 @@ class ProductVectorStore:
             
         print(f"Vector store saved to {directory}")
     
+    # Load the vector store from disk, including the FAISS index and product metadata
     def load(self, directory: str = "data/vector_store"):
-        """Load the vector store from disk."""
+       
         # Load FAISS index
         self.index = faiss.read_index(os.path.join(directory, "products.index"))
         
@@ -130,8 +135,9 @@ class ProductVectorStore:
         
         print(f"Vector store loaded with {len(self.products)} products")
 
+# Load products from JSON file
 def load_products_from_json(filepath: str = "data/zus_products.json") -> List[Dict[str, Any]]:
-    """Load products from JSON file."""
+   
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             products = json.load(f)
@@ -144,8 +150,9 @@ def load_products_from_json(filepath: str = "data/zus_products.json") -> List[Di
         print(f"Error parsing JSON: {e}")
         return []
 
+# Main function to build the vector store from scraped products
 def build_vector_store():
-    """Main function to build the vector store."""
+
     # Load products from JSON
     products = load_products_from_json()
     

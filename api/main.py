@@ -30,9 +30,9 @@ app.include_router(calculator.router)
 app.include_router(products.router)
 app.include_router(outlets.router)
 
+# Root endpoint for health check
 @app.get("/")
 async def root():
-    """Health check endpoint."""
     return {"message": "Mindhive Assessment API is running"}
 
 if __name__ == "__main__":

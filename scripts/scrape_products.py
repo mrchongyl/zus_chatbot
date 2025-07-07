@@ -21,6 +21,7 @@ USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 
 # Setup Gemini API configuration
 def setup_gemini_api():
+    
     load_dotenv()
     api_key = os.getenv('GEMINI_API_KEY')
     if not api_key:
@@ -29,9 +30,9 @@ def setup_gemini_api():
     
     genai.configure(api_key=api_key)
     return genai.GenerativeModel('gemini-2.0-flash')
-    
+
+# Extract clean text content from HTML
 def extract_clean_text_content(soup) -> str:
-    """Extract clean text content from HTML for processing."""
     
     # Remove script and style elements
     for script in soup(["script", "style", "nav", "header", "footer"]):
@@ -45,14 +46,14 @@ def extract_clean_text_content(soup) -> str:
     chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
     text = ' '.join(chunk for chunk in chunks if chunk)
     
-    # Truncate if too long (Gemini has token limits)
+    # Truncate if too long
     if len(text) > 30000:
         text = text[:30000] + "..."
     
     return text
 
+# Extract product information using Gemini
 def extract_products_with_gemini(model, page_text: str, page_num: int) -> List[Dict[str, Any]]:
-    """Use Gemini to extract product information from page text."""
     
     prompt = f"""
     You are an expert extractor. From the webpage below, extract **only ZUS Coffee drinkware** products (e.g., mugs, tumblers, bundles).
@@ -149,7 +150,7 @@ def scrape_products() -> List[Dict[str, Any]]:
 
     print("Starting product scraping")
 
-    # Setup Gemini
+    # Setup Gemini API
     model = setup_gemini_api()
     if not model:
         print("Failed to setup Gemini API. Exiting...")
@@ -201,7 +202,9 @@ def scrape_products() -> List[Dict[str, Any]]:
     print(f"Total products collected: {len(products)}")
     return products
 
+# Save the scraped products to CSV and JSON files
 def save_products_to_csv(products: List[Dict[str, Any]], filename: str = "data/zus_products.csv"): 
+    
     if not products:
         print("No products to save")
         return
@@ -218,7 +221,6 @@ def save_products_to_csv(products: List[Dict[str, Any]], filename: str = "data/z
     print(f"Saved {len(products)} products to {filename}")
 
 def save_products_to_json(products: List[Dict[str, Any]], filename: str = "data/zus_products.json"):
-    """Save scraped products to JSON file."""
     
     if not products:
         print("No products to save")
@@ -233,9 +235,6 @@ def save_products_to_json(products: List[Dict[str, Any]], filename: str = "data/
     print(f"Saved {len(products)} products to {filename}")
 
 if __name__ == "__main__":
-    # Scrape products
     products = scrape_products()
-    
-    # Save to both CSV and JSON
     save_products_to_csv(products)
     save_products_to_json(products)

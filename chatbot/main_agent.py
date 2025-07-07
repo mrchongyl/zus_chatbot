@@ -1,5 +1,5 @@
 """
-Main Agentic Chatbot using LangChain ReAct Pattern
+Main Agentic Chatbot using LangChain Custom ReAct Pattern
 ==================================================
 
 This chatbot can:
@@ -32,37 +32,36 @@ load_dotenv()
 
 # Session-based memory stores for conversation history
 session_store = {}
+
+# Get or create a chat message history for a session
 def get_session_history(session_id: str) -> BaseChatMessageHistory:
-    """Get or create a chat message history for a session."""
+   
     if session_id not in session_store:
         session_store[session_id] = ChatMessageHistory()
     return session_store[session_id]
 
+# Clear the chat history for a session
 def clear_session_history(session_id: str):
-    """Clear the chat history for a session."""
+   
     if session_id in session_store:
         del session_store[session_id]
 
 # Setup Google Gemini LLM for the agent.
 def setup_llm():
-    api_key = os.getenv('GEMINI_API_KEY')
+
+ api_key = os.getenv('GEMINI_API_KEY')
     if not api_key:
         raise ValueError("GEMINI_API_KEY not found.")
     
     return ChatGoogleGenerativeAI(
-        model="gemini-2.0-flash",
+        model="gemini-2.5-flash-lite-preview-06-17", #gemini-2.0-flash
         google_api_key=api_key,
         temperature=0.3  # 0.1 Low temperature for consistent, factual responses
     )
 
-# === TOOL FUNCTIONS ===
-
 def calculator_tool(expression: str) -> str:
     """
-    Calculator tool for arithmetic operations.
-    
-    This tool uses the FastAPI calculator endpoint for safe evaluation.
-    
+    Calculator tool for arithmetic operations.    
     Args:
         expression (str): Mathematical expression to evaluate
         
@@ -95,12 +94,9 @@ def calculator_tool(expression: str) -> str:
         return f"Error calculating: {expression}"
 
 def outlets_tool(query: str) -> dict:
-    """
-    Find ZUS Coffee outlets using natural language queries.
-    
+    """    
     This tool uses Text2SQL conversion with Gemini to translate
     natural language queries into database searches.
-    
     Args:
         query (str): Description of outlets to find
         
@@ -133,8 +129,6 @@ def outlets_tool(query: str) -> dict:
 
 def products_tool(query: str) -> str:
     """
-    Search ZUS Coffee drinkware products using AI-powered vector search.
-    
     This tool uses a FAISS vector database to find relevant products
     and then generates an AI summary of the results.
     
@@ -157,7 +151,7 @@ def products_tool(query: str) -> str:
         if response.status_code == 200:
             data = response.json()
             
-            # Get summary
+            # Get AI summary
             summary = data.get('summary', 'No summary available')
             products = data.get('products', [])
             total_results = data.get('total_results', 0)
@@ -165,7 +159,7 @@ def products_tool(query: str) -> str:
             if total_results == 0:
                 return f"No drinkware products found for: {query}"
             
-            # Format response with summary and product details
+            # Format response with AI summary and product details
             result = f"Product Search Results for '{query}':\n\n"
             result += f"Summary: {summary}\n\n"
             result += f"Products ({total_results} found):\n"
@@ -187,9 +181,8 @@ def products_tool(query: str) -> str:
     except Exception as e:
         return f"Error processing products request: {str(e)}"
 
-# Define Tools
-def create_tools() -> List[Tool]:
-    """Create the list of tools for the agent."""
+# Create the list of tools for the agent.
+def create_tools() -> List[Tool]:    
     
     tools = [
         Tool(
@@ -213,6 +206,7 @@ def create_tools() -> List[Tool]:
 
 # Agent Setup
 def create_agent():    
+  
     # Setup LLM
     llm = setup_llm()
     
@@ -224,31 +218,23 @@ def create_agent():
     
     custom_instructions = """
     
-    You are a helpful friendly assistant for ZUS Coffee.
+    You are a helpful, friendly assistant for ZUS Coffee with access to tools that return structured data (e.g., outlets, products, calculations).
     
-    You have access to tools that return structured data (e.g., outlets, products, calculations).
-    
-    Use the data from the tools to answer the user's question clearly and concisely.
-    
-    **After every Thought, you must output either 'Action:' (with the tool name and input) or 'Final Answer:' (with your answer). Never output a Thought without immediately following it with one of these.**
-    
-    Do not output answers before 'Final Answer:'.
-    
-    For lists, show items as bullet points (e.g., "- Item") on separate lines. 
-    
+    Always follow the ReAct format: After each Thought, output either 'Action:' with the tool name and input, or 'Final Answer:' with your answer.
+        
     When giving replying in Final Answer, use a friendly, conversational tone—like a helpful barista to make the response more engaging.
 
     Before every Action, write a Thought that justifies whether a tool call is needed. 
 
-    If a previous Action has already returned the required data, refer back to it and avoid re-querying. You may refer to these results with labels (e.g., "outlet list").
-
-    Only call the same tool again if the user's request clearly asks for different or more specific information.
-    
-    **When presenting outlet search results, only show the outlet names as a bullet list unless the user specifically asks for more details (like address, opening hours, or directions).**
+    Rules:
+    - Never answer before 'Final Answer:'.
+    - Use bullet points ("- Item") for lists, each on a new line.
+    - For outlet searches, list only outlet names unless the user asks for more (e.g., address, hours, directions).
+    - Politely refuse complex or intentionally long arithmetic inputs, and suggest simplifying them.
 
     """
 
-# Combine your instructions with the official template
+# Combine custom instructions with the official ReAct template
     combined_prompt = PromptTemplate(
     input_variables=react_prompt.input_variables,
     template=custom_instructions + react_prompt.template
@@ -274,9 +260,8 @@ def create_agent():
     )
     return agent_with_history
 
-# Chat Interface
-def chat_interface():
-    """Simple command-line chat interface."""
+# CLI Chat Interface
+def chat_interface():    
     
     print("ZUS Coffee Chatbot")
     print("=" * 50)
@@ -303,7 +288,7 @@ def chat_interface():
             if not user_input:
                 continue
 
-                # Block direct SQL input
+            # Block direct SQL input
             sql_keywords = ['select', 'insert', 'update', 'delete', 'drop', 'alter', 'create', 'truncate']
             if any(user_input.strip().lower().startswith(kw) for kw in sql_keywords):
                 print("\nSQL queries are not allowed. Please use natural language.")
@@ -327,47 +312,5 @@ def chat_interface():
         print(f"\nFailed to initialize agent: {str(e)}")
         print("Please check that all APIs are running and environment variables are set.")
 
-# Test the multi-turn conversation
-def test_conversation():
-    """Test the multi-turn conversation example from the assessment."""
-    
-    print("🧪 Testing Multi-turn Conversation with hwchase17/react")
-    print("=" * 60)
-    
-    try:
-        agent = create_agent()
-        session_id = "test_session"
-        
-        # Test conversation sequence
-        test_queries = [
-            "What's 15 + 25?",
-            "Find outlets in Shah Alam", 
-            "What's that calculation result divided by 8?",
-            "Show me ceramic mugs",
-            "What time does the 1 Utama outlet open?"
-        ]
-        
-        for i, query in enumerate(test_queries, 1):
-            print(f"\n🙋 Turn {i}: {query}")
-            try:
-                response = agent.invoke(
-                    {"input": query},
-                    config={"configurable": {"session_id": session_id}}
-                )
-                print(f"🤖 Assistant: {response['output']}")
-                print("-" * 50)
-            except Exception as e:
-                print(f"Error: {str(e)}")
-        
-        print("\n✅ Multi-turn conversation test completed!")
-        
-    except Exception as e:
-        print(f"Test failed: {str(e)}")
-
 if __name__ == "__main__":
-    import sys
-    
-    if len(sys.argv) > 1 and sys.argv[1] == "--test":
-        test_conversation()
-    else:
-        chat_interface()
+    chat_interface()

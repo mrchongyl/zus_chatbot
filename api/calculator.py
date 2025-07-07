@@ -1,4 +1,7 @@
-# API endpoints for calculator.
+"""
+Calculator API
+Evaluating mathematical expressions using asteval
+"""
 
 from fastapi import APIRouter
 from pydantic import BaseModel
@@ -17,17 +20,31 @@ class CalcOutput(BaseModel):
 # Initialize asteval
 aeval = Interpreter()
 
+# Validate the mathematical expression
+def validate_expression(expr: str) -> str | None:
+    
+    if not expr or not expr.strip():
+        return "No expression provided. Please enter a calculation."
+    if len(expr) > 100 or len(expr.split()) > 20:
+        return "Expression too long. Please shorten your calculation."
+    if not re.match(r'^[0-9+\-*/().\s]+$', expr):
+        return "Invalid characters in expression"
+    return None
+
+# API endpoint to evaluate mathematical expressions
 @router.get("/")
 async def calculate_get(expression: str):
+   
     expr = expression
 
-    # Only allow numbers and arithmetic characters
-    if not re.match(r'^[0-9+\-*/().\s]+$', expr):
+    # Streamlined input validation
+    error_msg = validate_expression(expr)
+    if error_msg:
         return CalcOutput(
             expression=expr,
             result="Error",
             success=False,
-            error="Invalid characters in expression"
+            error=error_msg
         )
 
     try:
@@ -60,27 +77,3 @@ async def calculate_get(expression: str):
             success=False,
             error=str(e)
         )
-    
-@router.get("/test")
-async def health_check():
-    """Health check endpoint for calculator API."""
-    try:
-        # Simple calculation to test asteval
-        aeval.symtable.clear()
-        test_expr = "1+1"
-        answer = aeval(test_expr)
-        error = None
-        if aeval.error:
-            error = str(aeval.error[0].get_error())
-        return {
-            "status": "healthy",
-            "test_expression": test_expr,
-            "test_result": answer,
-            "asteval_error": error,
-            "message": "Calculator is operational"
-        }
-    except Exception as e:
-        return {
-            "status": "error",
-            "message": f"Calculator health check failed: {str(e)}"
-        }

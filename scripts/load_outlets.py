@@ -14,9 +14,9 @@ import csv
 import os
 from pathlib import Path
 
-def create_database():
-    """Create the outlets database and table."""
-    
+# Create the database and outlets table
+def create_database():    
+   
     # Ensure data directory exists
     os.makedirs('data', exist_ok=True)
     
@@ -24,7 +24,7 @@ def create_database():
     conn = sqlite3.connect('data/outlets.db')
     cursor = conn.cursor()
     
-    # Drop the table if it exists to avoid schema mismatch
+    # Drop the table if exists
     cursor.execute('DROP TABLE IF EXISTS outlets')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS outlets (
@@ -44,8 +44,8 @@ def create_database():
     conn.commit()
     return conn
 
+# Load outlet data from CSV file into database
 def load_outlets_from_csv():
-    """Load outlet data from CSV file into database."""
     
     csv_file = Path('data/zus_outlets.csv')
     
@@ -91,7 +91,6 @@ def load_outlets_from_csv():
         print(f"Loaded {outlets_loaded} outlets into database")
         
         # Show sample data
-        #print("\n--- Testing Database ---")
         cursor.execute('SELECT name, area, state, opening_time, closing_time, direction_url FROM outlets LIMIT 3')
         sample = cursor.fetchall()
         print("\nSample outlets:")
@@ -105,8 +104,8 @@ def load_outlets_from_csv():
     finally:
         conn.close()
 
+# Main function to load outlets
 def main():
-    """Main function to load outlets."""
     print("Loading Outlets to Database")    
     success = load_outlets_from_csv()
     print("\nDatabase loading completed!")

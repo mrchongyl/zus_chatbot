@@ -8,6 +8,7 @@ import sqlite3
 import random
 
 def main():    
+   
     # Define possible opening and closing hours
     opening_hours = ['06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '10:00']
     closing_hours = ['18:00', '19:00', '20:00', '21:00', '21:30', '22:00', '22:30', '23:00']

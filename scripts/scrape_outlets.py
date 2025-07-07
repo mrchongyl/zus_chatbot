@@ -22,6 +22,7 @@ USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 
 # Setup Gemini API configuration
 def setup_gemini_api():
+    
     load_dotenv()
     api_key = os.getenv('GEMINI_API_KEY')
     if not api_key:
@@ -30,7 +31,9 @@ def setup_gemini_api():
     genai.configure(api_key=api_key)
     return genai.GenerativeModel('gemini-2.0-flash-lite')
 
+# Fetch HTML content with retries
 def fetch_with_retries(url, headers, max_retries=3):
+    
     for attempt in range(max_retries):
         try:
             response = requests.get(url, headers=headers, timeout=30)
@@ -41,8 +44,9 @@ def fetch_with_retries(url, headers, max_retries=3):
             time.sleep(10)
     return None
 
+# Extract structured outlet information from <article> elements in the HTML content
 def extract_clean_text_content(soup) -> Tuple[str, List[Dict[str, str]]]:
-    """Extract outlet name, address, and direction URL from structured <article> elements."""
+   
     outlet_blocks = []
     articles = soup.find_all("article")
     print(f"Found {len(articles)} <article> blocks")
@@ -73,6 +77,7 @@ def extract_clean_text_content(soup) -> Tuple[str, List[Dict[str, str]]]:
         except Exception as e:
             print(f"Error parsing article {idx}: {e}")
             continue
+
     # Combined text for debugging or Gemini input
     page_text = "\n".join([
         f"{outlet['name']}\n{outlet['address']}\nDirection: {outlet['direction_url']}"
@@ -80,9 +85,8 @@ def extract_clean_text_content(soup) -> Tuple[str, List[Dict[str, str]]]:
     ])
     return page_text, outlet_blocks
 
-
+# Use Gemini to extract structured outlet information from the scraped blocks
 def extract_outlets_with_gemini(model, outlet_blocks: list, page_num: int, start_index: int) -> List[Dict[str, Any]]:
-    """Use Gemini to extract outlet information from outlet_blocks."""
     
     prompt = f"""
     Below is structured ZUS Coffee outlet data scraped from a webpage.
@@ -163,7 +167,9 @@ def extract_outlets_with_gemini(model, outlet_blocks: list, page_num: int, start
         print(f"Error in extraction: {e}")
         return []
 
+# Scrape outlets from the ZUS Coffee website using Gemini
 def scrape_outlets() -> List[Dict[str, Any]]:
+    
     print("Starting outlet scraping")
     
     # Setup Gemini
@@ -173,12 +179,12 @@ def scrape_outlets() -> List[Dict[str, Any]]:
         return []
     
     outlets = []
-    outlet_counter = 1 #CHANGE BACK TO 1
-    #pages_to_scrape = [f"{BASE_URL}page/{i}/" for i in range(12, MAX_PAGES + 1)] 
+    outlet_counter = 1 # CHANGE BACK TO 1
+    # pages_to_scrape = [f"{BASE_URL}page/{i}/" for i in range(12, MAX_PAGES + 1)] 
     pages_to_scrape = [BASE_URL] + [f"{BASE_URL}page/{i}/" for i in range(2, MAX_PAGES + 1)]
 
     headers = {'User-Agent': USER_AGENT}
-    #for page_num, url in zip(range(12, MAX_PAGES + 1), pages_to_scrape): 
+    # for page_num, url in zip(range(12, MAX_PAGES + 1), pages_to_scrape): 
     for page_num, url in enumerate(pages_to_scrape, 1):
 
         try:
@@ -191,6 +197,7 @@ def scrape_outlets() -> List[Dict[str, Any]]:
                     break
                 soup = BeautifulSoup(response.content, 'html.parser')
                 page_text, outlet_blocks = extract_clean_text_content(soup)
+                
                 # Save raw scraped text for debugging
                 if SAVE_RAW_FILES:
                     os.makedirs("data", exist_ok=True)
@@ -207,6 +214,7 @@ def scrape_outlets() -> List[Dict[str, Any]]:
             if not outlet_blocks or len(outlet_blocks) < MIN_OUTLETS_PER_PAGE:
                 print(f"Insufficient outlets ({len(outlet_blocks)}) on page {page_num} after retries, skipping.")
                 continue
+            
             # Use Gemini to extract outlet information
             page_outlets = extract_outlets_with_gemini(model, outlet_blocks, page_num, outlet_counter)
             if page_outlets:
@@ -215,6 +223,7 @@ def scrape_outlets() -> List[Dict[str, Any]]:
                 print(f"Extracted {len(page_outlets)} outlets from page {page_num}")
             else:
                 print(f"No outlets extracted from page {page_num}")
+            
             # Rate limiting to respect API limits
             time.sleep(5)
         except requests.RequestException as e:
@@ -226,7 +235,9 @@ def scrape_outlets() -> List[Dict[str, Any]]:
     print(f"Total outlets collected: {len(outlets)}")
     return outlets
 
+# Save the scraped outlets to CSV and JSON files
 def save_outlets_to_csv(outlets: List[Dict[str, Any]], filename: str = "data/zus_outlets.csv"):
+    
     if not outlets:
         print("No outlets to save to CSV.")
         return
@@ -240,6 +251,7 @@ def save_outlets_to_csv(outlets: List[Dict[str, Any]], filename: str = "data/zus
     print(f"Saved {len(outlets)} outlets to {filename}")
 
 def save_outlets_to_json(outlets: List[Dict[str, Any]], filename: str = "data/zus_outlets.json"):
+    
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     with open(filename, 'w', encoding='utf-8') as jsonfile:
         json.dump(outlets, jsonfile, indent=2, ensure_ascii=False)
@@ -247,9 +259,6 @@ def save_outlets_to_json(outlets: List[Dict[str, Any]], filename: str = "data/zu
     print(f"Saved {len(outlets)} outlets to {filename}")
 
 if __name__ == "__main__":
-    # Scrape outlets with Gemini
     outlets = scrape_outlets()
-    
-    # Save to both CSV and JSON
     save_outlets_to_csv(outlets)
     save_outlets_to_json(outlets)

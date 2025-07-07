@@ -41,8 +41,9 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Initialize session state variables
 def init_session_state():
-    """Initialize session state variables."""
+    
     if "messages" not in st.session_state:
         st.session_state.messages = []
     if "agent" not in st.session_state:
@@ -55,8 +56,9 @@ def init_session_state():
         import uuid
         st.session_state.session_id = str(uuid.uuid4())
 
+# Initialize agent
 def initialize_agent():
-    """Initialize agent."""
+    
     if not AGENT_AVAILABLE:
         return False, f"Agent not available: {IMPORT_ERROR}"
     try:
@@ -68,13 +70,14 @@ def initialize_agent():
     except Exception as e:
         return False, f"Failed to initialize agent: {str(e)}"
 
+# Display header
 def display_header():
-    """Display the main header."""
     st.header("☕ ZUS Coffee Assistant", divider="blue", anchor=False)
     st.markdown("Your intelligent companion for calculations, outlet locations, and product recommendations")
 
+# Display sidebar with example queries and controls
 def display_sidebar():
-    """Display the sidebar with features and controls."""
+    
     with st.sidebar:
         st.markdown("## 💡 Try These")
         example_queries = [
@@ -104,13 +107,15 @@ def display_sidebar():
                 pass
             st.rerun()
 
+# Display chat messages with proper formatting
 def display_message(role: str, content: str, **kwargs):
-    """Display a chat message with proper line breaks."""
+
     content_html = content.replace("\n", "<br>")
     st.chat_message(role).markdown(content_html, unsafe_allow_html=True)
 
+# Extract tool usage information from agent response
 def extract_tool_info(response: Dict[str, Any]) -> Optional[Dict]:
-    """Extract tool usage information from agent response."""
+
     try:
         if 'intermediate_steps' in response:
             steps = response['intermediate_steps']
@@ -125,8 +130,9 @@ def extract_tool_info(response: Dict[str, Any]) -> Optional[Dict]:
     except:
         return None
 
+# Process user input and generate response
 def process_user_input(user_input: str):
-    """Process user input and get response."""
+
     if not user_input.strip():
         return
     MAX_INPUT_LENGTH = 200
@@ -137,6 +143,8 @@ def process_user_input(user_input: str):
             "error": True
         })
         return
+    
+    # Check for SQL keywords to prevent SQL injection
     sql_keywords = ['select', 'insert', 'update', 'delete', 'drop', 'alter', 'create', 'truncate']
     pattern = re.compile(r'\b(' + '|'.join(sql_keywords) + r')\b', re.IGNORECASE)
     if pattern.search(user_input) or ';' in user_input :
@@ -182,8 +190,9 @@ def process_user_input(user_input: str):
             "error": True
         })
 
+# Main application function
 def main():
-    """Main application function."""
+
     init_session_state()
     display_header()
     display_sidebar()

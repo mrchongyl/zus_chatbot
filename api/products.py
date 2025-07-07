@@ -1,5 +1,7 @@
-# Product RAG API
-# Provides /products endpoint for querying ZUS drinkware products using vector search
+"""
+Product RAG API
+Provides /products endpoint for querying ZUS drinkware products using vector search
+"""
 
 from fastapi import APIRouter, HTTPException, Query
 from typing import List, Dict, Any, Optional
@@ -7,8 +9,9 @@ import os
 import sys
 import google.generativeai as genai
 from dotenv import load_dotenv
+import re
 
-# Add the parent directory to the path so we can import from scripts
+# Add the parent directory
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 try:
@@ -19,24 +22,24 @@ except ImportError as e:
 
 # Load environment variables
 load_dotenv()
-
-# Create router instead of app
 router = APIRouter(prefix="/products", tags=["products"])
 
 # Global vector store instance
 vector_store = None
 
+# Setup Gemini API configuration
 def setup_gemini_api():
-    """Setup Gemini API configuration."""
+   
     api_key = os.getenv('GEMINI_API_KEY')
     if not api_key:
         raise ValueError("GEMINI_API_KEY not found in environment variables")
     
     genai.configure(api_key=api_key)
-    return genai.GenerativeModel('gemini-2.0-flash')
+    return genai.GenerativeModel('gemini-2.5-flash-lite-preview-06-17')
 
+# Load the vector store on startup
 def load_vector_store():
-    """Load the vector store on startup."""
+   
     global vector_store
     
     if ProductVectorStore is None:
@@ -53,8 +56,8 @@ def load_vector_store():
         print("Please run load_products.py first")
         vector_store = None
 
+# Generate an summary of the search results
 def generate_ai_summary(query: str, products: List[Dict[str, Any]], model) -> str:
-    """Generate an summary of the search results."""
     
     if not products:
         return "No products found matching your query. Please try different search terms."
@@ -80,22 +83,20 @@ def generate_ai_summary(query: str, products: List[Dict[str, Any]], model) -> st
     context_text = "\n\n".join(products_context)
     
     prompt = f"""
-You are a helpful customer service assistant for ZUS Coffee's drinkware products. 
+    You are a helpful customer service assistant for ZUS Coffee's drinkware products. 
 
-User Query: "{query}"
+    User Query: "{query}"
 
-Based on the following search results from our drinkware collection, provide a helpful and informative summary:
+    Based on the following search results from our drinkware collection, provide a helpful and informative summary (1 paragraph maximum):
 
-{context_text}
+    {context_text}
 
-Please provide a response that:
-1. Directly addresses the user's query
-2. Highlights the most relevant products found
-3. Mentions key features like capacity, materials, special collections
-4. Includes pricing information, including promotion
-5. Suggests alternatives if appropriate
-
-Keep the response concise but informative (2 paragraphs maximum).
+    Please provide a response that:
+    1. Directly addresses the user's query
+    2. Highlights the most relevant products found
+    3. Mentions key features like capacity, materials, special collections
+    4. Includes pricing information, including promotion
+    5. Suggests alternatives if appropriate
 """
 
     try:
@@ -109,29 +110,37 @@ Keep the response concise but informative (2 paragraphs maximum).
 
 # Initialize vector store at module level
 def init_vector_store():
-    """Initialize vector store when module is imported."""
+
     global vector_store
     if not vector_store:
         load_vector_store()
 
+# Validate the natural language query for products
+def validate_product_query(query: str) -> str | None:
+   
+    if not query or not query.strip():
+        return "No products found matching your search criteria. Please enter a product keyword."
+    if not re.search(r"[a-zA-Z0-9]", query):
+        return "Please enter a valid product keyword."
+    if len(query) > 100 or len(query.split()) > 20:
+        return "Query too long. Please shorten your query."
+    return None
+
+
 @router.get("")
 async def search_products(
+    
     query: str = Query(..., description="Search query for products"),
-    top_k: int = Query(5, ge=1, le=10, description="Number of top results to return"),
-    include_summary: bool = Query(True, description="Include AI-generated summary")
-):
+    top_k: int = Query(5, ge=1, le=10, description="Number of top results to return"), # Default top-k to 5 if none specified
+    include_summary: bool = Query(True, description="Include AI-generated summary")):
     """
-    Search for ZUS drinkware products and return AI-generated summary.
-    
-    Args:
-        query: Search query (e.g., "tumbler with lid", "ceramic mug")
-        top_k: Number of top results to return (1-20)
-        include_summary: Whether to include AI-generated summary
-    
+    Search for ZUS drinkware products and return AI-generated summary
+    query: Search query (e.g., "tumbler with lid", "ceramic mug")
+    top_k: Number of top results to return (1-20)
+    include_summary: Whether to include AI-generated summary
     Returns:
-        JSON response with search results and AI summary
+    JSON response with search results and AI summary
     """
-    
     if not vector_store:
         init_vector_store()
         if not vector_store:
@@ -139,6 +148,15 @@ async def search_products(
                 status_code=503, 
                 detail="Vector store not available."
             )
+    
+    error_msg = validate_product_query(query)
+    if error_msg:
+        return {
+            "query": query,
+            "products": [],
+            "summary": error_msg,
+            "total_results": 0
+        }
     
     try:
         # Search for products
@@ -173,16 +191,12 @@ async def search_products(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Search error: {str(e)}")
 
+# Search for products and return raw results without AI summary (debugging)
 @router.get("/raw")
 async def search_products_raw(
     query: str = Query(..., description="Search query for products"),
     top_k: int = Query(5, ge=1, le=10, description="Number of top results to return")
 ):
-    """
-    Search for products and return raw results without AI summary.
-    For debugging purposes.
-    """
-    
     if not vector_store:
         init_vector_store()
         if not vector_store:
@@ -203,9 +217,9 @@ async def search_products_raw(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Search error: {str(e)}")
 
+# Test endpoint to verify vector store connectivity
 @router.get("/test")
 async def health_check():
-    """Test endpoint to verify vector store connectivity."""
     if not vector_store:
         init_vector_store()
         
