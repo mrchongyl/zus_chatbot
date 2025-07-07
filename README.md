@@ -36,7 +36,7 @@ This project implements a multi-turn conversational AI chatbot with agentic plan
   ```
 - **Run the Streamlit chatbot UI:**
   ```bash
-  streamlit run zus_chatbot.py
+  python -m streamlit run zus_chatbot.py
   ```
 - **Run tests:**
   ```bash

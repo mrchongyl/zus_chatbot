@@ -1,12 +1,12 @@
-id,name,category,price,description,promotion,in_stock,scraped_at
-product_01,ZUS OG CUP 2.0 With Screw-On Lid 500ml (17oz),tumbler,RM 55.00,,On sale,True,2025-07-04 15:42:27
-product_02,ZUS All-Can Tumbler 600ml (20oz),tumbler,RM 105.00,,Buy 1 Free 1,True,2025-07-04 15:42:27
-product_03,ZUS All Day Cup 500ml (17oz) - Sundaze Collection,tumbler,RM 55.00,,On sale,True,2025-07-04 15:42:27
-product_04,ZUS All Day Cup 500ml (17oz),tumbler,RM 55.00,,On sale,True,2025-07-04 15:42:27
-product_05,ZUS Frozee Cold Cup 650ml (22oz),tumbler,RM 55.00,,Buy 1 Free 1,True,2025-07-04 15:42:27
-product_06,ZUS OG Ceramic Mug (16oz),mug,RM 39.00,,Buy 1 Free 1,True,2025-07-04 15:42:27
-product_07,[Kopi Patah Hati] ZUS Frozee Cold Cup 650ml (22oz),tumbler,RM 44.00,,On sale,True,2025-07-04 15:42:27
-product_08,ZUS All Day Cup 500ml (17oz) - Mountain Collection,tumbler,RM 79.00,,,True,2025-07-04 15:42:27
-product_09,ZUS All Day Cup 500ml (17oz) - Aqua Collection,tumbler,RM 79.00,,,True,2025-07-04 15:42:27
-product_10,ZUS Stainless Steel Mug (14oz),mug,RM 41.30,,Save 30%,True,2025-07-04 15:42:27
-product_11,[Corak Malaysia] Tiga Sekawan Bundle,bundle,RM 133.90,,,True,2025-07-04 15:42:27
+id,name,category,price,colours,promotion,in_stock,scraped_at
+product_01,ZUS OG CUP 2.0 With Screw-On Lid 500ml (17oz),tumbler,RM 55.00,"['Thunder Blue', 'Space Black', 'Lucky Pink']",On Sale,True,2025-07-06 17:41:50
+product_02,ZUS All-Can Tumbler 600ml (20oz),tumbler,RM 105.00,"['Thunder Blue', 'Stainless Steel']",Buy 1 Free 1,True,2025-07-06 17:41:50
+product_03,ZUS All Day Cup 500ml (17oz) - Sundaze Collection,tumbler,RM 55.00,"['Seashell', 'Sand Castle', 'Tideline']",On Sale,True,2025-07-06 17:41:50
+product_04,ZUS All Day Cup 500ml (17oz),tumbler,RM 55.00,"['Creamy Beige', 'Cherry Blossom', 'Fresh Mint', 'Fuzz Peach']",On Sale,True,2025-07-06 17:41:50
+product_05,ZUS Frozee Cold Cup 650ml (22oz),tumbler,RM 55.00,"['Frost White', 'Frost Pink', 'Frost Green', 'Frost Peach']",,True,2025-07-06 17:41:50
+product_06,ZUS OG Ceramic Mug (16oz),mug,RM 39.00,"['Thunder Blue', 'Cloud White', 'Space Black']",Buy 1 Free 1,True,2025-07-06 17:41:50
+product_07,[Kopi Patah Hati] ZUS Frozee Cold Cup 650ml (22oz),tumbler,RM 44.00,"['Sabrina Pink', 'Olivia Purple']",On Sale,True,2025-07-06 17:41:50
+product_08,ZUS All Day Cup 500ml (17oz) - Mountain Collection,tumbler,RM 79.00,"['Soft Fern', 'Pine Green', 'Terrain Green', 'Forest Green']",,True,2025-07-06 17:41:50
+product_09,ZUS All Day Cup 500ml (17oz) - Aqua Collection,tumbler,RM 79.00,"['Misty Blue', 'Ocean Breeze', 'Blue Lagoon', 'Deep Sea']",,True,2025-07-06 17:41:50
+product_10,ZUS Stainless Steel Mug (14oz),mug,RM 41.30,"['Starry Black', 'Pine Beige', 'Mossy Green']",Save 30%,True,2025-07-06 17:41:50
+product_11,[Corak Malaysia] Tiga Sekawan Bundle,bundle,RM 133.90,[],,True,2025-07-06 17:41:50

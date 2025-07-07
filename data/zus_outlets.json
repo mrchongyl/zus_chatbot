@@ -1,993 +1,1092 @@
 [
   {
-    "id": "outlet_001",
+    "id": "outlet_01",
     "name": "ZUS Coffee – Temu Business Centre City Of Elmina",
     "address": "No 5 (Ground Floor), Jalan Eserina AA U16/AA Elmina, East, Seksyen U16, 40150 Shah Alam, Selangor",
     "area": "Shah Alam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:21",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/XduXnuUs4E2a1VE56",
+    "scraped_at": "2025-07-07 01:45:42",
+    "opening_time": "09:00",
+    "closing_time": "21:00"
   },
   {
-    "id": "outlet_002",
+    "id": "outlet_02",
     "name": "ZUS Coffee – Spectrum Shopping Mall",
     "address": "Lot CW-5 Cafe Walk, Ground Floor Spectrum Shopping Mall Jalan Wawasan Ampang, 4, 2, Bandar Baru Ampang, 68000 Ampang, Selangor",
     "area": "Ampang",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:21",
+    "direction_url": "https://maps.app.goo.gl/XPhXh6bgSb4pPaSz7",
+    "scraped_at": "2025-07-07 01:45:42",
+    "opening_time": "08:30",
+    "closing_time": "21:30"
+  },
+  {
+    "id": "outlet_03",
+    "name": "ZUS Coffee – Bandar Menjalara",
+    "address": "37, Jalan 3/62a, Bandar Menjalara, 52200 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
+    "area": "Kuala Lumpur",
+    "state": "Wilayah Persekutuan Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/SoxNpkV3iGxmd4Rr7",
+    "scraped_at": "2025-07-07 01:45:42",
+    "opening_time": "07:30",
+    "closing_time": "23:00"
+  },
+  {
+    "id": "outlet_04",
+    "name": "ZUS Coffee – Jabatan Peguam Negara,  Putrajaya",
+    "address": "Bangunan Jabatan Peguam Negara AGC Persint 4, Lot 1, Level 1, Putrajaya 62100 Malaysia",
+    "area": "Putrajaya",
+    "state": "",
+    "direction_url": "https://maps.app.goo.gl/3jKWmERn8sC6ek6V7",
+    "scraped_at": "2025-07-07 01:45:42",
+    "opening_time": "08:00",
+    "closing_time": "18:00"
+  },
+  {
+    "id": "outlet_05",
+    "name": "ZUS Coffee – LSH33, Sentul",
+    "address": "G-11, Ground Floor, Laman Seri Harmoni (LSH33), No. 3, Jalan Batu Muda Tambahan 3, Sentul, 51100 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
+    "area": "Kuala Lumpur",
+    "state": "Wilayah Persekutuan Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/U7EbSxGQbjgtU6Qr8",
+    "scraped_at": "2025-07-07 01:45:42",
+    "opening_time": "07:00",
+    "closing_time": "22:30"
+  },
+  {
+    "id": "outlet_06",
+    "name": "ZUS Coffee – Bandar Tun Hussein Onn, Cheras",
+    "address": "No 48A Jalan Suarasa 8/4, Bandar Tun Hussein Onn, 43200 Cheras, Selangor",
+    "area": "Cheras",
+    "state": "Selangor",
+    "direction_url": "https://maps.app.goo.gl/9JbwtcN2q54sBjhk6",
+    "scraped_at": "2025-07-07 01:45:42",
+    "opening_time": "09:00",
+    "closing_time": "21:00"
+  },
+  {
+    "id": "outlet_07",
+    "name": "ZUS Coffee – AEON BiG Wangsa Maju",
+    "address": "Lot F1.11 (First Floor), AEON BiG Wangsa Maju, 6, Jalan 8/27A, Section 5, Wangsa Maju, 53300, Kuala Lumpur, Wilayah Persekutuan",
+    "area": "Kuala Lumpur",
+    "state": "Wilayah Persekutuan",
+    "direction_url": "https://maps.app.goo.gl/nuMteM6vU4YrhtHb9",
+    "scraped_at": "2025-07-07 01:45:42",
+    "opening_time": "08:00",
+    "closing_time": "22:00"
+  },
+  {
+    "id": "outlet_08",
+    "name": "ZUS Coffee – Cheras Business Centre",
+    "address": "No 6 Jalan 5/101C, Cheras Business Centre, 56100 Cheras, Kuala Lumpur",
+    "area": "Kuala Lumpur",
+    "state": "",
+    "direction_url": "https://maps.app.goo.gl/hFRNP2j8XUnkfNEHA",
+    "scraped_at": "2025-07-07 01:45:42",
+    "opening_time": "07:30",
+    "closing_time": "22:30"
+  },
+  {
+    "id": "outlet_09",
+    "name": "ZUS Coffee – Damansara Perdana, Petaling Jaya",
+    "address": "12-1 (Ground floor), Jalan PJU 8/5E, Bandar Damansara Perdana, 47820 Petaling Jaya, Selangor.",
+    "area": "Petaling Jaya",
+    "state": "Selangor",
+    "direction_url": "https://maps.app.goo.gl/Hj1Gu2MMHGabTZXb9",
+    "scraped_at": "2025-07-07 01:45:42",
+    "opening_time": "08:00",
+    "closing_time": "22:00"
+  },
+  {
+    "id": "outlet_10",
+    "name": "ZUS Coffee – Bandar Damai Perdana, Cheras",
+    "address": "No 19G (Ground floor), Jalan Damai Perdana 1/9b, Bandar Damai Perdana, 56000 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
+    "area": "Kuala Lumpur",
+    "state": "Wilayah Persekutuan Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/qnporqATyiphhS488",
+    "scraped_at": "2025-07-07 01:45:42",
+    "opening_time": "06:30",
+    "closing_time": "18:00"
+  },
+  {
+    "id": "outlet_11",
+    "name": "ZUS Coffee – Desa Pandan, Ampang",
+    "address": "No 35 (Ground Floor), Jalan 3/76D, Desa Pandan, 55100, Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur.",
+    "area": "Kuala Lumpur",
+    "state": "Wilayah Persekutuan Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/ib8foAkecu9ePYRQ8",
+    "scraped_at": "2025-07-07 01:45:42",
     "opening_time": "07:00",
     "closing_time": "21:30"
   },
   {
-    "id": "outlet_003",
-    "name": "ZUS Coffee – Bandar Menjalara",
-    "address": "Store 37, Jalan 3/62a, Bandar Menjalara, 52200 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
-    "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:55:21",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
-  },
-  {
-    "id": "outlet_004",
-    "name": "ZUS Coffee – Jabatan Peguam Negara, Putrajaya",
-    "address": "Store Bangunan Jabatan Peguam Negara AGC Persint 4, Lot 1, Level 1, Putrajaya 62100 Malaysia",
-    "area": "Putrajaya",
-    "state": "Putrajaya",
-    "scraped_at": "2025-07-01 18:55:21",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
-  },
-  {
-    "id": "outlet_005",
-    "name": "ZUS Coffee – LSH33, Sentul",
-    "address": "Store G-11, Ground Floor, Laman Seri Harmoni (LSH33), No. 3, Jalan Batu Muda Tambahan 3, Sentul, 51100 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
-    "area": "Sentul",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:55:21",
-    "opening_time": "07:00",
-    "closing_time": "22:00"
-  },
-  {
-    "id": "outlet_006",
-    "name": "ZUS Coffee – Bandar Tun Hussein Onn, Cheras",
-    "address": "Store No 48A Jalan Suarasa 8/4, Bandar Tun Hussein Onn, 43200 Cheras, Selangor",
-    "area": "Cheras",
-    "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:21",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
-  },
-  {
-    "id": "outlet_007",
-    "name": "ZUS Coffee – AEON BiG Wangsa Maju",
-    "address": "Store Lot F1.11 (First Floor), AEON BiG Wangsa Maju, 6, Jalan 8/27A, Section 5, Wangsa Maju, 53300, Kuala Lumpur, Wilayah Persekutuan",
-    "area": "Wangsa Maju",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:55:21",
-    "opening_time": "07:00",
-    "closing_time": "22:00"
-  },
-  {
-    "id": "outlet_008",
-    "name": "ZUS Coffee – Cheras Business Centre",
-    "address": "Store No 6 Jalan 5/101C, Cheras Business Centre, 56100 Cheras, Kuala Lumpur",
-    "area": "Cheras",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:55:21",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
-  },
-  {
-    "id": "outlet_009",
-    "name": "ZUS Coffee – Damansara Perdana, Petaling Jaya",
-    "address": "Store 12-1 (Ground floor), Jalan PJU 8/5E, Bandar Damansara Perdana, 47820 Petaling Jaya, Selangor.",
-    "area": "Petaling Jaya",
-    "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:21",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
-  },
-  {
-    "id": "outlet_010",
-    "name": "ZUS Coffee – Bandar Damai Perdana, Cheras",
-    "address": "Store No 19G (Ground floor), Jalan Damai Perdana 1/9b, Bandar Damai Perdana, 56000 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
-    "area": "Cheras",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:55:21",
-    "opening_time": "06:30",
-    "closing_time": "21:00"
-  },
-  {
-    "id": "outlet_011",
-    "name": "ZUS Coffee – Desa Pandan, Ampang",
-    "address": "No 35 (Ground Floor), Jalan 3/76D, Desa Pandan, 55100, Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur.",
-    "area": "Desa Pandan",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:55:21",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
-  },
-  {
-    "id": "outlet_012",
+    "id": "outlet_12",
     "name": "ZUS Coffee – Kenanga Wholesale City, Jalan Gelugor",
     "address": "G-92 (GF 012.2) & G-93 (GF 012.1), Ground Floor, Kompleks Kenanga Wholesale City, No. 2, Jalan Gelugor, 55200 Kuala Lumpur",
     "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:55:21",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
+    "state": "",
+    "direction_url": "https://maps.app.goo.gl/YcqBi1cYaSaCHsHJ8",
+    "scraped_at": "2025-07-07 01:45:42",
+    "opening_time": "06:30",
+    "closing_time": "19:00"
   },
   {
-    "id": "outlet_013",
+    "id": "outlet_13",
     "name": "ZUS Coffee – Giant Shah Alam Stadium",
     "address": "A14 – A16, Ground Floor, Giant Shah Alam Stadium, Persiaran Sukan, Seksyen 13, 40100 Shah Alam, Selangor",
     "area": "Shah Alam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:36",
-    "opening_time": "07:00",
+    "direction_url": "https://maps.app.goo.gl/V6jaEgHy2qcw1DJh6",
+    "scraped_at": "2025-07-07 01:45:58",
+    "opening_time": "08:30",
     "closing_time": "22:00"
   },
   {
-    "id": "outlet_014",
+    "id": "outlet_14",
     "name": "ZUS Coffee – Bintang Fairlane Residence",
     "address": "B­0­1 (Ground Floor), Block B, Retail 1, Bintang Fairlane, NO. 23, Jalan Padang Walter Grenier 55100 Kuala Lumpur",
     "area": "Kuala Lumpur",
     "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:55:36",
-    "opening_time": "07:00",
-    "closing_time": "21:30"
+    "direction_url": "https://maps.app.goo.gl/mvZdYjtUQedZ75me9",
+    "scraped_at": "2025-07-07 01:45:58",
+    "opening_time": "08:30",
+    "closing_time": "18:00"
   },
   {
-    "id": "outlet_015",
+    "id": "outlet_15",
     "name": "ZUS Coffee – Nadayu 801, Taman Subang Murni",
     "address": "Lot 08, Nadayu 801, Taman Subang Murni, 40150 Shah Alam, Selangor",
     "area": "Shah Alam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:36",
-    "opening_time": "07:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/6J4ySUmhzK4ey9dWA",
+    "scraped_at": "2025-07-07 01:45:58",
+    "opening_time": "08:00",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_016",
+    "id": "outlet_16",
     "name": "ZUS Coffee – MAB Academy Campus Sepang",
     "address": "Level 1, MAB Academy (MABA Campus) Building, Southern Support Zone KLIA, 64000 Sepang, Selangor",
     "area": "Sepang",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:36",
+    "direction_url": "https://maps.app.goo.gl/mLzPwsEm91VMgbhs7",
+    "scraped_at": "2025-07-07 01:45:58",
     "opening_time": "10:00",
-    "closing_time": "22:00"
+    "closing_time": "18:00"
   },
   {
-    "id": "outlet_017",
+    "id": "outlet_17",
     "name": "ZUS Coffee – Jalan Berangan, Port Klang",
     "address": "No 20(GF) Jalan Berangan, 42000 Port Klang, Selangor.",
     "area": "Port Klang",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:36",
-    "opening_time": "06:30",
-    "closing_time": "21:00"
+    "direction_url": "https://maps.app.goo.gl/JPkqNrEphcnqGZu76",
+    "scraped_at": "2025-07-07 01:45:58",
+    "opening_time": "08:00",
+    "closing_time": "19:00"
   },
   {
-    "id": "outlet_018",
+    "id": "outlet_18",
     "name": "ZUS Coffee – Ampang Point",
     "address": "No 50(GF) Jalan Memanda 9, Selangor. Taman Dato Ahmad Razali, 68000 Ampang, Selangor",
     "area": "Ampang",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:36",
+    "direction_url": "https://maps.app.goo.gl/EoDEnDH114wWbrLk9",
+    "scraped_at": "2025-07-07 01:45:58",
     "opening_time": "06:00",
-    "closing_time": "22:00"
+    "closing_time": "21:30"
   },
   {
-    "id": "outlet_019",
+    "id": "outlet_19",
     "name": "ZUS Coffee – Seksyen 3, Bandar Baru Bangi",
     "address": "47-G, Jalan 3/69, Seksyen 3, 43650 Bandar Baru Bangi, Selangor",
     "area": "Bandar Baru Bangi",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:36",
-    "opening_time": "06:30",
-    "closing_time": "23:00"
+    "direction_url": "https://maps.app.goo.gl/JCF1Ug6dFCaiiVzS7",
+    "scraped_at": "2025-07-07 01:45:58",
+    "opening_time": "08:00",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_020",
+    "id": "outlet_20",
     "name": "ZUS Coffee – Seksyen 7, Bandar Baru Bangi",
     "address": "No.48G (Ground Floor), Jalan 7/7a, Seksyen 7, 43650 Bandar Baru Bangi, Selangor.",
     "area": "Bandar Baru Bangi",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:36",
-    "opening_time": "06:30",
-    "closing_time": "23:00"
+    "direction_url": "https://maps.app.goo.gl/y6AehkccGpJHt4Fx9",
+    "scraped_at": "2025-07-07 01:45:58",
+    "opening_time": "06:00",
+    "closing_time": "19:00"
   },
   {
-    "id": "outlet_021",
+    "id": "outlet_21",
     "name": "ZUS Coffee – Desa Aman Puri, Kepong",
     "address": "No. 3-15A (GF), Jalan Desa 2/2, Desa Aman Puri, 52100 Kuala Lumpur.",
     "area": "Kuala Lumpur",
     "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:55:36",
-    "opening_time": "06:30",
+    "direction_url": "https://maps.app.goo.gl/gU68hxYf1toPTHoR6",
+    "scraped_at": "2025-07-07 01:45:58",
+    "opening_time": "07:30",
     "closing_time": "23:00"
   },
   {
-    "id": "outlet_022",
+    "id": "outlet_22",
     "name": "ZUS Coffee – M Vertica, Cheras",
     "address": "No Lot G-10(GF) M Vertica Retail Shop, 555 Jalan Cheras, Taman Pertama, 56000 Kuala Lumpur.",
     "area": "Kuala Lumpur",
     "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:55:36",
-    "opening_time": "06:30",
-    "closing_time": "21:00"
+    "direction_url": "https://maps.app.goo.gl/gxwDwJLy9CN4eKZS7",
+    "scraped_at": "2025-07-07 01:45:58",
+    "opening_time": "08:30",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_023",
+    "id": "outlet_23",
     "name": "ZUS Coffee – Pasaraya CS Bangi Avenue",
     "address": "Kiosk K10 & K11 (Ground Floor), No.1, Persiaran Bangi Avenue, Taman Bangi Avenue, 43000 Kajang, Selangor Darul Ehsan.",
     "area": "Kajang",
-    "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:36",
-    "opening_time": "07:00",
+    "state": "Selangor Darul Ehsan",
+    "direction_url": "https://maps.app.goo.gl/cVNJDgm78ZcuzQwy8",
+    "scraped_at": "2025-07-07 01:45:58",
+    "opening_time": "10:00",
     "closing_time": "21:30"
   },
   {
-    "id": "outlet_024",
+    "id": "outlet_24",
     "name": "ZUS Coffee – Lorong Pandan Pertama 5, Ampang",
     "address": "SA-10-G, Lorong Pandan Pertama 5, Taman Pandan Utama, 68000 Ampang Jaya, Selangor",
     "area": "Ampang Jaya",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:36",
+    "direction_url": "https://maps.app.goo.gl/g6F67nL4MK6bNaKg9",
+    "scraped_at": "2025-07-07 01:45:58",
     "opening_time": "07:00",
-    "closing_time": "22:00"
+    "closing_time": "20:00"
   },
   {
-    "id": "outlet_025",
+    "id": "outlet_25",
     "name": "ZUS Coffee – Edusentral, Setia Alam",
     "address": "VB-G-07 (Ground Floor), Edu Sentral, Jalan Setia Murni U13/51, Setia Alam Seksyen U13, 40170 Shah Alam, Selangor Darul Ehsan",
     "area": "Shah Alam",
-    "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:51",
+    "state": "Selangor Darul Ehsan",
+    "direction_url": "https://maps.app.goo.gl/UojmkGDokTKHbgij9",
+    "scraped_at": "2025-07-07 01:46:13",
     "opening_time": "06:30",
-    "closing_time": "23:00"
+    "closing_time": "19:00"
   },
   {
-    "id": "outlet_026",
+    "id": "outlet_26",
     "name": "ZUS Coffee – Wangsa Walk Mall",
     "address": "GL-03A & FL-03A and GL-05 & FL-05, BL-03A & BL-05, Wangsa Walk Mall, Wangsa Permai, 53300 Wilayah Persekutuan Kuala Lumpur",
     "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:55:51",
-    "opening_time": "06:30",
-    "closing_time": "23:00"
+    "state": "Wilayah Persekutuan Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/HWofKJLBZCt23ckZ6",
+    "scraped_at": "2025-07-07 01:46:13",
+    "opening_time": "06:00",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_027",
+    "id": "outlet_27",
     "name": "ZUS Coffee – Uptown Damansara, Petaling Jaya",
     "address": "44-G (Ground Floor), JALAN SS21/39, DAMANSARA UTAMA, 47400 PETALING JAYA, SELANGOR",
     "area": "Petaling Jaya",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:51",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
-  },
-  {
-    "id": "outlet_028",
-    "name": "ZUS Coffee – Bangsar Trade Centre",
-    "address": "Lot E-1-2(A), Ground Floor, Tower E, Bangsar Trade Centre. Off Jalan Pantai Baru, 59200 Kuala Lumpur.",
-    "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:55:51",
-    "opening_time": "06:30",
+    "direction_url": "https://maps.app.goo.gl/SGuUWhHHEBNd8mFWA",
+    "scraped_at": "2025-07-07 01:46:13",
+    "opening_time": "07:00",
     "closing_time": "23:00"
   },
   {
-    "id": "outlet_029",
+    "id": "outlet_28",
+    "name": "ZUS Coffee – Bangsar Trade Centre",
+    "address": "Lot E-1-2(A), Ground Floor, Tower E, Bangsar Trade Centre. Off Jalan Pantai Baru, 59200 Kuala Lumpur.",
+    "area": "Kuala Lumpur",
+    "state": "",
+    "direction_url": "https://maps.app.goo.gl/1QrDViaDCQ7m5Dc58",
+    "scraped_at": "2025-07-07 01:46:13",
+    "opening_time": "10:00",
+    "closing_time": "19:00"
+  },
+  {
+    "id": "outlet_29",
     "name": "ZUS Coffee – BHPetrol Karak Highway",
     "address": "Lot 1173, Stesen Minyak BP Lebuhraya Karak Kuala Lumpur, Daerah Gombak, 53000 Kuala Lumpur",
     "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:55:51",
-    "opening_time": "07:00",
-    "closing_time": "21:30"
+    "state": "",
+    "direction_url": "https://maps.app.goo.gl/rrkBGoVKpBATxEt89",
+    "scraped_at": "2025-07-07 01:46:13",
+    "opening_time": "09:00",
+    "closing_time": "20:00"
   },
   {
-    "id": "outlet_030",
+    "id": "outlet_30",
     "name": "ZUS Coffee – KL Eco City Mall",
     "address": "G-12, Ground Floor, KL Eco City Mall, INC, 3, Jalan Bangsar, KL Eco City, 59200 Kuala Lumpur, Federal Territory of Kuala Lumpur",
     "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:55:51",
-    "opening_time": "07:00",
-    "closing_time": "21:30"
+    "state": "Federal Territory of Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/kFzmFBpFo1N9Qyi58",
+    "scraped_at": "2025-07-07 01:46:13",
+    "opening_time": "06:30",
+    "closing_time": "18:00"
   },
   {
-    "id": "outlet_031",
+    "id": "outlet_31",
     "name": "ZUS Coffee – Alam Budiman, Shah Alam",
     "address": "No 53-G, Jalan Pulau Lumut P U10/P, Alam Budiman, Seksyen U10, 40170 Shah Alam, Selangor",
     "area": "Shah Alam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:51",
-    "opening_time": "07:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/ffTrhw66NZuooUKS8",
+    "scraped_at": "2025-07-07 01:46:13",
+    "opening_time": "09:00",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_032",
+    "id": "outlet_32",
     "name": "ZUS Coffee – Elmina Lakeside Mall",
     "address": "GF-95 & 96, Elmina Lakeside Mall, No.5 & No.7, Persiaran Garcinia, Seksyen U15, 40170 Shah Alam, Selangor Darul Ehsan",
     "area": "Shah Alam",
-    "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:51",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
+    "state": "Selangor Darul Ehsan",
+    "direction_url": "https://maps.app.goo.gl/R3BUrKfqbMsDcvyD7",
+    "scraped_at": "2025-07-07 01:46:13",
+    "opening_time": "08:30",
+    "closing_time": "23:00"
   },
   {
-    "id": "outlet_033",
+    "id": "outlet_33",
     "name": "ZUS Coffee – Pinnacle Sri Petaling Mall",
     "address": "G-K-01, Ground Floor, Pinnacle Sri Petaling Mall, Jalan Radin Anum 1, Bandar Baru Sri Petaling, 57000 Kuala Lumpur, Malaysia",
     "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:55:51",
-    "opening_time": "07:00",
-    "closing_time": "22:00"
+    "state": "Malaysia",
+    "direction_url": "https://maps.app.goo.gl/NYqx1mry2ZT3v6WL6",
+    "scraped_at": "2025-07-07 01:46:13",
+    "opening_time": "08:30",
+    "closing_time": "18:00"
   },
   {
-    "id": "outlet_034",
+    "id": "outlet_34",
     "name": "ZUS Coffee – Dataran Glomac, Kelana Jaya",
     "address": "C-G-05 (Ground Floor), Jalan SS 6/5b, Dataran Glomac, 47301 Petaling Jaya, Selangor.",
     "area": "Petaling Jaya",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:51",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/PbdUfc36FVxXzXz76",
+    "scraped_at": "2025-07-07 01:46:13",
+    "opening_time": "07:00",
+    "closing_time": "20:00"
   },
   {
-    "id": "outlet_035",
+    "id": "outlet_35",
     "name": "ZUS Coffee – UOA Business Park, Shah Alam",
     "address": "Unit Lot- 13-03A, Level 1, UOA Business Park, No 1, Jalan Pengatucara U1/51A, Seksyen U1 40150 Selangor Darul Ehsan",
     "area": "Shah Alam",
-    "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:51",
-    "opening_time": "07:00",
-    "closing_time": "21:30"
+    "state": "Selangor Darul Ehsan",
+    "direction_url": "https://maps.app.goo.gl/Pju2yTHLgw6Tqe7P6",
+    "scraped_at": "2025-07-07 01:46:13",
+    "opening_time": "06:00",
+    "closing_time": "20:00"
   },
   {
-    "id": "outlet_036",
+    "id": "outlet_36",
     "name": "ZUS Coffee – Atria Shopping Gallery",
     "address": "Atria Shopping Mall, Kiosk CK9, Concourse Floor, Jalan SS 22/23, Damansara Jaya, 47400 Petaling Jaya, Selangor",
     "area": "Petaling Jaya",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:55:51",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/JjyAvXoSL33VPd3p6",
+    "scraped_at": "2025-07-07 01:46:13",
+    "opening_time": "08:30",
+    "closing_time": "21:00"
   },
   {
-    "id": "outlet_037",
+    "id": "outlet_37",
     "name": "ZUS Coffee – Lebuh Turi, Klang",
     "address": "Lot No. 88 (Ground Floor), Lebuh Turi, Taman Chi Liung, 41200 Klang, Selangor",
     "area": "Klang",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:07",
-    "opening_time": "07:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/cMVfNAymsUxDVHWK6",
+    "scraped_at": "2025-07-07 01:46:29",
+    "opening_time": "07:30",
+    "closing_time": "20:00"
   },
   {
-    "id": "outlet_038",
+    "id": "outlet_38",
     "name": "ZUS Coffee – Ground Floor, Menara IQ",
     "address": "Unit 001, Ground Floor, Menara IQ, TRX 55188 Kuala Lumpur",
     "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:56:07",
+    "state": "",
+    "direction_url": "https://maps.app.goo.gl/BPGx2vU7o7WLXtUs6",
+    "scraped_at": "2025-07-07 01:46:29",
     "opening_time": "06:30",
-    "closing_time": "21:00"
+    "closing_time": "18:00"
   },
   {
-    "id": "outlet_039",
+    "id": "outlet_39",
     "name": "ZUS, Coffee Meets Pastry – 1 Utama Shopping Centre",
     "address": "Lot G601A, Ground Floor, 1 Utama Shopping Centre, 1, Lebuh Bandar Utama, Bandar Utama, 47800 Petaling Jaya, Selangor",
     "area": "Petaling Jaya",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:07",
-    "opening_time": "07:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/Qd3UY7VnZNVdPeQU9",
+    "scraped_at": "2025-07-07 01:46:29",
+    "opening_time": "06:30",
+    "closing_time": "20:00"
   },
   {
-    "id": "outlet_040",
+    "id": "outlet_40",
     "name": "ZUS Coffee – Taman Segar Perdana, Cheras",
     "address": "No 07GF) Jalan Segar Perdana 2, Taman Segar Perdana, 43200 Cheras, Selangor.",
     "area": "Cheras",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:07",
+    "direction_url": "https://maps.app.goo.gl/3ZVWQuWBvvk32DfV8",
+    "scraped_at": "2025-07-07 01:46:29",
     "opening_time": "06:00",
-    "closing_time": "22:00"
+    "closing_time": "21:30"
   },
   {
-    "id": "outlet_041",
+    "id": "outlet_41",
     "name": "ZUS Coffee – Sabak Bernam",
     "address": "No.100 (Ground Floor), Jalan Menteri, Pekan Sabak, 45200 Sabak Bernam, Selangor",
     "area": "Sabak Bernam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:07",
-    "opening_time": "07:00",
-    "closing_time": "21:30"
+    "direction_url": "https://maps.app.goo.gl/GfSJqhuBsUJbtr5M9",
+    "scraped_at": "2025-07-07 01:46:29",
+    "opening_time": "06:30",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_042",
+    "id": "outlet_42",
     "name": "ZUS Coffee – Jalan Kebun Nenas, Klang",
     "address": "No 47-G Jalan Kebun Nenas 7A/KS8, Bandar Putera 2, 41200 Klang, Selangor",
     "area": "Klang",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:07",
-    "opening_time": "06:30",
-    "closing_time": "21:00"
+    "direction_url": "https://maps.app.goo.gl/Bvkksy8u6HjkSVRZ7",
+    "scraped_at": "2025-07-07 01:46:29",
+    "opening_time": "06:00",
+    "closing_time": "20:00"
   },
   {
-    "id": "outlet_043",
+    "id": "outlet_43",
     "name": "ZUS Coffee – Menara TH Perdana",
     "address": "Unit L02,Tingkat Bawah, Jln Sultan Ismail, Chow Kit, 50250 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
     "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:56:07",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
+    "state": "Wilayah Persekutuan Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/7uwonBiP8Jw9VPNXA",
+    "scraped_at": "2025-07-07 01:46:29",
+    "opening_time": "10:00",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_044",
+    "id": "outlet_44",
     "name": "ZUS Coffee – MRT Bandar Utama",
     "address": "MRT Bandar Utama (Kajang Line), Station Concourse area, Persiaran Bandar Utama, Bandar Utama, 47800 Petaling Jaya, Selangor.",
     "area": "Petaling Jaya",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:07",
-    "opening_time": "07:00",
-    "closing_time": "21:30"
+    "direction_url": "https://maps.app.goo.gl/FzLWWCFfbpqx7mTB7",
+    "scraped_at": "2025-07-07 01:46:29",
+    "opening_time": "09:00",
+    "closing_time": "18:00"
   },
   {
-    "id": "outlet_045",
+    "id": "outlet_45",
     "name": "ZUS Coffee – Micasa Shoppes, Jalan Tun Razak",
     "address": "Lot G.11 & Mezzanine, Micasa Shoppes, 368A, Jln Tun Razak, Taman U Thant, 55000 Kuala Lumpur, Wilayah Persekutuan",
     "area": "Kuala Lumpur",
     "state": "Wilayah Persekutuan",
-    "scraped_at": "2025-07-01 18:56:07",
+    "direction_url": "https://maps.app.goo.gl/QEMe5NRA75F4wNDS8",
+    "scraped_at": "2025-07-07 01:46:29",
     "opening_time": "06:00",
-    "closing_time": "22:00"
+    "closing_time": "19:00"
   },
   {
-    "id": "outlet_046",
+    "id": "outlet_46",
     "name": "ZUS Coffee – Wisma TH Plaza Sentral",
     "address": "L-01B, Jalan Stesen Sentral 5, Kuala Lumpur Sentral, 50470 Kuala Lumpur",
     "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:56:07",
-    "opening_time": "06:30",
+    "state": "",
+    "direction_url": "https://maps.app.goo.gl/6q5uPX6uy64oBC2VA",
+    "scraped_at": "2025-07-07 01:46:29",
+    "opening_time": "09:00",
     "closing_time": "21:00"
   },
   {
-    "id": "outlet_047",
+    "id": "outlet_47",
     "name": "ZUS Coffee – Pertama Complex, Kuala Lumpur",
     "address": "Kiosk No. 3, Kompleks Pertama, Jalan Tuanku Abdul Rahman, 50100 Kuala Lumpur",
     "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:56:07",
-    "opening_time": "10:00",
+    "state": "",
+    "direction_url": "https://maps.app.goo.gl/qaW4ZmnjGioUqLYV8",
+    "scraped_at": "2025-07-07 01:46:29",
+    "opening_time": "06:30",
     "closing_time": "22:00"
   },
   {
-    "id": "outlet_048",
+    "id": "outlet_48",
     "name": "ZUS Coffee – Pekan Kapar, Klang",
     "address": "No. 228 (Ground Floor), Jalan Besar KU/13, Pekan Kapar, 42200 Kapar, Selangor",
     "area": "Kapar",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:07",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/by7nC4Lsh7aMRusSA",
+    "scraped_at": "2025-07-07 01:46:29",
+    "opening_time": "08:00",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_049",
+    "id": "outlet_49",
     "name": "ZUS Coffee – Sri Rampai, Setapak",
     "address": "No.39 (Ground Floor), Jalan 45/26 Taman Sri Rampai, 53300 Kuala Lumpur.",
     "area": "Kuala Lumpur",
     "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:56:24",
-    "opening_time": "06:00",
+    "direction_url": "https://maps.app.goo.gl/UFPhAXiUpmb2v9X57",
+    "scraped_at": "2025-07-07 01:46:44",
+    "opening_time": "08:00",
     "closing_time": "22:00"
   },
   {
-    "id": "outlet_050",
+    "id": "outlet_50",
     "name": "ZUS Coffee – Bloomsvale Shopping Gallery",
     "address": "G-018, Level Ground Floor, Bloomsvale Shopping Gallery, 137, Jalan Puchong, 58200 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
     "area": "Kuala Lumpur",
     "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:56:24",
-    "opening_time": "07:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/uYE7LuvdEp2yugjXA",
+    "scraped_at": "2025-07-07 01:46:44",
+    "opening_time": "08:00",
+    "closing_time": "19:00"
   },
   {
-    "id": "outlet_051",
+    "id": "outlet_51",
     "name": "ZUS Coffee – Bandar Mahkota Cheras",
     "address": "GK-01, BMC Mall. Jalan Temenggung 21/9, Bandar Mahkota Cheras, 43200 Cheras, Selangor.",
     "area": "Cheras",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:24",
-    "opening_time": "06:30",
+    "direction_url": "https://maps.app.goo.gl/NJcrYqQpzVxSY3R1A",
+    "scraped_at": "2025-07-07 01:46:44",
+    "opening_time": "08:30",
     "closing_time": "23:00"
   },
   {
-    "id": "outlet_052",
+    "id": "outlet_52",
     "name": "ZUS Coffee – KL Traders Square",
     "address": "51-G, KLTS, NO. 99, JALAN GOMBAK, SETAPAK, 53000, KUALA LUMPUR",
     "area": "Kuala Lumpur",
     "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:56:24",
-    "opening_time": "07:00",
-    "closing_time": "21:30"
+    "direction_url": "https://maps.app.goo.gl/ovNcaWjp4BCQgJbp7",
+    "scraped_at": "2025-07-07 01:46:44",
+    "opening_time": "08:00",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_053",
+    "id": "outlet_53",
     "name": "ZUS Coffee – Bandar Kinrara 5, Puchong",
     "address": "No 10(GF), Jalan BK 5A/2C, Bandar Kinrara 5, 47180 Puchong, Selangor",
     "area": "Puchong",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:24",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/SFmvcBUEDf4GNZZd8",
+    "scraped_at": "2025-07-07 01:46:44",
+    "opening_time": "09:00",
+    "closing_time": "21:00"
   },
   {
-    "id": "outlet_054",
+    "id": "outlet_54",
     "name": "ZUS Coffee – KPJ Kajang Specialist Hospital",
     "address": "KPJ Kajang Specialist Hospital, Jalan Cheras, Kampung Sungai Kantan, 43000 Kajang, Selangor.",
     "area": "Kajang",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:24",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/cV26tGNhZYm3Jtgm8",
+    "scraped_at": "2025-07-07 01:46:44",
+    "opening_time": "06:30",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_055",
+    "id": "outlet_55",
     "name": "ZUS Coffee – Kuala Kubu Baru",
     "address": "No.18(GF), Jalan Mat Kilau, Pekan Kuala Kubu Bharu, 44000 Kuala Kubu Baru, Selangor",
     "area": "Kuala Kubu Baru",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:24",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/vfdaNXFcxBcmHrq16",
+    "scraped_at": "2025-07-07 01:46:44",
+    "opening_time": "08:30",
+    "closing_time": "19:00"
   },
   {
-    "id": "outlet_056",
+    "id": "outlet_56",
     "name": "ZUS Coffee – Menara Axis, Petaling Jaya",
     "address": "Grd-05, Ground Floor, Menara Axis, No 2, Jalan 51A/ 223,46100 Petaling Jaya, Selangor",
     "area": "Petaling Jaya",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:24",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/GLtte1nwwryXQqKC8",
+    "scraped_at": "2025-07-07 01:46:44",
+    "opening_time": "06:00",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_057",
+    "id": "outlet_57",
     "name": "ZUS Coffee – Central I-City",
     "address": "Lot L1-10A, Level One, Central I-City, No. 1, Persiaran Multimedia, Seksyen 7, Jalan Plumbum 7/102, I-City, 40000 Shah Alam, Selangor",
     "area": "Shah Alam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:24",
-    "opening_time": "07:00",
-    "closing_time": "21:30"
+    "direction_url": "https://maps.app.goo.gl/St1WubMeyce9k1Eh9",
+    "scraped_at": "2025-07-07 01:46:44",
+    "opening_time": "09:00",
+    "closing_time": "22:00"
   },
   {
-    "id": "outlet_058",
+    "id": "outlet_58",
     "name": "ZUS Coffee – Taman Sri Muda",
     "address": "No.16-G (Ground Floor), Jalan Murni 25/61, Taman Sri Muda, 40400 Shah Alam, Selangor",
     "area": "Shah Alam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:24",
+    "direction_url": "https://maps.app.goo.gl/KJqteAwTt7SUEaik9",
+    "scraped_at": "2025-07-07 01:46:44",
     "opening_time": "06:30",
-    "closing_time": "23:00"
+    "closing_time": "22:00"
   },
   {
-    "id": "outlet_059",
+    "id": "outlet_59",
     "name": "ZUS Coffee – Alam Avenue 2, Shah Alam Seksyen 16",
     "address": "C-15-G, Jalan Serai Wangi L 16/L, Seksyen 16, Alam Avenue 2, 40200 Shah Alam, Selangor",
     "area": "Shah Alam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:24",
-    "opening_time": "06:30",
-    "closing_time": "23:00"
+    "direction_url": "https://maps.app.goo.gl/VweJD4e4SZETjWmD7",
+    "scraped_at": "2025-07-07 01:46:44",
+    "opening_time": "09:00",
+    "closing_time": "21:30"
   },
   {
-    "id": "outlet_060",
+    "id": "outlet_60",
     "name": "ZUS Coffee – Kuchai Entrepreneurs Park",
     "address": "No. 29 (Ground Floor), Jalan 1/116 B, Off, Jalan Kuchai Lama, Kuchai Entrepreneurs Park, 58200 Kuala Lumpur.",
     "area": "Kuala Lumpur",
     "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:56:24",
-    "opening_time": "06:30",
-    "closing_time": "23:00"
+    "direction_url": "https://maps.app.goo.gl/1DQNDZUjKwhAr89X7",
+    "scraped_at": "2025-07-07 01:46:44",
+    "opening_time": "06:00",
+    "closing_time": "19:00"
   },
   {
-    "id": "outlet_061",
+    "id": "outlet_61",
     "name": "ZUS Coffee – Jalil Link 1, Bukit Jalil",
     "address": "No.20(GF), Jalan Jalil Jaya 2, Jalil Link, Bukit Jalil 57000 WP Kuala Lumpur",
     "area": "Bukit Jalil",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:56:43",
-    "opening_time": "07:00",
-    "closing_time": "22:00"
+    "state": "WP Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/GgafJATLe1djdh5z5",
+    "scraped_at": "2025-07-07 01:46:59",
+    "opening_time": "09:00",
+    "closing_time": "18:00"
   },
   {
-    "id": "outlet_062",
+    "id": "outlet_62",
     "name": "ZUS Coffee – Menara Technip Energies",
     "address": "Menara Technip Energies, 38, Jalan Inai, Imbi, 55100 Kuala Lumpur, Federal Territory of Kuala Lumpur",
     "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:56:43",
-    "opening_time": "07:00",
-    "closing_time": "21:30"
+    "state": "Federal Territory of Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/2qhwJWG5A8jf4poW7",
+    "scraped_at": "2025-07-07 01:46:59",
+    "opening_time": "08:30",
+    "closing_time": "18:00"
   },
   {
-    "id": "outlet_063",
+    "id": "outlet_63",
     "name": "ZUS Coffee – Jakel Mall, Kuala Lumpur",
     "address": "Lot SC.02 & SC.03, Jakel Mall, Lot 159, Jakel Square Off, Jalan Munshi Abdullah, City Centre, 50100 Kuala Lumpur",
     "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:56:43",
-    "opening_time": "07:00",
-    "closing_time": "22:00"
+    "state": "",
+    "direction_url": "https://maps.app.goo.gl/SinZDdy8GsWQohhr6",
+    "scraped_at": "2025-07-07 01:46:59",
+    "opening_time": "06:00",
+    "closing_time": "21:00"
   },
   {
-    "id": "outlet_064",
+    "id": "outlet_64",
     "name": "ZUS Coffee – Anggun City, Rawang",
     "address": "Lot 40-1, Pusat Komersial Anggun City, 1, Jalan Anggun City 1, Taman Anggun, 48000 Rawang, Selangor",
     "area": "Rawang",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:43",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/pNRC9HwFT298kdUaA",
+    "scraped_at": "2025-07-07 01:46:59",
+    "opening_time": "08:00",
+    "closing_time": "18:00"
   },
   {
-    "id": "outlet_065",
+    "id": "outlet_65",
     "name": "ZUS Coffee – Olive Business Park, Seri Kembangan",
     "address": "No 36 (LG), Jalan BS 1/3, Pusat Perdagangan Olive Hill, Taman Bukit Serdang Seksyen 1, 43300 Seri Kembangan, Selangor.",
     "area": "Seri Kembangan",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:43",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/ecQ6XHq5W4oN447aA",
+    "scraped_at": "2025-07-07 01:46:59",
+    "opening_time": "06:30",
+    "closing_time": "23:00"
   },
   {
-    "id": "outlet_066",
+    "id": "outlet_66",
     "name": "ZUS Coffee – Bukit Tinggi 1",
     "address": "No.26-G, Lorong Batu Nilam 3a, Bandar Bukit Tinggi 41200 Klang",
     "area": "Klang",
-    "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:43",
-    "opening_time": "06:30",
-    "closing_time": "21:00"
+    "state": "",
+    "direction_url": "https://maps.app.goo.gl/zM1roarwqnoHVk7YA",
+    "scraped_at": "2025-07-07 01:46:59",
+    "opening_time": "07:00",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_067",
+    "id": "outlet_67",
     "name": "ZUS Coffee – CALTEX Eco Ardence",
     "address": "No. 2, Jalan Eco Ardence U12/36, Seksyen U12 40170, Shah Alam, Selangor",
     "area": "Shah Alam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:43",
-    "opening_time": "06:30",
-    "closing_time": "23:00"
+    "direction_url": "https://maps.app.goo.gl/kZxYiKdfidnaDftEA",
+    "scraped_at": "2025-07-07 01:46:59",
+    "opening_time": "08:00",
+    "closing_time": "20:00"
   },
   {
-    "id": "outlet_068",
+    "id": "outlet_68",
     "name": "ZUS Coffee – Jalan Seri Mas 1, Hulu Langat",
     "address": "No.33 (Ground Floor), Jalan Seri Mas 1, Taman Seri Emas, 43100 Hulu Langat, Selangor.",
     "area": "Hulu Langat",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:43",
-    "opening_time": "06:30",
-    "closing_time": "21:00"
+    "direction_url": "https://maps.app.goo.gl/zGHiZHjhXuJDtNvo6",
+    "scraped_at": "2025-07-07 01:46:59",
+    "opening_time": "10:00",
+    "closing_time": "21:30"
   },
   {
-    "id": "outlet_069",
+    "id": "outlet_69",
     "name": "ZUS Coffee – Pekan Semenyih",
     "address": "No.40 (Ground Floor), Jalan Pasar Baru, Pekan Semenyih, 43500 Semenyih, Selangor.",
     "area": "Semenyih",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:43",
-    "opening_time": "07:00",
-    "closing_time": "21:30"
+    "direction_url": "https://maps.app.goo.gl/mT7LLGgzhHkHxAUbA",
+    "scraped_at": "2025-07-07 01:46:59",
+    "opening_time": "10:00",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_070",
+    "id": "outlet_70",
     "name": "ZUS Coffee – Solaris Mont Kiara",
     "address": "Lot K-OG-14, Soho KL Mont Kiara, No. 2, Jalan Solaris, Solaris Mont Kiara, 50480, Wilayah Persekutuan Kuala Lumpur",
-    "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:56:43",
-    "opening_time": "06:30",
-    "closing_time": "23:00"
+    "area": "Solaris Mont Kiara",
+    "state": "Wilayah Persekutuan Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/Nc3SFsKZyhSSgaaF8",
+    "scraped_at": "2025-07-07 01:46:59",
+    "opening_time": "09:00",
+    "closing_time": "18:00"
   },
   {
-    "id": "outlet_071",
+    "id": "outlet_71",
     "name": "ZUS Coffee – Cyberview 23A, Cyberjaya",
     "address": "Cyberview 23A, Persiaran APEC Cyber 6, 63000 Cyberjaya Selangor",
     "area": "Cyberjaya",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:43",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/65eKzyJ3AYr7Ufc26",
+    "scraped_at": "2025-07-07 01:46:59",
+    "opening_time": "08:30",
+    "closing_time": "21:00"
   },
   {
-    "id": "outlet_072",
+    "id": "outlet_72",
     "name": "ZUS Coffee – Monash University Malaysia",
     "address": "3124C, Lepak Place, Monash University Malaysia, Jalan Lagoon Selatan, 47500 Bandar Sunway, Selangor Darul Ehsan",
     "area": "Bandar Sunway",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:56:43",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/yiZH7dYYP8vJFZsi7",
+    "scraped_at": "2025-07-07 01:46:59",
+    "opening_time": "10:00",
+    "closing_time": "21:30"
   },
   {
-    "id": "outlet_073",
+    "id": "outlet_73",
     "name": "ZUS Coffee – Semua House",
     "address": "GF.04, Ground Floor, Semua House, Jalan Bunus 6, City Centre, 50100 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
     "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:57:02",
-    "opening_time": "06:30",
-    "closing_time": "23:00"
+    "state": "Wilayah Persekutuan Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/cyFk3f3wuVoRiVCi8",
+    "scraped_at": "2025-07-07 01:47:15",
+    "opening_time": "06:00",
+    "closing_time": "18:00"
   },
   {
-    "id": "outlet_074",
+    "id": "outlet_74",
     "name": "ZUS Coffee – Southville City",
     "address": "A­G­09 (Ground Floor), Savanna Lifestyle Retail Jalan BBLS 2, Bandar Baru Lembah Selatan, 43800 Dengkil, Selangor",
     "area": "Dengkil",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:02",
-    "opening_time": "07:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/D4ZHpH55QcfbryDy5",
+    "scraped_at": "2025-07-07 01:47:15",
+    "opening_time": "06:00",
+    "closing_time": "21:30"
   },
   {
-    "id": "outlet_075",
+    "id": "outlet_75",
     "name": "ZUS Coffee – Sekinchan",
     "address": "No.15 (Ground Floor), Jalan Peria, Pekan Sekinchan, 45400 Sekinchan, Selangor",
     "area": "Sekinchan",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:02",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/wFX1izTnAqp11QqQ7",
+    "scraped_at": "2025-07-07 01:47:15",
+    "opening_time": "06:00",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_076",
+    "id": "outlet_76",
     "name": "ZUS Coffee – Kompleks PKNS Shah Alam",
     "address": "Lot G-6 (Ground Floor), Kompleks PKNS Shah Alam, Persiaran Tasik, Seksyen 14, 40000 Shah Alam, Selangor",
     "area": "Shah Alam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:02",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/11uRprMV9ixudpHT8",
+    "scraped_at": "2025-07-07 01:47:15",
+    "opening_time": "08:00",
+    "closing_time": "21:00"
   },
   {
-    "id": "outlet_077",
+    "id": "outlet_77",
     "name": "ZUS Coffee – Shah Alam Seksyen 18",
     "address": "15G (Ground Floor), Jalan Pinang B 18/B, Seksyen 18, 40200 Shah Alam, Selangor",
     "area": "Shah Alam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:02",
+    "direction_url": "https://maps.app.goo.gl/tV4tVt5hoCqVVS7d6",
+    "scraped_at": "2025-07-07 01:47:15",
+    "opening_time": "07:00",
+    "closing_time": "22:30"
+  },
+  {
+    "id": "outlet_78",
+    "name": "ZUS Coffee – SAMA Square",
+    "address": "G-02 & 02(E), Ground Floor, Same Square, Jalan 1/23c, Kampung Baru Air Panas, 53200 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur.",
+    "area": "Kuala Lumpur",
+    "state": "Wilayah Persekutuan Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/EzptbL3cArET9Nw1A",
+    "scraped_at": "2025-07-07 01:47:15",
     "opening_time": "07:00",
     "closing_time": "22:00"
   },
   {
-    "id": "outlet_078",
-    "name": "ZUS Coffee – SAMA Square",
-    "address": "G-02 & 02(E), Ground Floor, Same Square, Jalan 1/23c, Kampung Baru Air Panas, 53200 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur.",
-    "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:57:02",
-    "opening_time": "07:00",
-    "closing_time": "21:30"
-  },
-  {
-    "id": "outlet_079",
+    "id": "outlet_79",
     "name": "ZUS Coffee – GM Klang",
     "address": "A-G-13, Ground Floor, Wholesale City Gm Klang, Jalan Kasuarina 1, Bandar Botanik, 41200 Klang, Selangor",
     "area": "Klang",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:02",
-    "opening_time": "06:30",
+    "direction_url": "https://maps.app.goo.gl/KpWWdYpXUwHVqHk9A",
+    "scraped_at": "2025-07-07 01:47:15",
+    "opening_time": "09:00",
     "closing_time": "23:00"
   },
   {
-    "id": "outlet_080",
+    "id": "outlet_80",
     "name": "ZUS Coffee – Prima Saujana, Kajang",
     "address": "No.20 (GF), Jalan Prima Saujana 1/1A, Prima Saujana 43000 Kajang Selangor.",
     "area": "Kajang",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:02",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/eEyMwE9Vq4HixWfL6",
+    "scraped_at": "2025-07-07 01:47:15",
+    "opening_time": "10:00",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_081",
+    "id": "outlet_81",
     "name": "ZUS Coffee – AEON Mall Bukit Tinggi",
     "address": "Lot F26, AEON Bukit Tinggi Shopping Centre, 1, Persiaran Batu Nilam 1, KS6, 41200, Selangor",
     "area": "Klang",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:02",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/ciHTbpy7nFNH1xbQA",
+    "scraped_at": "2025-07-07 01:47:15",
+    "opening_time": "08:30",
+    "closing_time": "21:30"
   },
   {
-    "id": "outlet_082",
+    "id": "outlet_82",
     "name": "ZUS Coffee – Shah Alam Seksyen 20",
     "address": "No 18, Jalan Singa D 20/D, Seksyen 20, 40300 Shah Alam, Selangor",
     "area": "Shah Alam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:02",
-    "opening_time": "07:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/NJWvjTigi6rz1STG7",
+    "scraped_at": "2025-07-07 01:47:15",
+    "opening_time": "06:30",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_083",
+    "id": "outlet_83",
     "name": "ZUS Coffee – You City III Cheras",
     "address": "Lot no G-AP-8, Jalan Persiaran You City,Taman Suntex, 43200 Cheras, Selangor",
     "area": "Cheras",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:02",
-    "opening_time": "07:00",
-    "closing_time": "22:00"
-  },
-  {
-    "id": "outlet_084",
-    "name": "ZUS Coffee – Menara UOA Bangsar",
-    "address": "Lot LGF-8, Lower Ground Floor, 5, Jalan Bangsar Utama 1, Bangsar, 59000 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
-    "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:57:02",
-    "opening_time": "06:30",
+    "direction_url": "https://maps.app.goo.gl/MKWRhERopFZX9iwV8",
+    "scraped_at": "2025-07-07 01:47:15",
+    "opening_time": "08:00",
     "closing_time": "23:00"
   },
   {
-    "id": "outlet_085",
+    "id": "outlet_84",
+    "name": "ZUS Coffee – Menara UOA Bangsar",
+    "address": "Lot LGF-8, Lower Ground Floor, 5, Jalan Bangsar Utama 1, Bangsar, 59000 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
+    "area": "Kuala Lumpur",
+    "state": "Wilayah Persekutuan Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/9GFMf9ozWFEwVB3Q6",
+    "scraped_at": "2025-07-07 01:47:15",
+    "opening_time": "09:00",
+    "closing_time": "19:00"
+  },
+  {
+    "id": "outlet_85",
     "name": "ZUS Coffee – TTDI Jaya, Shah Alam",
     "address": "No.33 (Ground Floor), Jalan Opera F U2/F, Taman TTDI Jaya, Seksyen U2, 40150 Shah Alam.",
     "area": "Shah Alam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:20",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/y6JS8BiUbaStYPDPA",
+    "scraped_at": "2025-07-07 01:47:31",
+    "opening_time": "06:30",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_086",
+    "id": "outlet_86",
     "name": "ZUS Coffee – Citta Mall",
     "address": "G-48 7 G-48A, Ground Floor, Citta Mall, 1, Jalan PJU 1a/48, Ara Damansara, 47301 Petaling Jaya, Selangor",
     "area": "Petaling Jaya",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:20",
-    "opening_time": "06:30",
-    "closing_time": "21:00"
+    "direction_url": "https://maps.app.goo.gl/AGW7mvcrQhFBKF2S6",
+    "scraped_at": "2025-07-07 01:47:31",
+    "opening_time": "06:00",
+    "closing_time": "19:00"
   },
   {
-    "id": "outlet_087",
+    "id": "outlet_87",
     "name": "ZUS Coffee – Cubic Botanical, Pantai Dalam",
     "address": "No. R2-1 (Lower Ground Floor), Residensi Rimba Pantai Dalam, No. 6, Jalan Pantai Sentral 3, Pantai Dalam, 59200 Kuala Lumpur",
     "area": "Kuala Lumpur",
     "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:57:20",
-    "opening_time": "07:00",
-    "closing_time": "21:30"
+    "direction_url": "https://maps.app.goo.gl/2CFVnP1RUU76rsmZ8",
+    "scraped_at": "2025-07-07 01:47:31",
+    "opening_time": "06:30",
+    "closing_time": "22:00"
   },
   {
-    "id": "outlet_088",
+    "id": "outlet_88",
     "name": "ZUS Coffee – TTDI Grove Kajang",
     "address": "No. 26, JALAN TTDI GROVE 1/1, 43000 KAJANG, SELANGOR",
     "area": "Kajang",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:20",
-    "opening_time": "06:30",
-    "closing_time": "23:00"
-  },
-  {
-    "id": "outlet_089",
-    "name": "ZUS Coffee – Jenjarom",
-    "address": "No. 37 (Ground Floor), Jalan 2/1, Taman Seri Jaromas, 42600 Jenjarom",
-    "area": "Jenjarom",
-    "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:20",
-    "opening_time": "06:30",
-    "closing_time": "21:00"
-  },
-  {
-    "id": "outlet_090",
-    "name": "ZUS Coffee – Suasana PjH Presint 2",
-    "address": "Unit A-G-R10 & A-G-R11, Block A, Suasana PjH, Jalan Tun Abdul Razak, Presint 2, 62100 Putrajaya",
-    "area": "Putrajaya",
-    "state": "Wilayah Persekutuan",
-    "scraped_at": "2025-07-01 18:57:20",
+    "direction_url": "https://maps.app.goo.gl/9RQRxmiGig3X6BXF9",
+    "scraped_at": "2025-07-07 01:47:31",
     "opening_time": "06:00",
     "closing_time": "22:00"
   },
   {
-    "id": "outlet_091",
+    "id": "outlet_89",
+    "name": "ZUS Coffee – Jenjarom",
+    "address": "No. 37 (Ground Floor), Jalan 2/1, Taman Seri Jaromas, 42600 Jenjarom",
+    "area": "Jenjarom",
+    "state": "",
+    "direction_url": "https://maps.app.goo.gl/jij7okFL6ZQ6oDj38",
+    "scraped_at": "2025-07-07 01:47:31",
+    "opening_time": "09:00",
+    "closing_time": "23:00"
+  },
+  {
+    "id": "outlet_90",
+    "name": "ZUS Coffee – Suasana PjH Presint 2",
+    "address": "Unit A-G-R10 & A-G-R11, Block A, Suasana PjH, Jalan Tun Abdul Razak, Presint 2, 62100 Putrajaya",
+    "area": "Putrajaya",
+    "state": "",
+    "direction_url": "https://maps.app.goo.gl/KuSAsowCiPCM3ZaY7",
+    "scraped_at": "2025-07-07 01:47:31",
+    "opening_time": "06:30",
+    "closing_time": "19:00"
+  },
+  {
+    "id": "outlet_91",
     "name": "ZUS Coffee – Plaza Low yat",
     "address": "Plaza Low Yat, Lot LG-04 & 05, Lower Ground Floor, 7, Jalan Bintang, Bukit Bintang, 55100 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
     "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:57:20",
+    "state": "Wilayah Persekutuan Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/hP7wXLwkdTDEP9Jk8",
+    "scraped_at": "2025-07-07 01:47:31",
     "opening_time": "07:00",
-    "closing_time": "22:00"
+    "closing_time": "23:00"
   },
   {
-    "id": "outlet_092",
+    "id": "outlet_92",
     "name": "ZUS Coffee – Selera Putra, Souq Putrajaya",
     "address": "Lot G-005, Selera Putra, Souq Putrajaya, Presint 1, 62000 Putrajaya",
     "area": "Putrajaya",
-    "state": "Wilayah Persekutuan",
-    "scraped_at": "2025-07-01 18:57:20",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
+    "state": "",
+    "direction_url": "https://maps.app.goo.gl/u8mwJJX78gsH9Cd66",
+    "scraped_at": "2025-07-07 01:47:31",
+    "opening_time": "08:00",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_093",
+    "id": "outlet_93",
     "name": "ZUS Coffee – Plaza Shah Alam",
     "address": "S19, Second Floor, Jalan Tengku Ampuan Zabedah E 9/E, Seksyen 9, 40100 Shah Alam, Selangor",
     "area": "Shah Alam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:20",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/jmCaSVSHEAZX1uCPA",
+    "scraped_at": "2025-07-07 01:47:31",
+    "opening_time": "09:00",
+    "closing_time": "20:00"
   },
   {
-    "id": "outlet_094",
+    "id": "outlet_94",
     "name": "ZUS Coffee – Vista Bangi, Jalan Reko",
     "address": "1-06 (Ground Floor) Vista Bangi, Jalan Reko, 43000 Kajang, Selangor.",
     "area": "Kajang",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:20",
-    "opening_time": "06:30",
-    "closing_time": "23:00"
+    "direction_url": "https://maps.app.goo.gl/cjtSfXE8JLt3kB6K6",
+    "scraped_at": "2025-07-07 01:47:31",
+    "opening_time": "10:00",
+    "closing_time": "21:30"
   },
   {
-    "id": "outlet_095",
+    "id": "outlet_95",
     "name": "ZUS Coffee – Kipmall Bangi",
     "address": "1K-03A, Level 1, No. 1 Jalan Medan Bangi Business Park Bangi Golf Resort) Off, Persiaran Kemajuan, Seksyen 6, 43650 Bandar Baru Bangi, Selangor",
     "area": "Bandar Baru Bangi",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:20",
-    "opening_time": "06:30",
-    "closing_time": "21:00"
+    "direction_url": "https://maps.app.goo.gl/uR1tJeAs3S9T1Hgy5",
+    "scraped_at": "2025-07-07 01:47:31",
+    "opening_time": "10:00",
+    "closing_time": "22:30"
   },
   {
-    "id": "outlet_096",
+    "id": "outlet_96",
     "name": "ZUS Coffee – Universiti Malaya Centre for Continuing Education",
     "address": "VIP Dining, Cyberview 23, Jalan Teknokrat 3, Cyber 4, 63000 Cyberjaya, Selangor",
     "area": "Cyberjaya",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:20",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/r9fWQegqWYNN5YGh9",
+    "scraped_at": "2025-07-07 01:47:31",
+    "opening_time": "07:00",
+    "closing_time": "20:00"
   },
   {
-    "id": "outlet_097",
+    "id": "outlet_97",
     "name": "Ready-To Zus – Holiday Inn Express Hotel KL",
     "address": "Lot G01, Ground Floor, 84, Jalan Raja Chulan, Kuala Lumpur, 50200 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
     "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:57:39",
-    "opening_time": "06:30",
-    "closing_time": "21:00"
+    "state": "Wilayah Persekutuan Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/tTGVQUum8VZxHCiDA",
+    "scraped_at": "2025-07-07 01:47:47",
+    "opening_time": "07:30",
+    "closing_time": "22:00"
   },
   {
-    "id": "outlet_098",
+    "id": "outlet_98",
     "name": "ZUS Coffee – MSU Medical Centre",
     "address": "Lot A01 (Ground Floor), MSU Medical Centre, University Drive, Off Persiaran Olahraga, Seksyen 13, 40100 Shah Alam, Selangor.",
     "area": "Shah Alam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:39",
-    "opening_time": "07:00",
+    "direction_url": "https://maps.app.goo.gl/jqLkNUJLJTSDrwiv5",
+    "scraped_at": "2025-07-07 01:47:47",
+    "opening_time": "08:30",
     "closing_time": "21:30"
   },
   {
-    "id": "outlet_099",
+    "id": "outlet_99",
     "name": "ZUS Coffee – Bandar Teknologi Kajang",
     "address": "No. G-8 (Ground Floor), Jalan 1/2, HILLPARK RESIDENCE, Seksyen 1 Bandar Teknologi Kajang, 43500 Semenyih, Selangor",
     "area": "Semenyih",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:39",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/9cNsY6ftsn1d5rgx9",
+    "scraped_at": "2025-07-07 01:47:47",
+    "opening_time": "08:00",
+    "closing_time": "19:00"
   },
   {
     "id": "outlet_100",
@@ -995,8 +1094,9 @@
     "address": "B03, Ground Floor, VSQ@PJ City Centre, Jalan Utara, 46200 Petaling Jaya, Selangor",
     "area": "Petaling Jaya",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:39",
-    "opening_time": "06:30",
+    "direction_url": "https://maps.app.goo.gl/PAvN2P4C7TSVRLiH9",
+    "scraped_at": "2025-07-07 01:47:47",
+    "opening_time": "08:30",
     "closing_time": "23:00"
   },
   {
@@ -1005,9 +1105,10 @@
     "address": "L-013 (Ground Floor), Vista Shop, Jalan PJU 10/2A, Damansara Damai,47830 Petaling Jaya, Selangor",
     "area": "Petaling Jaya",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:39",
-    "opening_time": "06:30",
-    "closing_time": "21:00"
+    "direction_url": "https://maps.app.goo.gl/x3vfoWpBpRLG9K327",
+    "scraped_at": "2025-07-07 01:47:47",
+    "opening_time": "07:30",
+    "closing_time": "18:00"
   },
   {
     "id": "outlet_102",
@@ -1015,9 +1116,10 @@
     "address": "KF3 & KF5, First Floor, Aeon Mall Cheras, Selatan, Jalan Cheras Perdana Cheras, 43200, Balakong, Selangor",
     "area": "Balakong",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:39",
-    "opening_time": "07:00",
-    "closing_time": "21:30"
+    "direction_url": "https://maps.app.goo.gl/UrdwdN3cYSCCSuqB7",
+    "scraped_at": "2025-07-07 01:47:47",
+    "opening_time": "07:30",
+    "closing_time": "23:00"
   },
   {
     "id": "outlet_103",
@@ -1025,19 +1127,21 @@
     "address": "8-1-2 (Ground Floor), Jalan Setia Prima P U13/P, Setia Alam, 40170 Shah Alam, Selangor",
     "area": "Shah Alam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:39",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/1i1djZnUqsuTjtip7",
+    "scraped_at": "2025-07-07 01:47:47",
+    "opening_time": "08:30",
+    "closing_time": "19:00"
   },
   {
     "id": "outlet_104",
     "name": "ZUS Coffee – The Glenz @Glenmarie",
     "address": "G-3B (Ground Floor), Subplace Boulevard Pusat Kormersil Vestland, No.6, Jalan Juruanalisis U1/35, Seksyen U1, 40150 Shah Alam, Selangor Darul Ehsan",
     "area": "Shah Alam",
-    "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:39",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
+    "state": "Selangor Darul Ehsan",
+    "direction_url": "https://maps.app.goo.gl/qyNRDn9vdyN7ebpa9",
+    "scraped_at": "2025-07-07 01:47:47",
+    "opening_time": "06:30",
+    "closing_time": "23:00"
   },
   {
     "id": "outlet_105",
@@ -1045,9 +1149,10 @@
     "address": "A-G-9 (Ground Floor), Block A, Dataran Puchong, Jalan PU 7/1, Taman Puchong Utama, 47140 Puchong, Selangor",
     "area": "Puchong",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:39",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/JFR4PpoU3195PJiQ7",
+    "scraped_at": "2025-07-07 01:47:47",
+    "opening_time": "10:00",
+    "closing_time": "22:30"
   },
   {
     "id": "outlet_106",
@@ -1055,8 +1160,9 @@
     "address": "Lot LG2.37, Level LG2, Sunway Pyramid, 3, Jalan PJS 11/15, Bandar Sunway, 47500 Petaling Jaya, Selangor",
     "area": "Petaling Jaya",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:39",
-    "opening_time": "07:00",
+    "direction_url": "https://maps.app.goo.gl/gEZekwMHNSMr48rM8",
+    "scraped_at": "2025-07-07 01:47:47",
+    "opening_time": "10:00",
     "closing_time": "21:30"
   },
   {
@@ -1065,9 +1171,10 @@
     "address": "GK-08, Ground Floor, 67, Jln Taman Ibu Kota, Taman Danau Kota, 53300 Kuala Lumpur, Wilayah Persekutuan",
     "area": "Kuala Lumpur",
     "state": "Wilayah Persekutuan",
-    "scraped_at": "2025-07-01 18:57:39",
-    "opening_time": "06:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/Bm11m4TsgbU4vHuN7",
+    "scraped_at": "2025-07-07 01:47:47",
+    "opening_time": "07:00",
+    "closing_time": "23:00"
   },
   {
     "id": "outlet_108",
@@ -1075,9 +1182,10 @@
     "address": "Lot C.98.0, The Exchange TRX, Persiaran TRX, Tun Razak Exchange, 55188 Kuala Lumpur, Wilayah Persekutuan",
     "area": "Kuala Lumpur",
     "state": "Wilayah Persekutuan",
-    "scraped_at": "2025-07-01 18:57:39",
-    "opening_time": "07:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/dF2G1ifX7ZNim34X9",
+    "scraped_at": "2025-07-07 01:47:47",
+    "opening_time": "06:30",
+    "closing_time": "18:00"
   },
   {
     "id": "outlet_109",
@@ -1085,9 +1193,10 @@
     "address": "No.25, Jalan PJS 3/46, Taman Sri Manja, 46000 Petaling Jaya",
     "area": "Petaling Jaya",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:56",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/NC5h4Ka5GpkNqZXv7",
+    "scraped_at": "2025-07-07 01:48:01",
+    "opening_time": "08:00",
+    "closing_time": "20:00"
   },
   {
     "id": "outlet_110",
@@ -1095,8 +1204,9 @@
     "address": "No 18-G (Ground Floor), Jalan Eco Grandeur 1/9A, Eco Granduer, 42300, Bandar Puncak Alam, Selangor",
     "area": "Bandar Puncak Alam",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:56",
-    "opening_time": "06:30",
+    "direction_url": "https://maps.app.goo.gl/Ri16uBrxZcHrzipp6",
+    "scraped_at": "2025-07-07 01:48:01",
+    "opening_time": "08:30",
     "closing_time": "21:00"
   },
   {
@@ -1105,9 +1215,10 @@
     "address": "Lot G-01, Jaya Shopping Centre, Jalan 14/17, Seksyen 14, 46100 Petaling Jaya, Selangor",
     "area": "Petaling Jaya",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:56",
+    "direction_url": "https://maps.app.goo.gl/PPdekSrAX9qRBJPaA",
+    "scraped_at": "2025-07-07 01:48:01",
     "opening_time": "06:00",
-    "closing_time": "22:00"
+    "closing_time": "19:00"
   },
   {
     "id": "outlet_112",
@@ -1115,9 +1226,10 @@
     "address": "Lot 47-1, Jalan Eco Majestic 10/1A, 43500 Semenyih, Selangor.",
     "area": "Semenyih",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:56",
-    "opening_time": "07:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/5do85BzjhSHZQqGd8",
+    "scraped_at": "2025-07-07 01:48:01",
+    "opening_time": "10:00",
+    "closing_time": "22:30"
   },
   {
     "id": "outlet_113",
@@ -1125,19 +1237,21 @@
     "address": "Lot L3-44A, Level 3, gateway@KLIA2, Lbh KLIA, 43900 KLIA, Selangor",
     "area": "KLIA",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:56",
-    "opening_time": "06:30",
-    "closing_time": "23:00"
+    "direction_url": "https://maps.app.goo.gl/zokxx7yUmHcStc978",
+    "scraped_at": "2025-07-07 01:48:01",
+    "opening_time": "07:00",
+    "closing_time": "21:30"
   },
   {
     "id": "outlet_114",
     "name": "ZUS Coffee – Gateway@KLIA2 (Arrival Hall, Level 2)",
     "address": "Lot No. L2-90B, Level 2, gateway@KLIA2, Lbh KLIA, 43900 Klia, Selangor",
-    "area": "KLIA",
+    "area": "Klia",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:56",
-    "opening_time": "06:30",
-    "closing_time": "23:00"
+    "direction_url": "https://maps.app.goo.gl/ix7SbeVWTn9Ya3JS7",
+    "scraped_at": "2025-07-07 01:48:01",
+    "opening_time": "10:00",
+    "closing_time": "22:30"
   },
   {
     "id": "outlet_115",
@@ -1145,19 +1259,21 @@
     "address": "No. 9 (Ground Floor), Jalan USJ 10/1E, Taipan Business Centre, 47620, Subang Jaya, Selangor",
     "area": "Subang Jaya",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:56",
+    "direction_url": "https://maps.app.goo.gl/ypaC1vcYetCYs3aV8",
+    "scraped_at": "2025-07-07 01:48:01",
     "opening_time": "07:00",
-    "closing_time": "21:30"
+    "closing_time": "23:00"
   },
   {
     "id": "outlet_116",
     "name": "ZUS Coffee – Sunway Velocity Mall",
     "address": "Lot 1-22, First Floor, Lingkaran SV2, Sunway Velocity Mall, 55100 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
     "area": "Kuala Lumpur",
-    "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:57:56",
-    "opening_time": "10:00",
-    "closing_time": "22:00"
+    "state": "Wilayah Persekutuan Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/tSr4cVgTudc9g7RKA",
+    "scraped_at": "2025-07-07 01:48:01",
+    "opening_time": "08:00",
+    "closing_time": "20:00"
   },
   {
     "id": "outlet_117",
@@ -1165,19 +1281,21 @@
     "address": "Lot C-17, Level Concourse, Permata Sapura, Kuala Lumpur City Centre, 50088 Kuala Lumpur.",
     "area": "Kuala Lumpur",
     "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:57:56",
-    "opening_time": "07:00",
-    "closing_time": "21:30"
+    "direction_url": "https://maps.app.goo.gl/7jfFcmfhtje1aJWr8",
+    "scraped_at": "2025-07-07 01:48:01",
+    "opening_time": "10:00",
+    "closing_time": "21:00"
   },
   {
     "id": "outlet_118",
     "name": "ZUS Coffee – Taman Myra Meranti, Puchong",
     "address": "No. 8A (Ground Floor), Jalan MM4, Taman Myra Meranti, 47120 Puchong, Selangor Darul Ehsan",
     "area": "Puchong",
-    "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:56",
-    "opening_time": "07:00",
-    "closing_time": "21:30"
+    "state": "Selangor Darul Ehsan",
+    "direction_url": "https://maps.app.goo.gl/T2FaCc1iy6ptTeor8",
+    "scraped_at": "2025-07-07 01:48:01",
+    "opening_time": "06:00",
+    "closing_time": "20:00"
   },
   {
     "id": "outlet_119",
@@ -1185,9 +1303,10 @@
     "address": "A1-0-12 (Ground Floor), OUG Parklane, Jalan 1/152, Taman OUG Parklane, 58200 Kuala Lumpur",
     "area": "Kuala Lumpur",
     "state": "Kuala Lumpur",
-    "scraped_at": "2025-07-01 18:57:56",
-    "opening_time": "07:00",
-    "closing_time": "22:00"
+    "direction_url": "https://maps.app.goo.gl/W24LoGds3JoiD3m37",
+    "scraped_at": "2025-07-07 01:48:01",
+    "opening_time": "09:00",
+    "closing_time": "23:00"
   },
   {
     "id": "outlet_120",
@@ -1195,8 +1314,141 @@
     "address": "Lot GK105, Ground Floor, Centro Mall, 8, Jalan Batu Tiga Lama, Kawasan 16, 41300 Klang, Selangor",
     "area": "Klang",
     "state": "Selangor",
-    "scraped_at": "2025-07-01 18:57:56",
+    "direction_url": "https://maps.app.goo.gl/PNyXbe5UZ439yJQj9",
+    "scraped_at": "2025-07-07 01:48:01",
+    "opening_time": "06:00",
+    "closing_time": "22:30"
+  },
+  {
+    "id": "outlet_121",
+    "name": "ZUS Coffee – Lotus’s Klang",
+    "address": "Lot GK14. KS 6, 3, Jalan Batu Nilam 6, Bandar Bukit Tinggi 1, 41200 Klang, Selangor.",
+    "area": "Klang",
+    "state": "Selangor",
+    "direction_url": "https://maps.app.goo.gl/6rScsK1tKDm6Mcac6",
+    "scraped_at": "2025-07-07 01:48:16",
+    "opening_time": "07:00",
+    "closing_time": "19:00"
+  },
+  {
+    "id": "outlet_122",
+    "name": "ZUS Coffee – Pavilion Damansara Heights",
+    "address": "Lot 2.13.01. Level 2. No. 3, Jalan Damanlela, Pavilion Damansara Heights 50490 Kuala Lumpur.",
+    "area": "Kuala Lumpur",
+    "state": "Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/TqbHh3pMfNtRj4ht9",
+    "scraped_at": "2025-07-07 01:48:16",
+    "opening_time": "07:30",
+    "closing_time": "21:00"
+  },
+  {
+    "id": "outlet_123",
+    "name": "ZUS Coffee – Shaftsbury Square",
+    "address": "Level P1-23, Lot 2350, Shaftsbury Square, Cyber 6, 63000 Cyberjaya, Selangor",
+    "area": "Cyberjaya",
+    "state": "Selangor",
+    "direction_url": "https://maps.app.goo.gl/rEPRLDbi6WzySivA6",
+    "scraped_at": "2025-07-07 01:48:16",
+    "opening_time": "10:00",
+    "closing_time": "22:00"
+  },
+  {
+    "id": "outlet_124",
+    "name": "ZUS Coffee – SS2",
+    "address": "No.5, Jalan SS2/67, SS2, 47300 Petaling Jaya, Selangor",
+    "area": "Petaling Jaya",
+    "state": "Selangor",
+    "direction_url": "https://maps.app.goo.gl/bWF7JyTj4fsrvduv8",
+    "scraped_at": "2025-07-07 01:48:16",
+    "opening_time": "06:00",
+    "closing_time": "18:00"
+  },
+  {
+    "id": "outlet_125",
+    "name": "ZUS Coffee – Sunway Velocity Two",
+    "address": "Lot VS1-G-01, Sunway Velocity Two, Jalan Peel, Seksyen 90, 55100 Wilayah Persekutuan Kuala Lumpur.",
+    "area": "Kuala Lumpur",
+    "state": "Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/cpAihjdHZWuwS8fg8",
+    "scraped_at": "2025-07-07 01:48:16",
+    "opening_time": "06:00",
+    "closing_time": "19:00"
+  },
+  {
+    "id": "outlet_126",
+    "name": "ZUS Coffee – Kidzania Kuala Lumpur",
+    "address": "Curve NX, Jalan PJU 7/5, Mutiara, Damansara 47810 Petaling Jaya, Selangor",
+    "area": "Petaling Jaya",
+    "state": "Selangor",
+    "direction_url": "https://maps.app.goo.gl/y8ftJcN4VPpD37U8A",
+    "scraped_at": "2025-07-07 01:48:16",
+    "opening_time": "06:00",
+    "closing_time": "22:30"
+  },
+  {
+    "id": "outlet_127",
+    "name": "ZUS Coffee – Seventeen Mall",
+    "address": "998, Jalan 17/38, Seksyen 17, 46400 Petaling Jaya, Selangor",
+    "area": "Petaling Jaya",
+    "state": "Selangor",
+    "direction_url": "https://maps.app.goo.gl/wg2ZfHJZQJP5gcnm7",
+    "scraped_at": "2025-07-07 01:48:16",
+    "opening_time": "07:00",
+    "closing_time": "19:00"
+  },
+  {
+    "id": "outlet_128",
+    "name": "ZUS Coffee – SHELL Cyberjaya Autoville",
+    "address": "Stesen Minyak Shell Autoville, Persiaran Mutilmedia, Cyber 10, 63000, Cyberjaya, Selangor",
+    "area": "Cyberjaya",
+    "state": "Selangor",
+    "direction_url": "https://maps.app.goo.gl/69dHq3DgYtq3h3Kj6",
+    "scraped_at": "2025-07-07 01:48:16",
+    "opening_time": "08:00",
+    "closing_time": "23:00"
+  },
+  {
+    "id": "outlet_129",
+    "name": "ZUS Coffee – Cybersouth Dengkil",
+    "address": "No 35-G, Jalan PP 1/1, Park Place 1, Cybersouth, 43800 Dengkil, Selangor",
+    "area": "Dengkil",
+    "state": "Selangor",
+    "direction_url": "https://maps.app.goo.gl/KJGBzSUYVHKFyxTs6",
+    "scraped_at": "2025-07-07 01:48:16",
+    "opening_time": "07:30",
+    "closing_time": "18:00"
+  },
+  {
+    "id": "outlet_130",
+    "name": "ZUS Coffee – UCSI University KL",
+    "address": "Lot 6, Block G, Ground Floor, UCSI University, No. 1, Jalan Menara Gading, UCSI Heights (Taman Connaught), 56000 Cheras, Kuala Lumpur.",
+    "area": "Cheras",
+    "state": "Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/8nSgs6vCWKjW4MCR8",
+    "scraped_at": "2025-07-07 01:48:16",
     "opening_time": "06:30",
     "closing_time": "23:00"
+  },
+  {
+    "id": "outlet_131",
+    "name": "ZUS Coffee – Avenue K",
+    "address": "Lot C-6, Level Concourse, Avenue K, 156 Jalan Ampang, 50450 Kuala Lumpur.",
+    "area": "Kuala Lumpur",
+    "state": "Kuala Lumpur",
+    "direction_url": "https://maps.app.goo.gl/m5H6LUwbe4C68hQX9",
+    "scraped_at": "2025-07-07 01:48:16",
+    "opening_time": "08:30",
+    "closing_time": "19:00"
+  },
+  {
+    "id": "outlet_132",
+    "name": "ZUS Coffee – Centrepoint Bandar Utama",
+    "address": "LOT F103, First Floor, Centrepoint Bandar Utama, 3, Lebuh Bandar Utama, Bandar Utama, 47800 Petaling Jaya, Selangor",
+    "area": "Petaling Jaya",
+    "state": "Selangor",
+    "direction_url": "https://maps.app.goo.gl/2m3UHhhCWzcUGVi18",
+    "scraped_at": "2025-07-07 01:48:16",
+    "opening_time": "08:30",
+    "closing_time": "19:00"
   }
 ]

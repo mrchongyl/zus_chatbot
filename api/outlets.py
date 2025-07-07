@@ -9,7 +9,6 @@ import os
 import re
 import google.generativeai as genai
 from dotenv import load_dotenv
-import datetime
 
 load_dotenv()
 
@@ -36,29 +35,25 @@ class Text2SQLConverter:
         # Preprocess the query for time conversion
         processed_query = self.preprocess_query(natural_query)
         
-        # Add current time info
-        now = datetime.datetime.now()
-        current_time_str = now.strftime("%H:%M:%S")
-        
         system_prompt = f"""
-        Convert natural language to SQL for ZUS coffee outlets.
+        Convert user queries into SQLite SQL for ZUS Coffee outlets.
 
-        Current datetime: {current_time_str}
+        Schema:
+        outlets(id, name, address, area, state, opening_time, closing_time, direction_url)
 
-        Schema: outlets(id, name, address, area, state, opening_time, closing_time)
-
-        Rules: 
-        - ALWAYS select only the relevant columns: id, name, address, area, state, opening_time, closing_time (never use SELECT *), LIKE with %, case-insensitive, LIMIT 5, SQLite syntax
-        - Auto-convert time: AM/PM to 24hr format (8 AM → 08:00, 10 PM → 22:00)
-        
-        IMPORTANT: 
-        - Always detect and convert any Malaysian location initialisms (e.g., "PJ", "KL") into their full names (e.g., "Petaling Jaya", "Kuala Lumpur"). Ensure that all name/area/state abbreviations are expanded to their full forms prior to execution.
+        Rules:
+        - Select only: id, name, address, area, state, opening_time, closing_time, direction_url (no SELECT *)
+        - Use case-insensitive LIKE with %
+        - Use LIMIT 5
+        - Convert AM/PM to 24-hour format (e.g., 10 PM → 22:00)
+        - Expand Malaysian abbreviations (e.g., "PJ" → "Petaling Jaya", "KL" → "Kuala Lumpur")
+        - Use SQLite syntax (e.g., strftime for current time)
 
         Examples:
-        - "Find outlets in Kuala Lumpur" → SELECT id, name, address, area, state, opening_time, closing_time FROM outlets WHERE area LIKE '%Kuala Lumpur%' OR state LIKE '%Kuala Lumpur%' OR name LIKE '%Kuala Lumpur%' LIMIT 5;
-        - "Open until 10 PM" → SELECT id, name, address, area, state, opening_time, closing_time FROM outlets WHERE closing_time >= '22:00' LIMIT 5;
-        - "What outlets are open now?" → SELECT id, name, address, area, state, opening_time, closing_time FROM outlets WHERE opening_time <= strftime('%H:%M', 'now', 'localtime') AND closing_time >= strftime('%H:%M', 'now', 'localtime') LIMIT 5;
-        - "1 Utama opening hours" → SELECT id, name, address, area, state, opening_time, closing_time FROM outlets WHERE name LIKE '%1 Utama%' OR area LIKE '%1 Utama%' LIMIT 5;
+        - "Find outlets in Kuala Lumpur" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url FROM outlets WHERE area LIKE '%Kuala Lumpur%' OR state LIKE '%Kuala Lumpur%' OR name LIKE '%Kuala Lumpur%' LIMIT 5;    
+        - "Open until 10 PM" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url  FROM outlets WHERE closing_time >= '22:00' LIMIT 5;
+        - "What outlets are open now?" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url  FROM outlets WHERE opening_time <= strftime('%H:%M', 'now', 'localtime') AND closing_time >= strftime('%H:%M', 'now', 'localtime') LIMIT 5;
+        - "1 Utama opening hours" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url FROM outlets WHERE name LIKE '%1 Utama%' OR area LIKE '%1 Utama%' LIMIT 5;
 
         Query: {processed_query}
         SQL:

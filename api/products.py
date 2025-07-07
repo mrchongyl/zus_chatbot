@@ -62,16 +62,21 @@ def generate_ai_summary(query: str, products: List[Dict[str, Any]], model) -> st
     # Create context from the search results
     products_context = []
     for i, product in enumerate(products, 1):
+
+        # Convert colours from string to plain text
+        colours = product.get('colours', [])
+        colours_text = ', '.join(colours) if colours else 'No colour details'
+
         context = f"""
         {i}. {product['name']}
-           - Category: {product['category']}
-           - Price: {product['price']}
-           - Description: {product['description']}
-           - In Stock: {'Yes' if product['in_stock'] else 'No'}
-           - Similarity Score: {product.get('similarity_score', 0):.3f}
+        - Price: {product['price']}
+        - Promotion: {product['promotion']}
+        - Category: {product['category']}
+        - Colours: {colours_text}
+        - In Stock: {'Yes' if product['in_stock'] else 'No'}
+        - Similarity Score: {product.get('similarity_score', 0):.3f}
         """.strip()
         products_context.append(context)
-    
     context_text = "\n\n".join(products_context)
     
     prompt = f"""
@@ -112,7 +117,7 @@ def init_vector_store():
 @router.get("")
 async def search_products(
     query: str = Query(..., description="Search query for products"),
-    top_k: int = Query(5, ge=1, le=20, description="Number of top results to return"),
+    top_k: int = Query(5, ge=1, le=10, description="Number of top results to return"),
     include_summary: bool = Query(True, description="Include AI-generated summary")
 ):
     """
@@ -142,8 +147,8 @@ async def search_products(
         if not results:
             return {
                 "query": query,
-                "summary": "No products found matching your search criteria. Please try different keywords.",
                 "products": [],
+                "summary": "No products found matching your search criteria. Please try different keywords.",
                 "total_results": 0
             }
         
@@ -171,11 +176,11 @@ async def search_products(
 @router.get("/raw")
 async def search_products_raw(
     query: str = Query(..., description="Search query for products"),
-    top_k: int = Query(5, ge=1, le=20, description="Number of top results to return")
+    top_k: int = Query(5, ge=1, le=10, description="Number of top results to return")
 ):
     """
     Search for products and return raw results without AI summary.
-    Useful for debugging or when you don't need AI processing.
+    For debugging purposes.
     """
     
     if not vector_store:
@@ -211,5 +216,4 @@ async def health_check():
         "message": "Vector store initialized successfully"
     }
 
-# Initialize vector store when module is imported
-init_vector_store()
+# Initialize vector store

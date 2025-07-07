@@ -21,19 +21,23 @@ class ProductVectorStore:
         self.dimension = 384  # Dimension for all-MiniLM-L6-v2
         
     def create_product_documents(self, products: List[Dict[str, Any]]) -> List[str]:
-        """Create searchable documents from product data, including promotion details."""
+        """Create searchable documents from product data, including colours and promotion details."""
         documents = []
         
         for product in products:
+            # Format colours for display
+            colours = product.get('colours', [])
+            colours_text = ', '.join(colours) if colours else 'No colours specified'
+            
             doc = f"""
             Product Name: {product.get('name', 'Unknown')}
             Category: {product.get('category', 'Unknown')}
             Price: {product.get('price', 'N/A')}
+            Colours: {colours_text}
             Promotion: {product.get('promotion', 'N/A')}
-            Description: {product.get('description', 'No description available')}
             In Stock: {'Yes' if product.get('in_stock', True) else 'No'}
             
-            Full Product Info: {product.get('name', '')} - {product.get('category', '')} drinkware item priced at {product.get('price', 'N/A')}. Promotion: {product.get('promotion', 'N/A')}. {product.get('description', '')}
+            Full Product Info: {product.get('name', '')} - {product.get('category', '')} drinkware item priced at {product.get('price', 'N/A')}. Available colours: {colours_text}. Promotion: {product.get('promotion', 'N/A')}.
             """.strip()
             
             documents.append(doc)
@@ -165,7 +169,7 @@ def build_vector_store():
         "ceramic mug",
         "travel cup",
         "cold drink container",
-        "ZUS coffee cup"
+        "blue tumbler"
     ]
     
     for query in test_queries:

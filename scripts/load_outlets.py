@@ -24,6 +24,8 @@ def create_database():
     conn = sqlite3.connect('data/outlets.db')
     cursor = conn.cursor()
     
+    # Drop the table if it exists to avoid schema mismatch
+    cursor.execute('DROP TABLE IF EXISTS outlets')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS outlets (
             id VARCHAR PRIMARY KEY,
@@ -33,6 +35,7 @@ def create_database():
             state VARCHAR NOT NULL,
             opening_time TIME,
             closing_time TIME,
+            direction_url TEXT,
             scraped_at DATETIME,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )
@@ -69,8 +72,8 @@ def load_outlets_from_csv():
             for row in reader:
                 cursor.execute('''
                     INSERT OR REPLACE INTO outlets 
-                    (id, name, address, area, state, opening_time, closing_time, scraped_at)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    (id, name, address, area, state, opening_time, closing_time, direction_url, scraped_at)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ''', (
                     row.get('id', ''),
                     row.get('name', ''),
@@ -79,6 +82,7 @@ def load_outlets_from_csv():
                     row.get('state', ''),
                     row.get('opening_time', ''),
                     row.get('closing_time', ''),
+                    row.get('direction_url', ''),
                     row.get('scraped_at', '')
                 ))
                 outlets_loaded += 1
@@ -88,9 +92,11 @@ def load_outlets_from_csv():
         
         # Show sample data
         #print("\n--- Testing Database ---")
-        cursor.execute('SELECT name, area, state, opening_time, closing_time FROM outlets LIMIT 3')
+        cursor.execute('SELECT name, area, state, opening_time, closing_time, direction_url FROM outlets LIMIT 3')
         sample = cursor.fetchall()
         print("\nSample outlets:")
+        for outlet in sample:
+            print(outlet)
         
     except Exception as e:
         print(f"Error loading data: {e}")

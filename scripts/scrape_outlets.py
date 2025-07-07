@@ -1,5 +1,5 @@
 """
-ZUS Coffee Outlet Scraper using Gemini 2.0 Flash
+ZUS Coffee Outlet Scraper using Gemini 2.0 Flash-Lite
 Scrapes outlet information from https://zuscoffee.com/category/store/kuala-lumpur-selangor/
 """
 
@@ -8,10 +8,17 @@ import json
 import csv
 import time
 import os
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Tuple
 import google.generativeai as genai
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
+
+BASE_URL = "https://zuscoffee.com/category/store/kuala-lumpur-selangor/"
+MAX_PAGES = 11
+MIN_OUTLETS_PER_PAGE = 5
+MAX_EXTRACTION_RETRIES = 3
+SAVE_RAW_FILES = True
+USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
 
 # Setup Gemini API configuration
 def setup_gemini_api():
@@ -20,127 +27,87 @@ def setup_gemini_api():
     if not api_key:
         print("Warning: GEMINI_API_KEY environment variable not set.")
         return None
-    
     genai.configure(api_key=api_key)
-    return genai.GenerativeModel('gemini-2.0-flash')
+    return genai.GenerativeModel('gemini-2.0-flash-lite')
 
-def scrape_outlets() -> List[Dict[str, Any]]:
-    
-    print("Starting outlet scraping")
-    
-    # Setup Gemini API
-    model = setup_gemini_api()
-
-    outlets = []
-    
-    # URLs to scrape
-    pages_to_scrape = [
-        "https://zuscoffee.com/category/store/kuala-lumpur-selangor/"
-        "https://zuscoffee.com/category/store/kuala-lumpur-selangor/page/2/",
-        "https://zuscoffee.com/category/store/kuala-lumpur-selangor/page/3/",
-        "https://zuscoffee.com/category/store/kuala-lumpur-selangor/page/4/",
-        "https://zuscoffee.com/category/store/kuala-lumpur-selangor/page/5/"
-    ]
-    
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-    }
-    
-    for page_num, url in enumerate(pages_to_scrape, 1):
+def fetch_with_retries(url, headers, max_retries=3):
+    for attempt in range(max_retries):
         try:
-            print(f"Fetching page {page_num}: {url}")
-            response = requests.get(url, headers=headers, timeout=15)
+            response = requests.get(url, headers=headers, timeout=30)
             response.raise_for_status()
-            
-            # Extract text content for processing
-            soup = BeautifulSoup(response.content, 'html.parser')
-            page_text = extract_clean_text_content(soup)
-
-            # Save raw scraped text for debugging
-            os.makedirs("data", exist_ok=True)
-            with open(f"data/outlets_raw{page_num}.txt", 'w', encoding='utf-8') as f:
-                f.write(page_text)
-            print(f"Saved raw data/outlets_raw{page_num}.txt")
-
-            if not page_text.strip():
-                print(f"No content found on page {page_num}")
-                continue
-            
-            # Use Gemini to extract outlet information
-            page_outlets = extract_outlets_with_gemini(model, page_text, page_num)
-            
-            if page_outlets:
-                outlets.extend(page_outlets)
-                print(f"Extracted {len(page_outlets)} outlets from page {page_num}")
-            else:
-                print(f"No outlets extracted from page {page_num}")
-            
-            # Rate limiting to respect API limits
-            time.sleep(2)
-            
-        except requests.RequestException as e:
-            print(f"Error fetching page {page_num}: {e}")
-            continue
+            return response
         except Exception as e:
-            print(f"Error processing page {page_num}: {e}")
+            print(f"Fetch failed ({e}), retrying {attempt+1}/{max_retries}...")
+            time.sleep(10)
+    return None
+
+def extract_clean_text_content(soup) -> Tuple[str, List[Dict[str, str]]]:
+    """Extract outlet name, address, and direction URL from structured <article> elements."""
+    outlet_blocks = []
+    articles = soup.find_all("article")
+    print(f"Found {len(articles)} <article> blocks")
+    skip_names = {"Ingredients", "KCAL", ""}
+
+    for idx, article in enumerate(articles):
+        try:
+            ps = article.find_all("p")
+            name = ps[0].get_text(strip=True) if len(ps) > 0 else ""
+            address = ps[1].get_text(strip=True) if len(ps) > 1 else ""
+            # Filter: Unwanted extras like "Ingredients" and "KCAL"
+            if name in skip_names or address in skip_names:
+                continue
+            # Search for the <a> link that contains 'maps.app.goo.gl'
+            direction_url = ""
+            for a in article.find_all("a", href=True):
+                href = a['href'].strip()
+                if "maps.app.goo.gl" in href:
+                    direction_url = href
+                    break
+            # Only add if all three fields are present and direction_url is not empty
+            if name and address and direction_url:
+                outlet_blocks.append({
+                    "name": name,
+                    "address": address,
+                    "direction_url": direction_url
+                })
+        except Exception as e:
+            print(f"Error parsing article {idx}: {e}")
             continue
-    
-    print(f"Total outlets collected: {len(outlets)}")
-    return outlets
+    # Combined text for debugging or Gemini input
+    page_text = "\n".join([
+        f"{outlet['name']}\n{outlet['address']}\nDirection: {outlet['direction_url']}"
+        for outlet in outlet_blocks
+    ])
+    return page_text, outlet_blocks
 
-def extract_clean_text_content(soup) -> str:
-    """Extract clean text content from HTML for processing."""
-    
-    # Remove script and style elements
-    for script in soup(["script", "style", "nav", "header", "footer"]):
-        script.decompose()
-    
-    # Get text content
-    text = soup.get_text()
-    
-    # Clean up the text
-    lines = (line.strip() for line in text.splitlines())
-    chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-    text = ' '.join(chunk for chunk in chunks if chunk)
-    
-    # Truncate if too long (Gemini has token limits)
-    if len(text) > 30000:
-        text = text[:30000] + "..."
-    
-    return text
 
-def extract_outlets_with_gemini(model, page_text: str, page_num: int) -> List[Dict[str, Any]]:
-    """Use Gemini to extract outlet information from page text."""
+def extract_outlets_with_gemini(model, outlet_blocks: list, page_num: int, start_index: int) -> List[Dict[str, Any]]:
+    """Use Gemini to extract outlet information from outlet_blocks."""
     
     prompt = f"""
-You are an expert data extraction assistant. Extract ZUS Coffee outlet information from the following webpage content.
+    Below is structured ZUS Coffee outlet data scraped from a webpage.
 
-TASK: Extract all ZUS Coffee outlets with their complete and accurate information.
+    Each outlet contains a name, full address, and a Google Maps direction URL.
 
-REQUIREMENTS:
-1. Each outlet must have a unique and correct name-address pairing
-2. Ensure outlet names match their corresponding addresses
-3. Extract the 'area' (city/town) and 'state' from the address field, and include them as separate fields in the output. 
-For example, if the address ends with 'Shah Alam, Selangor', then area is 'Shah Alam' and state is 'Selangor'.
+    TASK: For each outlet:
+    - Extract 'area' (town/city) and 'state' from the address
+    - Return name, address, area, state, and direction_url
 
-OUTPUT FORMAT: Return a valid JSON array with this exact structure:
-[
-  {{
-    "name": "ZUS Coffee – [Location Name]",
-    "address": "[Complete physical address]",
-    "area": "[Extracted area from address]",
-    "state": "[Extracted state from address]",
-  }}
-]
+    OUTPUT FORMAT: Return a valid JSON array with this exact structure:
+    [
+    {{
+        "name": "...",
+        "address": "...",
+        "area": "[Extracted area from address]",
+        "state": "[Extracted state from address]",
+        "direction_url": "..."
+    }}
+    ]
 
-IMPORTANT RULES:
-- Ensure each outlet name correctly corresponds to its address
-- Area and state must be extracted from the address and included as separate fields
+    OUTLETS:
+    {json.dumps(outlet_blocks, indent=2)}
 
-WEBPAGE CONTENT:
-{page_text}
-
-Extract the outlets as a JSON array:
+    Extract the outlets as a JSON array:
 """
 
     try:
@@ -172,14 +139,15 @@ Extract the outlets as a JSON array:
                 continue
                 
             # Generate additional fields
-            outlet_id = f"outlet_{i+1:02d}"
-            
+            outlet_id = f"outlet_{start_index + i:02d}"
+
             processed_outlet = {
                 'id': outlet_id,
-                'name': outlet.get('name', '').strip(),
-                'address': outlet.get('address', '').strip(),
-                'area': outlet.get('area', '').strip(),
-                'state': outlet.get('state', '').strip(),
+                'name': outlet.get('name', ''),
+                'address': outlet.get('address', ''),
+                'area': outlet.get('area', ''),
+                'state': outlet.get('state', ''),
+                'direction_url': outlet.get('direction_url', ''),
                 'scraped_at': time.strftime('%Y-%m-%d %H:%M:%S'),
             }
             
@@ -195,8 +163,70 @@ Extract the outlets as a JSON array:
         print(f"Error in extraction: {e}")
         return []
 
-def save_outlets_to_csv(outlets: List[Dict[str, Any]], filename: str = "data/zus_outlets1.csv"):
+def scrape_outlets() -> List[Dict[str, Any]]:
+    print("Starting outlet scraping")
+    
+    # Setup Gemini
+    model = setup_gemini_api()
+    if not model:
+        print("Failed to setup Gemini API. Exiting...")
+        return []
+    
+    outlets = []
+    outlet_counter = 1 #CHANGE BACK TO 1
+    #pages_to_scrape = [f"{BASE_URL}page/{i}/" for i in range(12, MAX_PAGES + 1)] 
+    pages_to_scrape = [BASE_URL] + [f"{BASE_URL}page/{i}/" for i in range(2, MAX_PAGES + 1)]
 
+    headers = {'User-Agent': USER_AGENT}
+    #for page_num, url in zip(range(12, MAX_PAGES + 1), pages_to_scrape): 
+    for page_num, url in enumerate(pages_to_scrape, 1):
+
+        try:
+            print(f"Fetching page {page_num}: {url}")
+            outlet_blocks = []
+            for extraction_attempt in range(MAX_EXTRACTION_RETRIES):
+                response = fetch_with_retries(url, headers)
+                if response is None:
+                    print(f"Failed to fetch {url} after retries.")
+                    break
+                soup = BeautifulSoup(response.content, 'html.parser')
+                page_text, outlet_blocks = extract_clean_text_content(soup)
+                # Save raw scraped text for debugging
+                if SAVE_RAW_FILES:
+                    os.makedirs("data", exist_ok=True)
+                    with open(f"data/outlets_raw_page{page_num}.txt", 'w', encoding='utf-8') as f:
+                        f.write(page_text)
+                    print(f"Saved raw data/outlets_raw_page{page_num}.txt")
+                if not page_text.strip():
+                    print(f"No content found on page {page_num}")
+                    break
+                if len(outlet_blocks) >= MIN_OUTLETS_PER_PAGE:
+                    break  # Success, enough outlets found
+                print(f"Only {len(outlet_blocks)} outlets found on page {page_num}, retrying extraction ({extraction_attempt+1}/{MAX_EXTRACTION_RETRIES})...")
+                time.sleep(10)  # Wait before retrying
+            if not outlet_blocks or len(outlet_blocks) < MIN_OUTLETS_PER_PAGE:
+                print(f"Insufficient outlets ({len(outlet_blocks)}) on page {page_num} after retries, skipping.")
+                continue
+            # Use Gemini to extract outlet information
+            page_outlets = extract_outlets_with_gemini(model, outlet_blocks, page_num, outlet_counter)
+            if page_outlets:
+                outlets.extend(page_outlets)
+                outlet_counter += len(page_outlets)
+                print(f"Extracted {len(page_outlets)} outlets from page {page_num}")
+            else:
+                print(f"No outlets extracted from page {page_num}")
+            # Rate limiting to respect API limits
+            time.sleep(5)
+        except requests.RequestException as e:
+            print(f"Error fetching page {page_num}: {e}")
+            continue
+        except Exception as e:
+            print(f"Error processing page {page_num}: {e}")
+            continue
+    print(f"Total outlets collected: {len(outlets)}")
+    return outlets
+
+def save_outlets_to_csv(outlets: List[Dict[str, Any]], filename: str = "data/zus_outlets.csv"):
     if not outlets:
         print("No outlets to save to CSV.")
         return
@@ -209,8 +239,7 @@ def save_outlets_to_csv(outlets: List[Dict[str, Any]], filename: str = "data/zus
             writer.writerow(outlet)
     print(f"Saved {len(outlets)} outlets to {filename}")
 
-def save_outlets_to_json(outlets: List[Dict[str, Any]], filename: str = "data/zus_outlets1.json"):
-    
+def save_outlets_to_json(outlets: List[Dict[str, Any]], filename: str = "data/zus_outlets.json"):
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     with open(filename, 'w', encoding='utf-8') as jsonfile:
         json.dump(outlets, jsonfile, indent=2, ensure_ascii=False)

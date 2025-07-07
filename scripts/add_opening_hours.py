@@ -6,7 +6,6 @@ import csv
 import json
 import sqlite3
 import random
-from typing import List, Dict
 
 def main():    
     # Define possible opening and closing hours
@@ -55,9 +54,18 @@ def main():
                 WHERE id = ?
             """, (outlet['opening_time'], outlet['closing_time'], outlet['id']))
         conn.commit()
+        # Show sample data
+        cursor.execute('SELECT name, area, state, opening_time, closing_time, direction_url FROM outlets LIMIT 3')
+        sample = cursor.fetchall()
+        print("\nSample outlets:")
+        for outlet in sample:
+            print(outlet)
         conn.close()
         print("Database updated")
     except Exception as e:
         print(f"Database error: {e}")
     
     print("Done!")
+
+if __name__ == "__main__":
+    main()

@@ -17,7 +17,7 @@ Architecture:
 
 import os
 import requests
-from typing import Dict, Any, List
+from typing import List
 from dotenv import load_dotenv
 from langchain.agents import Tool, AgentExecutor, create_react_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -109,13 +109,13 @@ def outlets_tool(query: str) -> dict:
     
     Examples:
         outlets_tool("outlets in Kuala Lumpur") -> Returns all KL outlets
-        outlets_tool("all outlets") -> Returns all available outlets
+        outlets_tool("outlets open until 10 PM") -> Returns outlets with that opening time
     """
     try:
         response = requests.get(
             "http://127.0.0.1:8000/outlets",
             params={"query": query},
-            timeout=15
+            timeout=30
         )
         
         if response.status_code == 200:
@@ -151,7 +151,7 @@ def products_tool(query: str) -> str:
     try:
         response = requests.get(
             f"http://127.0.0.1:8000/products?query={query}&top_k=3",
-            timeout=15
+            timeout=20
         )
         
         if response.status_code == 200:
@@ -175,6 +175,7 @@ def products_tool(query: str) -> str:
                 result += f"   Price: {product['price']}\n"
                 result += f"   Promotion: {product['promotion']}\n"
                 result += f"   Category: {product['category']}\n"
+                result += f"   Colours: {product['colours']}\n"
                 result += f"   Similarity Score: {product['similarity_score']:.3f}\n\n"
             
             return result
@@ -223,16 +224,27 @@ def create_agent():
     
     custom_instructions = """
     
-    You are a helpful assistant for ZUS Coffee.
+    You are a helpful friendly assistant for ZUS Coffee.
     
     You have access to tools that return structured data (e.g., outlets, products, calculations).
     
     Use the data from the tools to answer the user's question clearly and concisely.
-    Always follow the ReAct format: After each Thought, output either 'Action:' with the tool name and input, or 'Final Answer:' with your answer.
+    
+    **After every Thought, you must output either 'Action:' (with the tool name and input) or 'Final Answer:' (with your answer). Never output a Thought without immediately following it with one of these.**
     
     Do not output answers before 'Final Answer:'.
     
-    For lists, show items as bullet points (e.g., "- Item") on separate lines. Be brief, clear, and conversational. Say politely if no results are found.
+    For lists, show items as bullet points (e.g., "- Item") on separate lines. 
+    
+    When giving replying in Final Answer, use a friendly, conversational tone—like a helpful barista to make the response more engaging.
+
+    Before every Action, write a Thought that justifies whether a tool call is needed. 
+
+    If a previous Action has already returned the required data, refer back to it and avoid re-querying. You may refer to these results with labels (e.g., "outlet list").
+
+    Only call the same tool again if the user's request clearly asks for different or more specific information.
+    
+    **When presenting outlet search results, only show the outlet names as a bullet list unless the user specifically asks for more details (like address, opening hours, or directions).**
 
     """
 
@@ -250,6 +262,7 @@ def create_agent():
         tools=tools,
         verbose=True,
         max_iterations=4,
+        max_execution_time=60,
         handle_parsing_errors=True
     )
     
