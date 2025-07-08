@@ -220,6 +220,7 @@ def create_agent():
     Rules:
     - Never answer before 'Final Answer:'.
     - Use bullet points ("- Item") for lists, each on a new line.
+    - Keep track of previous user queries, tool inputs, and results to maintain context in multi-turn conversations.
     - For outlet searches, list only outlet names unless the user asks for more (e.g., address, hours, directions).
     - If the user makes a very long, complex, or multi-part request (e.g., asking for products, outlets, and calculations at once, or inputting complex arithmetic), politely refuse and ask them to simplify or split it into smaller parts.
 
