@@ -26,6 +26,7 @@ class Text2SQLConverter:
         api_key = os.getenv('GEMINI_API_KEY')
         genai.configure(api_key=api_key)
         self.model = genai.GenerativeModel('gemini-2.5-flash-lite-preview-06-17')
+        
     # Convert natural language query to SQL using Gemini
     def convert_to_sql(self, natural_query: str) -> str:
         if not self.model:
@@ -44,12 +45,11 @@ class Text2SQLConverter:
         - Use LIMIT 5
         - Convert AM/PM to 24-hour format (e.g., 10 PM → 22:00)
         - Expand Malaysian abbreviations (e.g., "PJ" → "Petaling Jaya", "KL" → "Kuala Lumpur")
-        - Use SQLite syntax (e.g., strftime for current time)
+        - Use SQLite syntax
 
         Examples:
         - "Find outlets in Kuala Lumpur" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url FROM outlets WHERE area LIKE '%Kuala Lumpur%' OR state LIKE '%Kuala Lumpur%' OR name LIKE '%Kuala Lumpur%' LIMIT 5;    
         - "Open until 10 PM" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url  FROM outlets WHERE closing_time >= '22:00' LIMIT 5;
-        - "What outlets are open now?" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url  FROM outlets WHERE opening_time <= strftime('%H:%M', 'now', 'localtime') AND closing_time >= strftime('%H:%M', 'now', 'localtime') LIMIT 5;
         - "1 Utama opening hours" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url FROM outlets WHERE name LIKE '%1 Utama%' OR area LIKE '%1 Utama%' LIMIT 5;
 
         Query: {processed_query}
