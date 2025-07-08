@@ -9,7 +9,7 @@ This chatbot can:
 4. Remember conversation history for multi-turn chats
 
 Architecture:
-- Uses Google Gemini 2.0 Flash as the language model
+- Uses Google Gemini 2.5-Flash-Lite as the language model
 - LangChain ReAct agent with hwchase17/react + custom prompt
 - Three main tools: calculator, outlets, products
 - Conversation memory for context preservation

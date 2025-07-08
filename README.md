@@ -23,7 +23,7 @@ This project implements a multi-turn conversational AI chatbot with agentic plan
    - Windows: `./.venv/Scripts/activate`
    - Mac/Linux: `source .venv/bin/activate`
 4. Install dependencies: `pip install -r requirements.txt`
-5. Copy `.env.example` to `.env` and set your API keys and configuration (e.g., GEMINI_API_KEY).
+5. Create `.env` to set your API keys and configuration (e.g., GEMINI_API_KEY).
 6. (Optional) Build or update the vector store and database:
    - `python scripts/load_products.py`  # Loads product data
    - `python scripts/load_outlets.py`   # Loads outlet data
@@ -80,6 +80,7 @@ The system is composed of several modular components:
   - Exposes endpoints for calculator, product search (RAG), and outlet queries (Text2SQL).
   - Handles requests from both the chatbot agent and external clients.
   - Integrates with a vector store (FAISS) for semantic product search and a SQLite database for outlet info.
+  - Implements a safe calculator API using asteval to evaluate user-submitted math expressions securely.
 
 - **Chatbot Agent (`chatbot/`):**
   - Implements a multi-turn conversational agent using the LangChain ReAct pattern and Google Gemini LLM.
@@ -99,45 +100,77 @@ The system is composed of several modular components:
 Below is a flowchart illustrating the main components and data flow of the system, from user input to backend processing and data retrieval.
 
 ```
-User (via Streamlit UI)
-        │
-        ▼
-+-------------------+
-|  Streamlit Frontend|
-| (zus_chatbot.py)   |
-+-------------------+
-        │
-        ▼
-+-------------------+
-| Chatbot Agent     |
-| (chatbot/)        |
-| - Multi-turn      |
-| - Agentic planning|
-| - Tool selection  |
-+-------------------+
-        │
-        ▼
-+-------------------+
-| FastAPI Backend   |
-| (api/)            |
-| - Exposes API     |
-|   endpoints:      |
-|   • Calculator    |
-|   • ZUS_Products  |
-|   • ZUS_Outlets   |
-+-------------------+
-   │        │        │
-   │        │        │
-   ▼        ▼        ▼
-Calculator  Product   Outlet
- Tool API   Search    Search
-            (RAG)     (Text2SQL)
-            │         │
-            ▼         ▼
-   FAISS Vector   SQLite DB
-   Store         (data/outlets.db)
-   (data/)       (data/)
+           User (via Streamlit UI)
+                     │
+                     ▼
+        +-----------------------------+
+        |     Streamlit Frontend      |
+        |        (zus_chatbot.py)     |
+        +-----------------------------+
+                     │
+                     ▼
+        +-----------------------------+
+        |        Chatbot Agent        |
+        |           (chatbot/)        |
+        | - Multi-turn conversation   |
+        | - Agentic planning          |
+        | - Tool selection            |
+        +-----------------------------+
+                     │
+                     ▼
+        +-----------------------------+
+        |        FastAPI Backend      |
+        |             (api/)          |
+        | - Exposes API endpoints:    |
+        |     • Calculator             |
+        |     • ZUS_Products (RAG)     |
+        |     • ZUS_Outlets (Text2SQL)|
+        +-----------------------------+
+           │           │           │
+           ▼           ▼           ▼
++----------------+  +----------------+  +------------------+
+|  Calculator     |  | Product Search |  |  Outlet Search   |
+|    Tool (API)   |  |     (RAG)      |  |   (Text2SQL)     |
++----------------+  +----------------+  +------------------+
+                            │                     │
+                            ▼                     ▼
+             +------------------+     +--------------------+
+             | FAISS Vector DB  |     |   SQLite DB        |
+             |   (data/)        |     | (data/outlets.db)  |
+             +------------------+     +--------------------+
 ```
+
+## Assessment Requirements Implementation
+
+### Part 1: Sequential Conversation
+- **Memory Management:** Session-based memory stores last several turns per user, enabling context-aware responses.
+- **Context Awareness:** Previous conversation context is used to influence agent decisions and responses.
+- **State Management:** Each user/session is isolated, ensuring global state does not leak between users.
+- **Multi-turn Support:** The agent supports seamless multi-turn conversations, maintaining context and variables across turns.
+
+### Part 2: Agentic Planning
+- **Intent Classification:** User intent is parsed using the LangChain ReAct pattern and Google Gemini LLM.
+- **Action Planning:** The agent selects and sequences tool/API calls based on parsed intent and conversation context.
+- **Confidence Handling:** The agent leverages LLM output and error handling to determine when to ask clarifying questions or retry.
+- **Core Intents:** Supported intents include calculation, product search (RAG), outlet search (Text2SQL), and general chat.
+
+### Part 3: Tool Calling
+- **Calculator Tool:** Mathematical expressions are evaluated safely using the asteval library, with input validation and error handling.
+- **Natural Language Processing:** LLM-powered parsing of user queries to extract expressions and intent.
+- **Security:** All tool calls are sandboxed and validated to prevent code injection or unsafe execution.
+- **Error Handling:** The system provides clear, informative error messages and fallback responses for invalid input or tool failures.
+
+### Part 4: Custom API & RAG Integration
+- **Vector Search:** Product search is powered by FAISS-based semantic vector search for relevant product retrieval.
+- **Text2SQL:** Natural language queries for outlets are converted to SQL using LLMs and executed against a SQLite database.
+- **Embeddings:** Sentence-transformers are used to generate semantic embeddings for product data.
+- **Database Integration:** SQLite is used for structured outlet data, with robust query validation.
+
+### Part 5: Unhappy Flows
+- **Input Validation:** All user input is sanitized and validated before processing.
+- **Error Recovery:** The agent and APIs handle errors gracefully, providing fallback responses and suggestions.
+- **Security:** SQL injection and code injection are prevented through input validation and safe execution practices.
+- **Monitoring:** Health check endpoints and system status checks are implemented for operational monitoring.
 
 ### Key Trade-offs & Design Decisions
 
@@ -173,6 +206,7 @@ Calculator  Product   Outlet
   - FastAPI endpoints for ZUS coffee shop data (products, outlets).
   - Product knowledge base with vector search for RAG.
   - Outlets database with Text2SQL capabilities.
+  - Calculator API powered by asteval for safely evaluating user math expressions.
 - **Robustness:** Handles unhappy flows, errors, and includes security measures.
 
 ## Testing
