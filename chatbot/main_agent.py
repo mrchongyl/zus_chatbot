@@ -9,7 +9,7 @@ This chatbot can:
 4. Remember conversation history for multi-turn chats
 
 Architecture:
-- Uses Google Gemini 2.5-Flash-Lite as the language model
+- Uses Google Gemini 2.0-Flash as the language model
 - LangChain ReAct agent with hwchase17/react + custom prompt
 - Three main tools: calculator, outlets, products
 - Conversation memory for context preservation
@@ -52,13 +52,16 @@ def setup_llm():
     if not api_key:
         raise ValueError("GEMINI_API_KEY not found.")
     return ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash-lite-preview-06-17", #gemini-2.0-flash
+        model="gemini-2.5-flash", #gemini-2.0-flash
         google_api_key=api_key,
         temperature=0.3  # 0.1 Low temperature for consistent, factual responses
     )
 
 # Base URL for API requests
 API_BASE_URL = "https://zus-chatbot-api-554593173489.asia-southeast1.run.app"
+
+# Base URL for local development:
+# API_BASE_URL = "http://127.0.0.1:8000"
 
 # Calculator tool for arithmetic operations.
 def calculator_tool(expression: str) -> str:

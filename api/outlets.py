@@ -127,6 +127,11 @@ def validate_outlet_query(query: str) -> str | None:
         return "Invalid or potentially unsafe query. Please rephrase your request."
     return None
 
+# --- Database Exists Check ---
+def db_exists():
+    import os
+    return os.path.exists(DATABASE_PATH)
+
 # --- API Endpoints ---
 @router.get("/")
 async def query_outlets(

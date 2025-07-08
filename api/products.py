@@ -54,6 +54,10 @@ def init_vector_store():
     if not vector_store:
         load_vector_store()
 
+def vector_store_exists():
+    import os
+    return os.path.exists("data/vector_store/products.index")
+
 # --- Query Validation ---
 def validate_product_query(query: str) -> str | None:
     if not query or not query.strip():
