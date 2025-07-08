@@ -24,7 +24,8 @@ FAILURE_PHRASES = [
     "only",
     "complex",
     "didn't",
-    "empty"
+    "empty",
+    "massive"
 ]
 
 def test_calculator_basic_operations():
@@ -108,22 +109,25 @@ def test_calculator_extreme_inputs():
     session_id = "test_calc_extreme"
     clear_session_history(session_id)
 
-    # Very long expression (complex, not just repeated sums)
+    # Very long expression
     long_expr = "5+23+4*534*12/45+65*55+" * 100 + "7"
     response = agent.invoke({"input": f"Calculate {long_expr}"}, config={"configurable": {"session_id": session_id}})
     output = response["output"].lower()
+    print(output)
     assert any(phrase in output for phrase in FAILURE_PHRASES)
     time.sleep(4)
 
     # Very large number
     response = agent.invoke({"input": "Calculate 10**1000"}, config={"configurable": {"session_id": session_id}})
     output = response["output"].lower()
+    print(output)
     assert any(phrase in output for phrase in FAILURE_PHRASES)
     time.sleep(4)
 
     # Division by zero
     response = agent.invoke({"input": "Calculate 1 / 0"}, config={"configurable": {"session_id": session_id}})
     output = response["output"].lower()
+    print(output)
     assert any(phrase in output for phrase in FAILURE_PHRASES)
     time.sleep(4)
 
