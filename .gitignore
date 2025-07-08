@@ -45,15 +45,6 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Database files
-*.db
-*.sqlite
-*.sqlite3
-
-# Vector store files
-*.index
-*.pkl
-
 # Logs
 *.log
 logs/

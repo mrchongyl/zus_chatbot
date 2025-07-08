@@ -57,6 +57,9 @@ def setup_llm():
         temperature=0.3  # 0.1 Low temperature for consistent, factual responses
     )
 
+# Base URL for API requests
+API_BASE_URL = "https://zus-chatbot-api-554593173489.asia-southeast1.run.app"
+
 # Calculator tool for arithmetic operations.
 def calculator_tool(expression: str) -> str:
     """
@@ -76,7 +79,7 @@ def calculator_tool(expression: str) -> str:
         import urllib.parse
         encoded_expression = urllib.parse.quote(expression)
         response = requests.get(
-            f"http://127.0.0.1:8000/calculator?expression={encoded_expression}",
+            f"{API_BASE_URL}/calculator?expression={encoded_expression}",
             timeout=10
         )
         if response.status_code == 200:
@@ -107,7 +110,7 @@ def outlets_tool(query: str) -> dict:
     """
     try:
         response = requests.get(
-            "http://127.0.0.1:8000/outlets",
+            f"{API_BASE_URL}/outlets",
             params={"query": query},
             timeout=30
         )
@@ -142,7 +145,7 @@ def products_tool(query: str) -> str:
     """
     try:
         response = requests.get(
-            f"http://127.0.0.1:8000/products?query={query}&top_k=3",
+            f"{API_BASE_URL}/products?query={query}&top_k=3",
             timeout=20
         )
         if response.status_code == 200:
