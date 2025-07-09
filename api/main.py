@@ -9,12 +9,12 @@ This module contains the main API endpoints for:
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from . import calculator, products, outlets
-from fastapi import status
-import os
 import google.generativeai as genai
+import os
+from api.products import router as product_router, load_vector_store
 
 app = FastAPI(
-    title="Mindhive Assessment API",
+    title="Mindhive Assessment API (mrchongyl)",
     description="Zus Coffee Chatbot API with RAG and Tool Integration",
     version="1.0.0"
 )
@@ -32,6 +32,11 @@ app.add_middleware(
 app.include_router(calculator.router)
 app.include_router(products.router)
 app.include_router(outlets.router)
+
+@app.on_event("startup")
+async def startup_event():
+    print("Loading vector store at startup...")
+    load_vector_store()
 
 # Root endpoint for health check
 @app.get("/")
@@ -64,6 +69,13 @@ async def health_check():
     except Exception as e:
         health["outlets_db"] = f"fail: {e}"
 
+    # Check Gemini API
+    try:
+        _ = genai.list_models()
+        health["gemini_api"] = "ok"
+    except Exception as e:
+        health["gemini_api"] = f"fail: {e}"
+
     overall = all(v == "ok" for v in health.values())
     return {
         "status": "ok" if overall else "degraded",
@@ -74,4 +86,4 @@ if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8080, reload=True) 
     
-    # uvicorn.run(app, host="127.0.0.1", port=8000, reload=True) for local development
+    #uvicorn.run(app, host="127.0.0.1", port=8000, reload=True) # for local development

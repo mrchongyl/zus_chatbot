@@ -9,13 +9,14 @@ This chatbot can:
 4. Remember conversation history for multi-turn chats
 
 Architecture:
-- Uses Google Gemini 2.0-Flash as the language model
+- Uses Google Gemini 2.5-Flash as the language model
 - LangChain ReAct agent with hwchase17/react + custom prompt
 - Three main tools: calculator, outlets, products
 - Conversation memory for context preservation
 """
 
 import os
+import json
 import requests
 from typing import List
 from dotenv import load_dotenv
@@ -52,7 +53,7 @@ def setup_llm():
     if not api_key:
         raise ValueError("GEMINI_API_KEY not found.")
     return ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash", #gemini-2.0-flash
+        model="gemini-2.5-flash",
         google_api_key=api_key,
         temperature=0.3  # 0.1 Low temperature for consistent, factual responses
     )
@@ -61,7 +62,7 @@ def setup_llm():
 API_BASE_URL = "https://zus-chatbot-api-554593173489.asia-southeast1.run.app"
 
 # Base URL for local development:
-# API_BASE_URL = "http://127.0.0.1:8000"
+#API_BASE_URL = "http://127.0.0.1:8000"
 
 # Calculator tool for arithmetic operations.
 def calculator_tool(expression: str) -> str:
@@ -83,7 +84,7 @@ def calculator_tool(expression: str) -> str:
         encoded_expression = urllib.parse.quote(expression)
         response = requests.get(
             f"{API_BASE_URL}/calculator?expression={encoded_expression}",
-            timeout=10
+            timeout=60
         )
         if response.status_code == 200:
             data = response.json()
@@ -97,7 +98,7 @@ def calculator_tool(expression: str) -> str:
         return f"Error calculating: {expression}"
 
 # Outlets tool for outlet search
-def outlets_tool(query: str) -> dict:
+def outlets_tool(query: str) -> str:
     """    
     This tool uses Text2SQL conversion with Gemini to translate
     natural language queries into database searches.
@@ -115,20 +116,40 @@ def outlets_tool(query: str) -> dict:
         response = requests.get(
             f"{API_BASE_URL}/outlets",
             params={"query": query},
-            timeout=30
+            timeout=60
         )
         if response.status_code == 200:
             data = response.json()
             outlets = data.get('results', [])
+            message = data.get('message', '')
             if not outlets:
-                return {"query": query, "outlets": [], "message": f"No outlets found for query: {query}"}
-            return {"query": query, "outlets": outlets}
+                return str([{
+                    "query": query,
+                    "outlets": [],
+                    "message": message or f"No outlets found for query: {query}\n"
+                }])
+            return str([{
+                "query": query,
+                "outlets": outlets
+            }]) + "\n"
         else:
-            return {"query": query, "outlets": [], "message": f"Outlets API error: {response.status_code}"}
+            return str([{
+                "query": query,
+                "outlets": [],
+                "message": f"Outlets API error: {response.status_code}\n"
+            }])
     except requests.RequestException as e:
-        return {"query": query, "outlets": [], "message": f"Failed to connect to outlets API: {str(e)}"}
+        return str([{
+            "query": query,
+            "outlets": [],
+            "message": f"Failed to connect to outlets API: {str(e)}\n"
+        }])
     except Exception as e:
-        return {"query": query, "outlets": [], "message": f"Error processing outlets request: {str(e)}"}
+        return str([{
+            "query": query,
+            "outlets": [],
+            "message": f"Error processing outlets request: {str(e)}\n"
+        }])
 
 # Products tool for product search and summary
 def products_tool(query: str) -> str:
@@ -149,7 +170,7 @@ def products_tool(query: str) -> str:
     try:
         response = requests.get(
             f"{API_BASE_URL}/products?query={query}&top_k=3",
-            timeout=20
+            timeout=60
         )
         if response.status_code == 200:
             data = response.json()
@@ -161,16 +182,16 @@ def products_tool(query: str) -> str:
                 return f"No drinkware products found for: {query}"
             # Format response with AI summary and product details
             result = f"Product Search Results for '{query}':\n\n"
-            result += f"Summary: {summary}\n\n"
-            result += f"Products ({total_results} found):\n"
-            for i, product in enumerate(products[:3], 1):
-                result += f"{i}. {product['name']}\n"
-                result += f"   Price: {product['price']}\n"
-                result += f"   Promotion: {product['promotion']}\n"
-                result += f"   Category: {product['category']}\n"
-                result += f"   Colours: {product['colours']}\n"
-                result += f"   Similarity Score: {product['similarity_score']:.3f}\n\n"
-            return result
+            result += f"[Summary: {summary}]\n\n"
+            #result += f"Products ({total_results} found):\n"
+            #for i, product in enumerate(products[:3], 1):
+            #    result += f"{i}. {product['name']}\n"
+            #    result += f"   Price: {product['price']}\n"
+            #    result += f"   Promotion: {product['promotion']}\n"
+            #    result += f"   Category: {product['category']}\n"
+            #    result += f"   Colours: {product['colours']}\n"
+            #    result += f"   Similarity Score: {product['similarity_score']:.3f}\n\n"
+            return result + "\n"
         else:
             return f"Products API error: {response.status_code}"
     except requests.RequestException as e:
@@ -189,7 +210,7 @@ def create_tools() -> List[Tool]:
         Tool(
             name="ZUS_Outlets",
             func=outlets_tool,
-            description="Get information about ZUS Coffee outlet locations and services. You can search by area/city name (e.g., 'Cheras', 'Kuala Lumpur'), opening hours, or general queries. Examples: 'outlets in Cheras', 'outlets open until 10 PM'.",
+            description="Get information about ZUS Coffee outlet locations, directions and operation time. You can search by area/city name (e.g., 'Cheras', 'Kuala Lumpur'), opening hours, or general queries. Examples: 'outlets in Cheras', 'outlets open until 10 PM'.",
         ),
         Tool(
             name="ZUS_Products", 
@@ -209,18 +230,25 @@ def create_agent():
     react_prompt = hub.pull("hwchase17/react")
     custom_instructions = """
     
-    You are a helpful, friendly assistant for ZUS Coffee with access to tools that return structured data (e.g., outlets, products, calculations).
+    You are a helpful, friendly assistant for ZUS Coffee with access to tools that return structured data (e.g., outlets, products, calculations) and reply in a friendly, conversational tone to make the user feel comfortable and engaged, include emoji where appropriate.
     
-    Always follow the ReAct format: After each Thought, output either 'Action:' with the tool name and input, or 'Final Answer:' with your answer.
+    Always follow the ReAct format:
+    Thought: I need to look up outlets in ss2.
+    Action: Outlets
+    Action Input:... (e.g.: "outlets in ss2")
+
+    (observe tool output)
+
+    Thought: I now know the final answer.
+    Final Answer: ...
         
-    When giving replying in Final Answer, use a friendly, conversational tone—like a helpful barista to make the response more engaging.
 
-    Before every Action, write a Thought that justifies whether a tool call is needed. 
-
-    Rules:
+    IMPORTANT:
     - Never answer before 'Final Answer:'.
+    - Think step-by-step about what you need to do.
+    - If the question do not require a tool, just provide the answer directly with 'Final Answer'.
     - Use bullet points ("- Item") for lists, each on a new line.
-    - Keep track of previous user queries, tool inputs, and results to maintain context in multi-turn conversations.
+    - Keep track of previous user queries, action input, and final answer to maintain context in multi-turn conversations.
     - For outlet searches, list only outlet names unless the user asks for more (e.g., address, hours, directions).
     - If the user makes a very long, complex, or multi-part request (e.g., asking for products, outlets, and calculations at once, or inputting complex arithmetic), politely refuse and ask them to simplify or split it into smaller parts.
 
@@ -237,7 +265,7 @@ def create_agent():
         agent=agent,
         tools=tools,
         verbose=True,
-        max_iterations=4,
+        max_iterations=5,
         max_execution_time=60,
         handle_parsing_errors=True
     )

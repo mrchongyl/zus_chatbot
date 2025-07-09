@@ -32,7 +32,7 @@ def setup_gemini_api():
     if not api_key:
         raise ValueError("GEMINI_API_KEY not found in environment variables")
     genai.configure(api_key=api_key)
-    return genai.GenerativeModel('gemini-2.5-flash-lite-preview-06-17')
+    return genai.GenerativeModel('gemini-2.0-flash')
 
 def load_vector_store():
     global vector_store
@@ -48,11 +48,6 @@ def load_vector_store():
         print(f"Failed to load vector store: {e}")
         print("Please run load_products.py first")
         vector_store = None
-
-def init_vector_store():
-    global vector_store
-    if not vector_store:
-        load_vector_store()
 
 def vector_store_exists():
     import os
@@ -94,16 +89,16 @@ def generate_ai_summary(query: str, products: List[Dict[str, Any]], model) -> st
 
     User Query: "{query}"
 
-    Based on the following search results from our drinkware collection, provide a helpful and informative summary (1 paragraph maximum):
+    Based on the following search results from our drinkware collection, provide a helpful and informative summary (3 paragraph maximum):
 
     {context_text}
 
     Please provide a response that:
-    1. Directly addresses the user's query
-    2. Highlights the most relevant products found
-    3. Mentions key features like capacity, materials, special collections
-    4. Includes pricing information, including promotion
-    5. Suggests alternatives if appropriate
+    - Directly addresses the user's query
+    - Highlights the most relevant products found
+    - Mentions key features like capacity, materials, special collections
+    - Always include pricing information, including promotion
+    - Suggests alternatives if appropriate
 """
     try:
         response = model.generate_content(prompt)
@@ -129,12 +124,7 @@ async def search_products(
     JSON response with search results and AI summary
     """
     if not vector_store:
-        init_vector_store()
-        if not vector_store:
-            raise HTTPException(
-                status_code=503, 
-                detail="Vector store not available."
-            )
+        raise HTTPException(status_code=503, detail="Vector store not available.")
     error_msg = validate_product_query(query)
     if error_msg:
         return {
@@ -177,12 +167,7 @@ async def search_products_raw(
     top_k: int = Query(5, ge=1, le=10, description="Number of top results to return")
 ):
     if not vector_store:
-        init_vector_store()
-        if not vector_store:
-            raise HTTPException(
-                status_code=503, 
-                detail="Vector store not available."
-            )
+        raise HTTPException(status_code=503, detail="Vector store not available.")
     try:
         results = vector_store.search(query, top_k=top_k)
         return {
@@ -196,7 +181,7 @@ async def search_products_raw(
 @router.get("/test")
 async def health_check():
     if not vector_store:
-        init_vector_store()
+        raise HTTPException(status_code=503, detail="Vector store not available.")
     return {
         "status": "healthy",
         "vector_store_loaded": vector_store is not None,

@@ -25,8 +25,8 @@ class Text2SQLConverter:
     def __init__(self):
         api_key = os.getenv('GEMINI_API_KEY')
         genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-2.5-flash-lite-preview-06-17')
-        
+        self.model = genai.GenerativeModel('gemini-2.0-flash')
+
     # Convert natural language query to SQL using Gemini
     def convert_to_sql(self, natural_query: str) -> str:
         if not self.model:
@@ -45,12 +45,12 @@ class Text2SQLConverter:
         - Use LIMIT 5
         - Convert AM/PM to 24-hour format (e.g., 10 PM → 22:00)
         - Expand Malaysian abbreviations (e.g., "PJ" → "Petaling Jaya", "KL" → "Kuala Lumpur")
+        - Automatically ignore the word "ZUS" when matching outlet names in queries (e.g., "ZUS 1 Utama" → search using "1 Utama", since all outlet names already contain "ZUS")
         - Use SQLite syntax
 
         Examples:
-        - "Find outlets in Kuala Lumpur" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url FROM outlets WHERE area LIKE '%Kuala Lumpur%' OR state LIKE '%Kuala Lumpur%' OR name LIKE '%Kuala Lumpur%' LIMIT 5;    
-        - "Open until 10 PM" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url  FROM outlets WHERE closing_time >= '22:00' LIMIT 5;
-        - "1 Utama opening hours" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url FROM outlets WHERE name LIKE '%1 Utama%' OR area LIKE '%1 Utama%' LIMIT 5;
+        - "outlets in Kuala Lumpur" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url FROM outlets WHERE area LIKE '%Kuala Lumpur%' OR state LIKE '%Kuala Lumpur%' OR name LIKE '%Kuala Lumpur%' LIMIT 5;    
+        - "opening time for 1 utama" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url FROM outlets WHERE name LIKE '%1 Utama%' LIMIT 5;
 
         Query: {processed_query}
         SQL:
@@ -62,6 +62,12 @@ class Text2SQLConverter:
             sql_query = response.text.strip()
             # Clean up the SQL query
             sql_query = sql_query.replace('```sql', '').replace('```', '').strip()
+            # Only keep the part starting from the first SELECT
+            select_idx = sql_query.lower().find('select')
+            if select_idx != -1:
+                sql_query = sql_query[select_idx:]
+            else:
+                raise HTTPException(status_code=500, detail="No SELECT statement found in generated SQL.")
             if not sql_query.endswith(';'):
                 sql_query += ';'
             return sql_query
@@ -133,7 +139,7 @@ def db_exists():
     return os.path.exists(DATABASE_PATH)
 
 # --- API Endpoints ---
-@router.get("/")
+@router.get("")
 async def query_outlets(
     query: str = Query(..., description="Natural language query about outlets")):
     try:
@@ -151,6 +157,7 @@ async def query_outlets(
         sql_query = converter.convert_to_sql(query)
         # Execute SQL query
         results = execute_sql_query(sql_query)
+        #print(f"Generated SQL: {sql_query}") # Debugging output
         return {
             "query": query,
             "sql": sql_query,
@@ -160,6 +167,7 @@ async def query_outlets(
     except HTTPException:
         raise
     except Exception as e:
+        #print(f"Error in /outlets: {e}")
         raise HTTPException(status_code=500, detail=f"Error processing query: {str(e)}")
 
 @router.get("/test")

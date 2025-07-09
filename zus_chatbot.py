@@ -74,7 +74,7 @@ def display_sidebar():
             "Find outlets in Kuala Lumpur",
             "Show me travel mugs",
             "Calculate 15% tip on RM45",
-            "What's the opening time for ZUS 1 Utama?"
+            "What's the opening time for ZUS M Vertica?"
         ]
         for query in example_queries:
             if st.button(f"💬 {query}", use_container_width=True, key=f"example_{query}"):
@@ -134,8 +134,8 @@ def process_user_input(user_input: str):
         return
     # Check for SQL keywords to prevent SQL injection
     sql_keywords = ['select', 'insert', 'update', 'delete', 'drop', 'alter', 'create', 'truncate']
-    pattern = re.compile(r'\\b(' + '|'.join(sql_keywords) + r')\\b', re.IGNORECASE)
-    if pattern.search(user_input) or ';' in user_input :
+    pattern = re.compile(r'\b(' + '|'.join(sql_keywords) + r')\b', re.IGNORECASE)
+    if pattern.search(user_input) or ';' in user_input:
         st.session_state.messages.append({
             "role": "assistant",
             "content": "SQL queries are not allowed. Please use natural language.",
