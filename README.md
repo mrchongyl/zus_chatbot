@@ -83,13 +83,12 @@ The system is composed of several modular components:
   - Handles requests from both the chatbot agent and external clients.
   - Integrates with a vector store (FAISS) for semantic product search and a SQLite database for outlet info.
   - Implements a safe calculator API using asteval to evaluate user-submitted math expressions securely.
-  - **Vector store is loaded at startup for performance.**
+  - Vector store is loaded at startup for performance.
 
 - **Chatbot Agent (`chatbot/`):**
   - Implements a multi-turn conversational agent using the LangChain ReAct pattern and Google Gemini LLM.
   - Uses three main tools: Calculator, ZUS_Outlets (Text2SQL), and ZUS_Products (RAG vector search).
   - Maintains session-based memory for context-aware conversations.
-  - **Memory is limited to the last N turns for performance.**
   - Handles tool selection, error recovery, and conversation flow.
 
 - **Streamlit UI (`zus_chatbot.py`):**
