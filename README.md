@@ -317,3 +317,7 @@ cd zus_chatbot
 
 
 **You can now interact with the ZUS Chatbot locally, both via the web UI and the API.**
+
+## Cloud Deployment
+
+The ZUS Coffee chatbot is deployed on Google Cloud for reliable and scalable performance.
