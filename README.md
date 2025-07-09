@@ -315,6 +315,5 @@ cd zus_chatbot
 - For SQL/database errors, ensure `data/outlets.db` exists and is populated.
 - For API key errors, check your `.env` file.
 
----
 
 **You can now interact with the ZUS Chatbot locally, both via the web UI and the API.**
