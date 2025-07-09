@@ -1,7 +1,7 @@
 # Mindhive Assessment - ZUS Chatbot
 
 This project implements a multi-turn conversational AI chatbot with agentic planning, tool integration, and Retrieval-Augmented Generation (RAG) for the Mindhive Assessment.
-
+---
 ## Project Structure
 
 ```
@@ -43,7 +43,6 @@ This project implements a multi-turn conversational AI chatbot with agentic plan
 - **Run tests:**
   ```bash
   pytest tests/
-  python test_complete_system.py  # End-to-end system test
   ```
 - **Run data scraping scripts:**
   ```bash
@@ -239,3 +238,83 @@ All tests are designed to cover both happy and unhappy flows, edge cases, and ro
 ## License
 
 This project is for assessment and demonstration purposes only.
+---
+## Local Deployment
+
+To run the ZUS Chatbot system locally on your machine, follow these steps:
+
+### 1. **Clone the Repository**
+
+```bash
+git clone https://github.com/your-username/zus_chatbot.git
+cd zus_chatbot
+```
+
+### 2. **Set Up Python Environment**
+
+- Create a virtual environment:
+  ```bash
+  python -m venv .venv
+  ```
+- Activate the environment:
+  - On Windows:
+    ```bash
+    .\.venv\Scripts\activate
+    ```
+  - On Mac/Linux:
+    ```bash
+    source .venv/bin/activate
+    ```
+- Install dependencies:
+  ```bash
+  pip install -r requirements.txt
+  ```
+
+### 3. **Configure Environment Variables**
+
+- Create a `.env` file in the project root.
+- Add your API keys and configuration, for example:
+  ```
+  GEMINI_API_KEY=your_gemini_api_key_here
+  ```
+
+### 4. **Prepare Data**
+
+- Load product and outlet data (required for chatbot functionality):
+  ```bash
+  python scripts/load_products.py
+  python scripts/load_outlets.py
+  ```
+
+### 5. **Start the FastAPI Backend**
+
+- Run the backend server:
+  ```bash
+  python -m uvicorn api.main:app --reload --host 127.0.0.1 --port 8000
+  ```
+- The vector store and database will be loaded at startup. If missing, endpoints will return a 503 error until data is loaded.
+
+### 6. **Launch the Chatbot UI**
+
+- In a new terminal (with the virtual environment activated), run:
+  ```bash
+  python -m streamlit run zus_chatbot.py
+  ```
+- This will open the chatbot interface in your browser at `http://localhost:8501`.
+
+### 7. **Accessing the API**
+
+- The FastAPI docs are available at:  
+  [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+- Health check endpoint:  
+  [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health)
+
+### 8. **Troubleshooting**
+
+- If you encounter errors about missing vector store or database, rerun the data loading scripts.
+- For SQL/database errors, ensure `data/outlets.db` exists and is populated.
+- For API key errors, check your `.env` file.
+
+---
+
+**You can now interact with the ZUS Chatbot locally, both via the web UI and the API.**
