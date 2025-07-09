@@ -1,7 +1,7 @@
 # Mindhive Assessment - ZUS Chatbot
 
 This project implements a multi-turn conversational AI chatbot with agentic planning, tool integration, and Retrieval-Augmented Generation (RAG) for the Mindhive Assessment.
----
+
 ## Project Structure
 
 ```
@@ -238,7 +238,7 @@ All tests are designed to cover both happy and unhappy flows, edge cases, and ro
 ## License
 
 This project is for assessment and demonstration purposes only.
----
+
 ## Local Deployment
 
 To run the ZUS Chatbot system locally on your machine, follow these steps:
