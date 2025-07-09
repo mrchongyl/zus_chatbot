@@ -1,4 +1,4 @@
-# Mindhive Assessment - AI Chatbot Engineer
+# Mindhive Assessment - ZUS Chatbot
 
 This project implements a multi-turn conversational AI chatbot with agentic planning, tool integration, and Retrieval-Augmented Generation (RAG) for the Mindhive Assessment.
 
@@ -34,6 +34,8 @@ This project implements a multi-turn conversational AI chatbot with agentic plan
   ```bash
   python -m uvicorn api.main:app --reload --host 127.0.0.1 --port 8000
   ```
+  - The vector store is now loaded once at server startup (see `@app.on_event("startup")` in `api/main.py`).
+  - If the vector store is missing or corrupted, endpoints will return a 503 error until it is rebuilt.
 - **Run the Streamlit chatbot UI:**
   ```bash
   python -m streamlit run zus_chatbot.py
@@ -60,7 +62,7 @@ The system uses a SQLite database for ZUS Coffee outlet information. To set up t
    python scripts/load_outlets.py
    ```
    This will create `data/outlets.db` with all outlet information.
-4. Move the sqlite3.exe into base project director
+4. Move the sqlite3.exe into base project directory if you want to use the CLI.
 5. To inspect the database manually:
    ```bash
    sqlite3 data/outlets.db
@@ -72,6 +74,7 @@ The system uses a SQLite database for ZUS Coffee outlet information. To set up t
 
 The API will not work until `data/outlets.db` exists and is populated.
 
+
 ## Architecture Overview
 
 The system is composed of several modular components:
@@ -81,11 +84,13 @@ The system is composed of several modular components:
   - Handles requests from both the chatbot agent and external clients.
   - Integrates with a vector store (FAISS) for semantic product search and a SQLite database for outlet info.
   - Implements a safe calculator API using asteval to evaluate user-submitted math expressions securely.
+  - **Vector store is loaded at startup for performance.**
 
 - **Chatbot Agent (`chatbot/`):**
   - Implements a multi-turn conversational agent using the LangChain ReAct pattern and Google Gemini LLM.
   - Uses three main tools: Calculator, ZUS_Outlets (Text2SQL), and ZUS_Products (RAG vector search).
   - Maintains session-based memory for context-aware conversations.
+  - **Memory is limited to the last N turns for performance.**
   - Handles tool selection, error recovery, and conversation flow.
 
 - **Streamlit UI (`zus_chatbot.py`):**
