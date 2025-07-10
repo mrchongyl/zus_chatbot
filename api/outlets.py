@@ -40,17 +40,21 @@ class Text2SQLConverter:
         outlets(id, name, address, area, state, opening_time, closing_time, direction_url)
 
         Rules:
-        - Select only: id, name, address, area, state, opening_time, closing_time, direction_url (no SELECT *)
+        - For normal searches, select only: id, name, address, area, state, opening_time, closing_time, direction_url (no SELECT *)
+        - Use aggregate functions COUNT(*), MIN(opening_time), and MAX(closing_time) when the user asks for number of outlets, earliest opening time, or latest closing time.
         - Use case-insensitive LIKE with %
-        - Use LIMIT 5
+        - Use LIMIT 5 for normal (non-aggregate) queries
         - Convert AM/PM to 24-hour format (e.g., 10 PM → 22:00)
         - Expand Malaysian abbreviations (e.g., "PJ" → "Petaling Jaya", "KL" → "Kuala Lumpur")
         - Automatically ignore the word "ZUS" when matching outlet names in queries (e.g., "ZUS 1 Utama" → search using "1 Utama", since all outlet names already contain "ZUS")
         - Use SQLite syntax
 
         Examples:
-        - "outlets in Kuala Lumpur" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url FROM outlets WHERE area LIKE '%Kuala Lumpur%' OR state LIKE '%Kuala Lumpur%' OR name LIKE '%Kuala Lumpur%' LIMIT 5;    
+        - "outlets in Kuala Lumpur" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url FROM outlets WHERE area LIKE '%Kuala Lumpur%' OR state LIKE '%Kuala Lumpur%' OR name LIKE '%Kuala Lumpur%' LIMIT 5;
         - "opening time for 1 utama" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url FROM outlets WHERE name LIKE '%1 Utama%' LIMIT 5;
+        - "how many outlets in Cheras" → SELECT COUNT(*) FROM outlets WHERE area LIKE '%Cheras%';
+        - "earliest opening time in Kuala Lumpur" → SELECT MIN(opening_time) FROM outlets WHERE area LIKE '%Kuala Lumpur%';
+        - "latest closing time in Petaling Jaya" → SELECT MAX(closing_time) FROM outlets WHERE area LIKE '%Petaling Jaya%';
 
         Query: {processed_query}
         SQL:
