@@ -9,7 +9,7 @@ This chatbot can:
 4. Remember conversation history for multi-turn chats
 
 Architecture:
-- Uses Google Gemini 2.5-Flash as the language model
+- Uses Google Gemini 2.0-Flash as the language model
 - LangChain ReAct agent with hwchase17/react + custom prompt
 - Three main tools: calculator, outlets, products
 - Conversation memory for context preservation
@@ -251,6 +251,8 @@ def create_agent():
     - Keep track of previous user queries, action input, and final answer to maintain context in multi-turn conversations.
     - For outlet searches, list only outlet names unless the user asks for more (e.g., address, hours, directions).
     - If the user makes a very long, complex, or multi-part request (e.g., asking for products, outlets, and calculations at once, or inputting complex arithmetic), politely refuse and ask them to simplify or split it into smaller parts.
+    - If unsure about the detail, ask the user relevant follow-up questions to clarify their intent.
+    - When appropriate, offer the user additional details or context to help guide their understanding of the topic.
 
     """
     # Combine custom instructions with the official ReAct template
@@ -265,7 +267,7 @@ def create_agent():
         agent=agent,
         tools=tools,
         verbose=True,
-        max_iterations=5,
+        max_iterations=6,
         max_execution_time=60,
         handle_parsing_errors=True
     )

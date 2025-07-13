@@ -40,21 +40,25 @@ class Text2SQLConverter:
         outlets(id, name, address, area, state, opening_time, closing_time, direction_url)
 
         Rules:
-        - For normal searches, select only: id, name, address, area, state, opening_time, closing_time, direction_url (no SELECT *)
-        - Use aggregate functions COUNT(*), MIN(opening_time), and MAX(closing_time) when the user asks for number of outlets, earliest opening time, or latest closing time.
+        - Select only: id, name, address, area, state, opening_time, closing_time, direction_url (no SELECT *)
+        - Use LIMIT 5 for non-aggregate queries
         - Use case-insensitive LIKE with %
-        - Use LIMIT 5 for normal (non-aggregate) queries
         - Convert AM/PM to 24-hour format (e.g., 10 PM → 22:00)
+        - Use COUNT(*), MIN(opening_time), MAX(closing_time) for queries on outlet count, earliest opening, and latest closing
+        - Exclude 24-hour outlets (closing_time = '23:59') when searching for latest closing time, or (opening_time = '00:00') for earliest opening time, unless "24 hours" is mentioned
+        - Represent 24-hour outlets with opening_time = '00:00', closing_time = '23:59'
         - Expand Malaysian abbreviations (e.g., "PJ" → "Petaling Jaya", "KL" → "Kuala Lumpur")
-        - Automatically ignore the word "ZUS" when matching outlet names in queries (e.g., "ZUS 1 Utama" → search using "1 Utama", since all outlet names already contain "ZUS")
+        - Strip "ZUS" from outlet names in user queries
         - Use SQLite syntax
 
+        --standard columns-- means: id, name, address, area, state, opening_time, closing_time, direction_url
+
         Examples:
-        - "outlets in Kuala Lumpur" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url FROM outlets WHERE area LIKE '%Kuala Lumpur%' OR state LIKE '%Kuala Lumpur%' OR name LIKE '%Kuala Lumpur%' LIMIT 5;
-        - "opening time for 1 utama" → SELECT id, name, address, area, state, opening_time, closing_time, direction_url FROM outlets WHERE name LIKE '%1 Utama%' LIMIT 5;
+        - "outlets in Kuala Lumpur" → SELECT --standard columns-- FROM outlets WHERE area LIKE '%Kuala Lumpur%' OR state LIKE '%Kuala Lumpur%' OR name LIKE '%Kuala Lumpur%' LIMIT 5;
+        - "opening time for 1 utama" → SELECT --standard columns-- FROM outlets WHERE name LIKE '%1 Utama%' LIMIT 5;
         - "how many outlets in Cheras" → SELECT COUNT(*) FROM outlets WHERE area LIKE '%Cheras%';
         - "earliest opening time in Kuala Lumpur" → SELECT MIN(opening_time) FROM outlets WHERE area LIKE '%Kuala Lumpur%';
-        - "latest closing time in Petaling Jaya" → SELECT MAX(closing_time) FROM outlets WHERE area LIKE '%Petaling Jaya%';
+        - "latest closing outlet in Petaling Jaya" → SELECT --standard columns-- FROM outlets WHERE area LIKE '%Petaling Jaya%' AND closing_time != '23:59' ORDER BY closing_time DESC LIMIT 5;
 
         Query: {processed_query}
         SQL:

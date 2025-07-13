@@ -1426,8 +1426,8 @@
     "state": "Kuala Lumpur",
     "direction_url": "https://maps.app.goo.gl/8nSgs6vCWKjW4MCR8",
     "scraped_at": "2025-07-07 01:48:16",
-    "opening_time": "06:30",
-    "closing_time": "23:00"
+    "opening_time": "00:00",
+    "closing_time": "23:59"
   },
   {
     "id": "outlet_131",
@@ -1437,8 +1437,8 @@
     "state": "Kuala Lumpur",
     "direction_url": "https://maps.app.goo.gl/m5H6LUwbe4C68hQX9",
     "scraped_at": "2025-07-07 01:48:16",
-    "opening_time": "08:30",
-    "closing_time": "19:00"
+    "opening_time": "00:00",
+    "closing_time": "23:59"
   },
   {
     "id": "outlet_132",
@@ -1448,7 +1448,7 @@
     "state": "Selangor",
     "direction_url": "https://maps.app.goo.gl/2m3UHhhCWzcUGVi18",
     "scraped_at": "2025-07-07 01:48:16",
-    "opening_time": "08:30",
-    "closing_time": "19:00"
+    "opening_time": "00:00",
+    "closing_time": "23:59"
   }
 ]
